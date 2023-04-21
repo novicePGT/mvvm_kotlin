@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
-    
+    tools:context=".LoginActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         android:layout_marginLeft="20dp">
 
         <EditText
-            android:id="@+id/custom_edit_text_email"
+            android:id="@+id/user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
@@ -61,10 +61,10 @@
             android:maxLines="1"
             android:singleLine="true"
             android:maxLength="30"
-            android:imeOptions="actionSearch"/>
+            android:imeOptions="actionNext"/>
 
         <EditText
-            android:id="@+id/custom_edit_text_password"
+            android:id="@+id/user_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
@@ -82,7 +82,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:maxLength="30"
-            android:imeOptions="actionSearch"/>
+            android:imeOptions="actionNext"/>
 
     </LinearLayout>
 
@@ -121,7 +121,7 @@
         android:paddingTop="30dp">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/custom_button"
+            android:id="@+id/btn_login"
             android:layout_marginRight="25dp"
             android:layout_marginLeft="25dp"
             android:layout_width="match_parent"

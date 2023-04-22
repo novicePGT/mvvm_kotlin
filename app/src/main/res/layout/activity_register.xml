@@ -71,52 +71,6 @@
             android:maxLength="30"
             android:imeOptions="actionNext"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/custom_btn_black"
-            android:textColor="@color/white"
-            android:text="send" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/register_user_verify"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_edt"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:hint="Enter your mail authentication"
-            android:inputType="text"
-            android:gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/icon_verify"
-            android:drawableTint="@android:color/darker_gray"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:maxLength="30"
-            android:imeOptions="actionNext"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/custom_btn_light_black"
-            android:textColor="@color/white"
-            android:text="verify" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -129,7 +83,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textSize="16sp"/>
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="15dp"/>
 
     </LinearLayout>
 
@@ -240,7 +196,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="15dp">
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -283,7 +240,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="30dp">
+        android:paddingTop="40dp">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/register_btn_join"

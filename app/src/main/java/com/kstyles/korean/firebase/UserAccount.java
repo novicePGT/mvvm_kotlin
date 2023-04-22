@@ -10,10 +10,11 @@ public class UserAccount {
 
     private String idToken;
 
-    public UserAccount(String userEmail, String userPassword, String userName) {
+    public UserAccount(String userEmail, String userPassword, String userName, String idToken) {
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userName = userName;
+        this.idToken = idToken;
     }
 
     /**

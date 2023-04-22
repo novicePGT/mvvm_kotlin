@@ -1,6 +1,9 @@
 package com.kstyles.korean.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,12 +19,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kstyles.korean.databinding.ActivityRegisterBinding;
 import com.kstyles.korean.firebase.UserAccount;
+import com.kstyles.korean.verification.EditTextWatcher;
+import com.kstyles.korean.verification.EmailValidator;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth; // 파이어베이스 인증
     private DatabaseReference databaseReference; // 실시간 데이터 베이스
     private ActivityRegisterBinding binding;
+
+    private String userEmail;
+    private String userPassword;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,29 +49,65 @@ public class RegisterActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
+        /**
+         * 정규식을 이용한 이메일 형식 검증 -> 텍스트로 정보를 노출
+         */
+        EditTextWatcher editTextWatcher = new EditTextWatcher(binding.registerTvVerification);
+        binding.registerUserEmail.addTextChangedListener(editTextWatcher);
+
+        /**
+         * firebaseAuth을 사용해 이메일 url 인증 기능을 포함한 이벤트 리스너
+         * Join 버튼을 클릭하면 Email, password, name 을 가지고 데이터베이스로 넘어간다.
+         */
         binding.registerBtnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 회원가입 로직
-                String userEmail = binding.registerUserEmail.getText().toString();
-                String userPassword = binding.registerUserPassword.getText().toString();
-                String userName = binding.registerUserName.getText().toString();
+                userEmail = binding.registerUserEmail.getText().toString();
+                userPassword = binding.registerUserPassword.getText().toString();
+                userName = binding.registerUserName.getText().toString();
 
                 firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
-                            // 회원가입 성공 로직
                             FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-                            UserAccount userAccount = new UserAccount(userEmail, userPassword, userName);
-                            userAccount.setIdToken(firebaseAuth.getUid());
-
+                            UserAccount userAccount = new UserAccount(userEmail, userPassword, userName, firebaseAuth.getUid());
                             databaseReference.child("UserAccount").child(currentUser.getUid()).setValue(userAccount);
+
+                            // 이메일 인증 메일 보내기
+                            currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(RegisterActivity.this, "이메일 인증 메일을 보냈습니다. 이메일을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(RegisterActivity.this, "이메일 인증 메일 보내기 실패", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
                             Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
         });
+    }
+
+    private void emailValidation() {
+        if (EmailValidator.isValidEmail(userEmail)) {
+            binding.registerTvVerification.setText("Email is a valid format.");
+            binding.registerTvVerification.setTextColor(Color.GREEN);
+        }
+        if (EmailValidator.isValidEmail(userEmail) == false) {
+            binding.registerTvVerification.setText("Email is not in a valid format.");
+            binding.registerTvVerification.setTextColor(Color.RED);
+        }
+        if (userEmail.isEmpty()) {
+            binding.registerTvVerification.setText("");
+        }
     }
 }

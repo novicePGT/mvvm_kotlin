@@ -1,5 +1,6 @@
 package com.kstyles.korean.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +22,7 @@ import com.kstyles.korean.databinding.ActivityRegisterBinding;
 import com.kstyles.korean.firebase.UserAccount;
 import com.kstyles.korean.verification.EditTextWatcher;
 import com.kstyles.korean.verification.EmailValidator;
+import com.kstyles.korean.verification.PasswordWatcher;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -54,6 +56,24 @@ public class RegisterActivity extends AppCompatActivity {
          */
         EditTextWatcher editTextWatcher = new EditTextWatcher(binding.registerTvVerification);
         binding.registerUserEmail.addTextChangedListener(editTextWatcher);
+
+        /**
+         * 비밀번호가 6자리 이하면 텍스트로 정보를 노출
+         */
+        PasswordWatcher passwordWatcher = new PasswordWatcher(binding.registerTvPasswordVerification, binding.registerUserPassword, binding.registerUserRePassword);
+        binding.registerUserPassword.addTextChangedListener(passwordWatcher);
+
+        /**
+         * 뒤로가기 버튼 구현
+         */
+        binding.registerBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         /**
          * firebaseAuth을 사용해 이메일 url 인증 기능을 포함한 이벤트 리스너

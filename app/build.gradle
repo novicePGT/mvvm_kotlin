@@ -47,4 +47,7 @@ dependencies {
     // 카드뷰
     implementation "androidx.cardview:cardview:1.0.0"
 
+    // 이미지 로드를 원활하게 해주는 라이브러리
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+
 }

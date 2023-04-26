@@ -1,77 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:layout_margin="20dp"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="12dp"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:focusable="true"
-    android:clickable="true">
+    android:orientation="horizontal">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/custom_linear_black"
+        android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground">
 
-        <LinearLayout
-            android:layout_width="320dp"
+        <TextView
+            android:id="@+id/item_level"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/custom_linear_black"
-            android:padding="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp">
+            android:text="Beginner"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/item_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Beginner"
-                android:textSize="25sp"
-                android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vocabulary1"
+            android:textSize="14sp"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/item_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vocabulary1"
-                android:textSize="14sp"/>
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:orientation="vertical"
-            android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="3sp"
+            android:layout_height="60dp"
+            android:background="@android:color/darker_gray"
+            android:layout_gravity="center"/>
 
-            <TextView
-                android:layout_width="3sp"
-                android:layout_height="50dp"
-                android:background="@android:color/darker_gray"
-                android:layout_gravity="center"/>
+        <ToggleButton
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/toggle_check_black"
+            android:layout_gravity="center"
+            android:textOff=""
+            android:textOn=""
+            android:clickable="false"/>
 
-            <ToggleButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/toggle_check_black"
-                android:layout_gravity="center"
-                android:textOff=""
-                android:textOn=""
-                android:clickable="false"/>
+        <TextView
+            android:layout_width="3sp"
+            android:layout_height="60dp"
+            android:background="@android:color/darker_gray"
+            android:layout_gravity="center"/>
 
-            <TextView
-                android:layout_width="3sp"
-                android:layout_height="50dp"
-                android:background="@android:color/darker_gray"
-                android:layout_gravity="center"/>
-
-
-        </LinearLayout>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

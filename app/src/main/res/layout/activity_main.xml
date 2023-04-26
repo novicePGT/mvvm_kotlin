@@ -36,9 +36,10 @@
         android:paddingBottom="60dp">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/recycler_item2"/>
+            tools:listitem="@layout/recycler_item"/>
 
     </FrameLayout>
 

@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">KoreanApp</string>
+    <string-array name="words">
+        <item>축구</item>
+        <item>야구</item>
+        <item>농구</item>
+        <item>배드민턴</item>
+        <item>테니스</item>
+        <item>자전거</item>
+        <item>수영</item>
+        <item>등산</item>
+        <item>배구</item>
+        <item>태권도</item>
+        <item>펜싱</item>
+        <item>골프</item>
+    </string-array>
+
+    <string-array name="nation">
+        <item>Korean</item>
+        <item>Vietnamese</item>
+        <item>Japanese</item>
+        <item>English</item>
+        <item>Russian</item>
+    </string-array>
 </resources>

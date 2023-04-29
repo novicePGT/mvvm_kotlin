@@ -1,13 +1,18 @@
 package com.kstyles.korean.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kstyles.korean.activity.MainActivity;
 import com.kstyles.korean.databinding.RecyclerItemBinding;
+import com.kstyles.korean.fragment.MainFragment;
+import com.kstyles.korean.fragment.PracticeFragment;
 import com.kstyles.korean.item.RecyclerItem;
 
 import java.util.ArrayList;
@@ -36,12 +41,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         RecyclerItemBinding binding = RecyclerItemBinding.inflate(inflater, parent, false);
-        return new RecyclerViewHolder(binding);
+
+        return new RecyclerViewHolder(binding, context);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         holder.bind(items, position);
+
     }
 
     @Override

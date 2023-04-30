@@ -5,29 +5,48 @@
     android:orientation="horizontal">
 
     <LinearLayout
+        android:id="@+id/recycler_item"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@drawable/custom_linear_black"
         android:padding="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground">
 
-        <TextView
-            android:id="@+id/item_level"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Beginner"
-            android:textSize="25sp"
-            android:textStyle="bold"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/item_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Vocabulary1"
-            android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/item_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Beginner"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vocabulary1"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_btn_black"
+            android:layout_marginLeft="60dp"
+            android:text="Continue"
+            android:textColor="@android:color/white"/>
+
     </LinearLayout>
 
     <LinearLayout

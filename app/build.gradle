@@ -50,4 +50,7 @@ dependencies {
     // 이미지 로드를 원활하게 해주는 라이브러리
     implementation 'com.github.bumptech.glide:glide:4.15.1'
 
+    // barchart 라이브러리
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 }

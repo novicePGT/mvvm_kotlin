@@ -1,10 +1,7 @@
 package com.kstyles.korean.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,13 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.kstyles.korean.databinding.ActivityRegisterBinding;
 import com.kstyles.korean.firebase.UserAccount;
 import com.kstyles.korean.verification.EditTextWatcher;
-import com.kstyles.korean.verification.EmailValidator;
 import com.kstyles.korean.verification.PasswordWatcher;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth; // 파이어베이스 인증
-    private DatabaseReference databaseReference; // 실시간 데이터 베이스
+    private DatabaseReference reference; // 실시간 데이터 베이스
     private ActivityRegisterBinding binding;
 
     private String userEmail;
@@ -49,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
          * firebase setting
          */
         firebaseAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        reference = FirebaseDatabase.getInstance().getReference("UserAccount");
 
         /**
          * 정규식을 이용한 이메일 형식 검증 -> 텍스트로 정보를 노출
@@ -93,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                             UserAccount userAccount = new UserAccount(userEmail, userPassword, userName, firebaseAuth.getUid());
-                            databaseReference.child("UserAccount").child(currentUser.getUid()).setValue(userAccount);
+                            reference.child("UserAccount").child(currentUser.getUid()).setValue(userAccount);
 
                             // 이메일 인증 메일 보내기
                             currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -115,19 +111,5 @@ public class RegisterActivity extends AppCompatActivity {
                 });
             }
         });
-    }
-
-    private void emailValidation() {
-        if (EmailValidator.isValidEmail(userEmail)) {
-            binding.registerTvVerification.setText("Email is a valid format.");
-            binding.registerTvVerification.setTextColor(Color.GREEN);
-        }
-        if (EmailValidator.isValidEmail(userEmail) == false) {
-            binding.registerTvVerification.setText("Email is not in a valid format.");
-            binding.registerTvVerification.setTextColor(Color.RED);
-        }
-        if (userEmail.isEmpty()) {
-            binding.registerTvVerification.setText("");
-        }
     }
 }

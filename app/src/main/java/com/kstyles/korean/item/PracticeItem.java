@@ -2,27 +2,19 @@ package com.kstyles.korean.item;
 
 public class PracticeItem {
 
-    private String practiceImage;
-
+    private String imageUrl;
     private String answer;
-    public PracticeItem(String practiceImage, String answer) {
-        this.practiceImage = practiceImage;
+
+    public PracticeItem(String imageUrl, String answer) {
+        this.imageUrl = imageUrl;
         this.answer = answer;
     }
 
-    public String getPracticeImage() {
-        return practiceImage;
-    }
-
-    public void setPracticeImage(String practiceImage) {
-        this.practiceImage = practiceImage;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
     public String getAnswer() {
         return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
     }
 }

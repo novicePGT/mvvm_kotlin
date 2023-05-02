@@ -1,6 +1,7 @@
 package com.kstyles.korean.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private RecyclerItemBinding binding;
+
     private Context context;
 
     public RecyclerViewHolder(@NonNull RecyclerItemBinding binding, Context context) {
@@ -36,8 +38,13 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
     @Override
     public void onClick(View v) {
         if (v == binding.recyclerItem) {
+            int position = getBindingAdapterPosition();
             FragmentTransaction transaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.main_frame, new PracticeFragment());
+            PracticeFragment practiceFragment = new PracticeFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("position", position);
+            practiceFragment.setArguments(bundle);
+            transaction.replace(R.id.main_frame, practiceFragment);
             transaction.addToBackStack(null);
             transaction.commit();
         }

@@ -1,4 +1,4 @@
-package com.kstyles.korean.firebase;
+package com.kstyles.korean.item;
 
 public class UserAccount {
 

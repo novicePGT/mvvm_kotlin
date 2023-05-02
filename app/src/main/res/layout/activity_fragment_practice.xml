@@ -16,6 +16,7 @@
             android:layout_marginTop="20dp">
 
             <TextView
+                android:id="@+id/practice_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Beginner Vocabulary 1"
@@ -32,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:progress="1"
                 android:max="10"
                 android:progressTint="@color/black"
@@ -69,10 +70,11 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="100dp"
             android:layout_marginLeft="100dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <ImageView
+                android:id="@+id/practice_img"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:background="@drawable/icon_home"/>
@@ -87,6 +89,7 @@
             android:layout_marginRight="20dp">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/practice_btn_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_btn_white"
@@ -94,6 +97,7 @@
                 android:layout_marginBottom="15dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/practice_btn_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_btn_white"
@@ -101,6 +105,7 @@
                 android:layout_marginBottom="15dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/practice_btn_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_btn_white"
@@ -108,6 +113,7 @@
                 android:layout_marginBottom="15dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/practice_btn_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_btn_white"
@@ -120,7 +126,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_margin="30dp">
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="30dp"

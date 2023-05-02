@@ -53,7 +53,8 @@ public class MainFragment extends Fragment {
         /**
          * firebase data 구현 리스너
          */
-        firebaseManager = new FirebaseManager("RecyclerItem");
+        firebaseManager = new FirebaseManager();
+        firebaseManager.setPathString("RecyclerItem");
         firebaseManager.getRecyclerItems(new FirebaseCallback<List<RecyclerItem>>() {
             @Override
             public void onSuccess(List<RecyclerItem> result) {

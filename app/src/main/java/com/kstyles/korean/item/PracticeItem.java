@@ -3,18 +3,25 @@ package com.kstyles.korean.item;
 public class PracticeItem {
 
     private String imageUrl;
+
     private String answer;
 
-    public PracticeItem(String imageUrl, String answer) {
-        this.imageUrl = imageUrl;
-        this.answer = answer;
+    public PracticeItem() {
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public String getAnswer() {
         return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 }

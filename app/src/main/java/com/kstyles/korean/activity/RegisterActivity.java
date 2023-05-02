@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kstyles.korean.databinding.ActivityRegisterBinding;
-import com.kstyles.korean.firebase.UserAccount;
+import com.kstyles.korean.item.UserAccount;
 import com.kstyles.korean.verification.EditTextWatcher;
 import com.kstyles.korean.verification.PasswordWatcher;
 

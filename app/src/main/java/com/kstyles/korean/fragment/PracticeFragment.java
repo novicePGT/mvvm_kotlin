@@ -1,24 +1,27 @@
 package com.kstyles.korean.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseError;
-import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentPracticeBinding;
 import com.kstyles.korean.item.PracticeItem;
 import com.kstyles.korean.item.RandomButtonListener;
 import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.repository.FirebaseCallback;
 import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.seekbar.SeekbarPosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +35,12 @@ public class PracticeFragment extends Fragment {
     private ArrayList<PracticeItem> practiceItems;
     private String selectLevel;
     private int position;
+    private SeekbarPosition seekbarPosition;
 
     public PracticeFragment() {
         recyclerItems = MainFragment.items;
         firebaseManager = new FirebaseManager();
+        seekbarPosition = new SeekbarPosition(0);
     }
 
     @Override
@@ -47,6 +52,7 @@ public class PracticeFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,6 +62,50 @@ public class PracticeFragment extends Fragment {
         binding.practiceLevel.setText(selectLevel);
         firebaseManager.setPathString(selectLevel);
 
+        getExamToFirebase(0);
+
+        binding.practiceBtnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentPosition = seekbarPosition.increasePosition(seekbarPosition.getPosition());
+                getExamToFirebase(currentPosition);
+            }
+        });
+
+        binding.practiceBtnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentPosition = seekbarPosition.decreasePosition(seekbarPosition.getPosition());
+                getExamToFirebase(currentPosition);
+            }
+        });
+
+        binding.practiceSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekbarPosition = new SeekbarPosition(progress);
+                int currentPosition = seekbarPosition.getPosition();
+                getExamToFirebase(currentPosition);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        return binding.getRoot();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void getExamToFirebase(int currentPosition) {
+        binding.practicePosition.setText(String.valueOf(currentPosition+1));
+        binding.practiceSeekbar.setProgress(currentPosition);
         firebaseManager.getPracticeItems(new FirebaseCallback<List<PracticeItem>>() {
             @Override
             public void onSuccess(List<PracticeItem> result) {
@@ -63,10 +113,11 @@ public class PracticeFragment extends Fragment {
                 practiceItems = new ArrayList<>();
                 practiceItems.addAll(result);
                 Glide.with(binding.getRoot())
-                        .load(practiceItems.get(9).getImageUrl())
+                        .load(practiceItems.get(currentPosition).getImageUrl())
+                        .centerCrop()
                         .into(binding.practiceImg);
                 RandomButtonListener randomButtonListener = new RandomButtonListener(
-                        binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3, binding.practiceBtn4, binding.getRoot().getContext(), practiceItems.get(9).getAnswer()
+                        binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3, binding.practiceBtn4, binding.getRoot().getContext(), practiceItems.get(currentPosition).getAnswer()
                 );
                 randomButtonListener.randomButtonEvent();
             }
@@ -77,6 +128,17 @@ public class PracticeFragment extends Fragment {
             }
         });
 
-        return binding.getRoot();
+        if (currentPosition == binding.practiceSeekbar.getMax()) {
+            binding.practiceBtnGo.setVisibility(View.INVISIBLE);
+            binding.practiceBtnBack.setVisibility(View.VISIBLE);
+        }
+        if (currentPosition == binding.practiceSeekbar.getMin()) {
+            binding.practiceBtnBack.setVisibility(View.INVISIBLE);
+            binding.practiceBtnGo.setVisibility(View.VISIBLE);
+        }
+        if (currentPosition != binding.practiceSeekbar.getMax() && currentPosition != binding.practiceSeekbar.getMin()) {
+            binding.practiceBtnBack.setVisibility(View.VISIBLE);
+            binding.practiceBtnGo.setVisibility(View.VISIBLE);
+        }
     }
 }

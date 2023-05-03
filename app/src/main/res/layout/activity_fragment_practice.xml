@@ -29,13 +29,14 @@
             android:layout_height="wrap_content">
 
             <SeekBar
+                android:id="@+id/practice_seekbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
-                android:progress="1"
-                android:max="10"
+                android:progress="0"
+                android:max="9"
                 android:progressTint="@color/black"
                 android:thumb="@drawable/custom_seekbar_thumb"
                 android:progressDrawable="@drawable/custom_seekbar"/>
@@ -50,6 +51,7 @@
             android:layout_marginLeft="45dp">
 
             <TextView
+                android:id="@+id/practice_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
@@ -130,6 +132,7 @@
             android:layout_marginLeft="40dp">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/practice_btn_back"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="start"
@@ -140,6 +143,7 @@
                 android:layout_weight="1"/>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/practice_btn_go"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="end"

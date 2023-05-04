@@ -5,9 +5,11 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityMainBinding;
 import com.kstyles.korean.fragment.Ex2Fragment;
 import com.kstyles.korean.fragment.ProgressFragment;
@@ -36,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         binding.mainBtnHome.setOnClickListener(v -> switchFragment(fragments[0]));
         binding.mainBtnEx2.setOnClickListener(v -> switchFragment(fragments[1]));
-        binding.mainBtnEx3.setOnClickListener(v -> switchFragment(fragments[2]));
-        binding.mainBtnEx4.setOnClickListener(v -> switchFragment(fragments[3]));
+        binding.mainBtnProgress.setOnClickListener(v -> switchFragment(fragments[2]));
+        binding.mainBtnSetting.setOnClickListener(v -> switchFragment(fragments[3]));
     }
 
     private void switchFragment(Fragment fragment) {
@@ -45,5 +47,11 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(binding.mainFrame.getId(), fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
+        binding.mainBtnHome.setBackgroundResource(fragment instanceof MainFragment ? R.drawable.icon_home_black : R.drawable.icon_home);
+        binding.mainBtnEx2.setBackgroundResource(fragment instanceof Ex2Fragment ? R.drawable.icon_search_black : R.drawable.icon_search);
+        binding.mainBtnProgress.setBackgroundResource(fragment instanceof ProgressFragment ? R.drawable.icon_clip_black : R.drawable.icon_clip);
+        binding.mainBtnSetting.setBackgroundResource(fragment instanceof SettingFragment ? R.drawable.icon_setup_black : R.drawable.icon_setup);
+
     }
 }

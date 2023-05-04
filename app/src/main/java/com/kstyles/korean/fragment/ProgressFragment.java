@@ -35,6 +35,7 @@ import com.kstyles.korean.adapter.RecyclerAdapter;
 import com.kstyles.korean.custom.CustomMarkerView;
 import com.kstyles.korean.databinding.ActivityFragmentProgressBinding;
 import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.preferences.count.QuizCount;
 
 import java.util.ArrayList;
 
@@ -58,6 +59,8 @@ public class ProgressFragment extends Fragment {
         binding = ActivityFragmentProgressBinding.inflate(inflater, container, false);
 
         setBarChartView();
+        binding.progressQuizCount.setText(String.valueOf(new QuizCount(getContext()).getQuizCount()));
+        binding.progressWordCount.setText(String.valueOf(new QuizCount(getContext()).getWordCount()));
 
         /**
          * global variable setting

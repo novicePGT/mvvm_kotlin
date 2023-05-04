@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 
 import com.kstyles.korean.R;
 import com.kstyles.korean.fragment.PracticeFragment;
+import com.kstyles.korean.preferences.count.QuizCount;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +32,7 @@ public class RandomButtonListener {
 
     public void randomButtonEvent() {
         int randomIndex = new Random().nextInt(4);
+        QuizCount quizCount = new QuizCount(context);
 
         List<String> buttonTexts = setButtonText(randomIndex);
 
@@ -44,7 +46,7 @@ public class RandomButtonListener {
                 public void onClick(View v) {
                     if (valueText.equals(answer)) {
                         Toast.makeText(context, "정답", Toast.LENGTH_SHORT).show();
-
+                        quizCount.increaseWordCount();
                     } else {
                         Toast.makeText(context, "오답", Toast.LENGTH_SHORT).show();
                     }

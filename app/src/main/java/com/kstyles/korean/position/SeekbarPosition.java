@@ -1,4 +1,4 @@
-package com.kstyles.korean.seekbar;
+package com.kstyles.korean.position;
 
 public class SeekbarPosition {
 

@@ -21,7 +21,7 @@ import com.kstyles.korean.item.RandomButtonListener;
 import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.repository.FirebaseCallback;
 import com.kstyles.korean.repository.FirebaseManager;
-import com.kstyles.korean.seekbar.SeekbarPosition;
+import com.kstyles.korean.position.SeekbarPosition;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -35,14 +35,14 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 SharedPreferences sharedPreferences = getSharedPreferences("idToken", 0);
-                String idToken = sharedPreferences.getString("idToken", null);
-                if (!idToken.isEmpty()) {
+                String idToken = sharedPreferences.getString("idToken", "0");
+                if (!idToken.equals("0")) {
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     Log.d(TAG, "TOKEN : " + idToken);
                 }
-                if (idToken.isEmpty()) {
+                if (idToken.equals("0")) {
                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();

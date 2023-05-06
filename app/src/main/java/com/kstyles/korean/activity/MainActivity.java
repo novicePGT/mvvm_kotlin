@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -15,6 +14,7 @@ import com.kstyles.korean.fragment.Ex2Fragment;
 import com.kstyles.korean.fragment.ProgressFragment;
 import com.kstyles.korean.fragment.SettingFragment;
 import com.kstyles.korean.fragment.MainFragment;
+import com.kstyles.korean.preferences.time.OperateUseTime;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,10 +22,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String TAG = "[MainActivity]";
     private ActivityMainBinding binding;
+    private OperateUseTime operateUseTime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        operateUseTime = new OperateUseTime(this);
 
         /**
          * View Binding Setting
@@ -53,5 +56,17 @@ public class MainActivity extends AppCompatActivity {
         binding.mainBtnProgress.setBackgroundResource(fragment instanceof ProgressFragment ? R.drawable.icon_clip_black : R.drawable.icon_clip);
         binding.mainBtnSetting.setBackgroundResource(fragment instanceof SettingFragment ? R.drawable.icon_setup_black : R.drawable.icon_setup);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        operateUseTime.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        operateUseTime.onStop();
     }
 }

@@ -1,5 +1,7 @@
 package com.kstyles.korean.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,10 +23,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +37,8 @@ import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.preferences.count.QuizCount;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ProgressFragment extends Fragment {
 
@@ -59,6 +60,9 @@ public class ProgressFragment extends Fragment {
         binding = ActivityFragmentProgressBinding.inflate(inflater, container, false);
 
         setBarChartView();
+        /**
+         * 몇 문제를 해결했는지, 몇 클래스를 완료했는지 나타내준다.
+         */
         binding.progressQuizCount.setText(String.valueOf(new QuizCount(getContext()).getQuizCount()));
         binding.progressWordCount.setText(String.valueOf(new QuizCount(getContext()).getWordCount()));
 
@@ -115,14 +119,8 @@ public class ProgressFragment extends Fragment {
         MarkerView customMarkerView = new CustomMarkerView(getContext(), R.layout.custom_marker_view);
         progressChart = binding.progressChart;
 
-        ArrayList<BarEntry> spendingTime = new ArrayList<>();
-        spendingTime.add(new BarEntry(1f, 90));
-        spendingTime.add(new BarEntry(2f, 30));
-        spendingTime.add(new BarEntry(3f, 60));
-        spendingTime.add(new BarEntry(4f, 45));
-        spendingTime.add(new BarEntry(5f, 70));
-        spendingTime.add(new BarEntry(6f, 60));
-        spendingTime.add(new BarEntry(7f, 80));
+
+        ArrayList<BarEntry> spendingTime = setBarEntity();
 
         BarDataSet barDataSet = new BarDataSet(spendingTime, null);
         barDataSet.setColor(Color.rgb(155, 155, 155));
@@ -170,5 +168,24 @@ public class ProgressFragment extends Fragment {
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
         legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         legend.setDrawInside(false);
+    }
+
+    @NonNull
+    private ArrayList<BarEntry> setBarEntity() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("use_time", Context.MODE_PRIVATE);
+        int[] useTimeArray = {
+                sharedPreferences.getInt("Mon", 0),
+                sharedPreferences.getInt("Tue", 0),
+                sharedPreferences.getInt("Wed", 0),
+                sharedPreferences.getInt("Thu", 0),
+                sharedPreferences.getInt("Fri", 0),
+                sharedPreferences.getInt("Sat", 0),
+                sharedPreferences.getInt("Sun", 0)
+        };
+
+        ArrayList<BarEntry> spendingTime = IntStream.range(0, useTimeArray.length)
+                .mapToObj(i -> new BarEntry((float)(i+1), useTimeArray[i]))
+                .collect(Collectors.toCollection(ArrayList::new));
+        return spendingTime;
     }
 }

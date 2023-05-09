@@ -117,7 +117,9 @@ public class PracticeFragment extends Fragment {
                         .centerCrop()
                         .into(binding.practiceImg);
                 RandomButtonListener randomButtonListener = new RandomButtonListener(
-                        binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3, binding.practiceBtn4, binding.getRoot().getContext(), practiceItems.get(currentPosition).getAnswer()
+                        binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3,
+                        binding.practiceBtn4, binding.getRoot().getContext(),
+                        practiceItems.get(currentPosition).getAnswer(), selectLevel
                 );
                 randomButtonListener.randomButtonEvent();
             }

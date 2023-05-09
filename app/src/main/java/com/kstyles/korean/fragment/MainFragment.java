@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseError;
-import com.kstyles.korean.adapter.RecyclerAdapter;
+import com.kstyles.korean.adapter.main.RecyclerAdapter;
 import com.kstyles.korean.databinding.ActivityFragmentMainBinding;
 import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.repository.FirebaseCallback;

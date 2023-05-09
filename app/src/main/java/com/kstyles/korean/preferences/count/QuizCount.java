@@ -5,8 +5,8 @@ import android.content.SharedPreferences;
 
 public class QuizCount {
 
-    private int wordCount;
-    private int quizCount;
+    private int wordCount = 0;
+    private int quizCount = 0;
     private SharedPreferences sharedPreferences;
 
     public QuizCount(Context context) {
@@ -15,14 +15,18 @@ public class QuizCount {
         this.wordCount = sharedPreferences.getInt("wordCount", wordCount);
     }
 
-    public void increaseWordCount() {
+    public void increaseWordCount(String selectLevel) {
         wordCount = wordCount + 1;
-        if (wordCount % 10 == 0) {
-            increaseQuizCount();
-        }
+
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("wordCount", wordCount);
+        editor.putInt(selectLevel, wordCount);
         editor.apply();
+
+        int levelComplete = sharedPreferences.getInt(selectLevel, 0);
+        if (levelComplete == 9) {
+            increaseQuizCount();
+        }
     }
 
     private void increaseQuizCount() {
@@ -40,4 +44,3 @@ public class QuizCount {
         return wordCount;
     }
 }
-

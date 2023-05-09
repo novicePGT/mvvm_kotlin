@@ -30,7 +30,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kstyles.korean.R;
-import com.kstyles.korean.adapter.RecyclerAdapter;
+import com.kstyles.korean.adapter.main.RecyclerAdapter;
+import com.kstyles.korean.adapter.progress.ProgressRecyclerAdapter;
 import com.kstyles.korean.custom.CustomMarkerView;
 import com.kstyles.korean.databinding.ActivityFragmentProgressBinding;
 import com.kstyles.korean.item.RecyclerItem;
@@ -48,7 +49,7 @@ public class ProgressFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-    private RecyclerView.Adapter adapter;
+    private ProgressRecyclerAdapter adapter;
     private ArrayList<RecyclerItem> items;
     private BarChart progressChart;
 
@@ -109,7 +110,7 @@ public class ProgressFragment extends Fragment {
             }
         });
 
-        adapter = new RecyclerAdapter(items, getContext());
+        adapter = new ProgressRecyclerAdapter(items, getContext());
         recyclerView.setAdapter(adapter);
 
         return binding.getRoot();

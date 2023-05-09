@@ -1,4 +1,4 @@
-package com.kstyles.korean.adapter;
+package com.kstyles.korean.adapter.main;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private RecyclerItemBinding binding;
-
     private Context context;
 
     public RecyclerViewHolder(@NonNull RecyclerItemBinding binding, Context context) {

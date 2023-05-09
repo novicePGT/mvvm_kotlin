@@ -1,18 +1,13 @@
-package com.kstyles.korean.adapter;
+package com.kstyles.korean.adapter.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kstyles.korean.activity.MainActivity;
 import com.kstyles.korean.databinding.RecyclerItemBinding;
-import com.kstyles.korean.fragment.MainFragment;
-import com.kstyles.korean.fragment.PracticeFragment;
 import com.kstyles.korean.item.RecyclerItem;
 
 import java.util.ArrayList;

@@ -13,6 +13,7 @@ import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.RecyclerItemProgressBinding;
 import com.kstyles.korean.fragment.PracticeFragment;
 import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.preferences.count.QuizCount;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class ProgressRecyclerViewHolder extends RecyclerView.ViewHolder implemen
 
     private RecyclerItemProgressBinding binding;
     private Context context;
+    private QuizCount quizCount;
 
     public ProgressRecyclerViewHolder(RecyclerItemProgressBinding binding, Context context) {
         super(binding.getRoot());
@@ -30,8 +32,21 @@ public class ProgressRecyclerViewHolder extends RecyclerView.ViewHolder implemen
     }
 
     public void bind(ArrayList<RecyclerItem> items, int position) {
-        binding.itemLevel.setText(items.get(position).getLevel());
-        binding.itemName.setText(items.get(position).getName());
+        String level = String.format("%s %s", items.get(position).getLevel(), items.get(position).getName());
+        quizCount = new QuizCount(context, level);
+        int getLevelPosition = quizCount.getLevelPosition() * 10;
+        if (getLevelPosition == 100) {
+            binding.progressLinear.setVisibility(View.INVISIBLE);
+            binding.progressCompleteLinear.setVisibility(View.VISIBLE);
+            binding.recyclerItemProgressBtn.setText("Revise");
+        } else {
+            binding.progressLinear.setVisibility(View.VISIBLE);
+            binding.progressCompleteLinear.setVisibility(View.INVISIBLE);
+            binding.itemLevel.setText(items.get(position).getLevel());
+            binding.itemName.setText(items.get(position).getName());
+            binding.recyclerItemProgressProgress.setProgress(getLevelPosition);
+            binding.recyclerItemProgressPercent.setText(getLevelPosition + " %");
+        }
     }
 
     @Override

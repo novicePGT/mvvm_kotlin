@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
@@ -15,10 +17,12 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseError;
+import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentPracticeBinding;
 import com.kstyles.korean.item.PracticeItem;
 import com.kstyles.korean.item.RandomButtonListener;
 import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.preferences.count.QuizCount;
 import com.kstyles.korean.repository.FirebaseCallback;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.position.SeekbarPosition;
@@ -40,7 +44,6 @@ public class PracticeFragment extends Fragment {
     public PracticeFragment() {
         recyclerItems = MainFragment.items;
         firebaseManager = new FirebaseManager();
-        seekbarPosition = new SeekbarPosition(0);
     }
 
     @Override
@@ -61,8 +64,15 @@ public class PracticeFragment extends Fragment {
         selectLevel = String.format("%s %s", recyclerItems.get(position).getLevel(), recyclerItems.get(position).getName());
         binding.practiceLevel.setText(selectLevel);
         firebaseManager.setPathString(selectLevel);
+        QuizCount quizCount = new QuizCount(getContext(), selectLevel);
+        seekbarPosition = new SeekbarPosition(quizCount.getLevelPosition());
 
-        getExamToFirebase(0);
+        Button button = getActivity().findViewById(R.id.recycler_item_progress_btn);
+        if (button.getText().toString().equals("Revise")) {
+            getExamToFirebase(quizCount.setLevelPosition());
+        } else {
+            getExamToFirebase(quizCount.getLevelPosition());
+        }
 
         binding.practiceBtnGo.setOnClickListener(new View.OnClickListener() {
             @Override

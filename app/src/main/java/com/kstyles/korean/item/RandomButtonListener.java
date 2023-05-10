@@ -33,7 +33,7 @@ public class RandomButtonListener {
 
     public void randomButtonEvent() {
         int randomIndex = new Random().nextInt(4);
-        QuizCount quizCount = new QuizCount(context);
+        QuizCount quizCount = new QuizCount(context, selectLevel);
 
         List<String> buttonTexts = setButtonText(randomIndex);
 

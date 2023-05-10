@@ -64,8 +64,8 @@ public class ProgressFragment extends Fragment {
         /**
          * 몇 문제를 해결했는지, 몇 클래스를 완료했는지 나타내준다.
          */
-        binding.progressQuizCount.setText(String.valueOf(new QuizCount(getContext()).getQuizCount()));
-        binding.progressWordCount.setText(String.valueOf(new QuizCount(getContext()).getWordCount()));
+        binding.progressQuizCount.setText(String.valueOf(new QuizCount(getContext(), "").getQuizCount()));
+        binding.progressWordCount.setText(String.valueOf(new QuizCount(getContext(), "").getWordCount()));
 
         /**
          * global variable setting

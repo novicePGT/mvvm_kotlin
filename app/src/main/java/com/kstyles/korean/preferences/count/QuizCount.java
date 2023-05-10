@@ -7,23 +7,38 @@ public class QuizCount {
 
     private int wordCount = 0;
     private int quizCount = 0;
+    private int levelWord = 0;
     private SharedPreferences sharedPreferences;
 
-    public QuizCount(Context context) {
+    public QuizCount(Context context, String level) {
         sharedPreferences = context.getSharedPreferences("wordCount", 0);
         this.quizCount = sharedPreferences.getInt("quizCount", quizCount);
         this.wordCount = sharedPreferences.getInt("wordCount", wordCount);
+        this.levelWord = sharedPreferences.getInt(level+"Word", levelWord);
+        if (this.quizCount == 0) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("quizCount", 0);
+            editor.apply();
+        }
+        if (this.wordCount == 0) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("wordCount", 0);
+            editor.apply();
+        }
     }
 
     public void increaseWordCount(String selectLevel) {
+        String selectLevelWord = selectLevel + "Word";
+        String selectLevelComplete = selectLevel + "Complete";
         wordCount = wordCount + 1;
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("wordCount", wordCount);
-        editor.putInt(selectLevel, wordCount);
+        editor.putInt(selectLevelComplete, wordCount);
+        editor.putInt(selectLevelWord, wordCount);
         editor.apply();
 
-        int levelComplete = sharedPreferences.getInt(selectLevel, 0);
+        int levelComplete = sharedPreferences.getInt(selectLevelComplete, 0);
         if (levelComplete == 9) {
             increaseQuizCount();
         }
@@ -36,6 +51,15 @@ public class QuizCount {
         editor.apply();
     }
 
+    public int getLevelPosition() {
+        levelWord = levelWord % 11;
+        return levelWord;
+    }
+
+    public int setLevelPosition() {
+        levelWord = 0;
+        return 0;
+    }
     public int getQuizCount() {
         return quizCount;
     }

@@ -17,6 +17,8 @@ public class UserAccount {
         this.idToken = idToken;
     }
 
+    public UserAccount() {}
+
     /**
      * GETTER & SETTER
      * @return

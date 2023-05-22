@@ -67,9 +67,11 @@ public class PracticeFragment extends Fragment {
         QuizCount quizCount = new QuizCount(getContext(), selectLevel);
         seekbarPosition = new SeekbarPosition(quizCount.getLevelPosition());
 
-        Button button = getActivity().findViewById(R.id.recycler_item_progress_btn);
-        if (button.getText().toString().equals("Revise")) {
-            getExamToFirebase(quizCount.setLevelPosition());
+        if (getActivity() != null) {
+            Button button = getActivity().findViewById(R.id.recycler_item_progress_btn);
+            getExamToFirebase(button != null && "Revise".equals(button.getText())
+                    ? quizCount.setLevelPosition()
+                    : quizCount.getLevelPosition());
         } else {
             getExamToFirebase(quizCount.getLevelPosition());
         }

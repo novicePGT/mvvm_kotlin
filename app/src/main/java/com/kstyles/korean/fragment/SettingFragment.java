@@ -1,5 +1,6 @@
 package com.kstyles.korean.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentSettingBinding;
 import com.kstyles.korean.databinding.InputChangePasswordBinding;
+import com.kstyles.korean.databinding.InputLogoutBinding;
 import com.kstyles.korean.repository.FirebaseManager;
 
 public class SettingFragment extends Fragment {
@@ -31,6 +33,9 @@ public class SettingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivityFragmentSettingBinding.inflate(inflater, container, false);
 
+        /**
+         * 비밀번호 변경 로직을 포함한 AlertDialog
+         */
         binding.settingChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +53,31 @@ public class SettingFragment extends Fragment {
                                 String newPassword = bindingDialog.settingChangePassword.getText().toString();
                                 FirebaseManager firebaseManager = new FirebaseManager();
                                 firebaseManager.setUserPassword(getContext(), email, password, newPassword);
+                            }
+                        })
+                        .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 거절버튼 수행
+                            }
+                        }).show();
+            }
+        });
+
+        binding.settingBtnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputLogoutBinding bindingDialog = InputLogoutBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Logout")
+                        .setView(bindingDialog.getRoot())
+                        .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 수락버튼 수행
+                                FirebaseManager firebaseManager = new FirebaseManager();
+                                firebaseManager.signOut((Activity) getContext());
                             }
                         })
                         .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {

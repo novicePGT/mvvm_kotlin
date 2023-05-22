@@ -10,9 +10,13 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kstyles.korean.databinding.ActivitySplashBinding;
+import com.kstyles.korean.repository.FirebaseManager;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -34,20 +38,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                SharedPreferences sharedPreferences = getSharedPreferences("idToken", 0);
-                String idToken = sharedPreferences.getString("idToken", "0");
-                if (!idToken.equals("0")) {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                    Log.d(TAG, "TOKEN : " + idToken);
-                }
-                if (idToken.equals("0")) {
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                    Log.e(TAG, "TOKEN is null");
-                }
+                FirebaseManager firebaseManager = new FirebaseManager();
+                firebaseManager.signInWithToken(SplashActivity.this);
             }
         }, SPLASH_DURATION);
     }

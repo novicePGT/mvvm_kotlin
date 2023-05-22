@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,7 +13,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kstyles.korean.databinding.ActivityLoginBinding;
@@ -67,7 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 로그인 성공 로직
-                            saveTokenValue(task);
+                            if (binding.customRadioButton.isChecked()) {
+
+                            }
 
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -81,26 +80,5 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
-    }
-
-    private void saveTokenValue(@NonNull Task<AuthResult> task) {
-        if (binding.customRadioButton.isChecked()) {
-            SharedPreferences sharedPreferences = getSharedPreferences("idToken", 0);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-
-            validateUser(editor);
-        }
-    }
-
-    private void validateUser(SharedPreferences.Editor editor) {
-        if (user != null) {
-            String idToken = user.getUid();
-            Log.d(TAG, idToken);
-
-            editor.putString("idToken", idToken);
-            editor.commit();
-        } else {
-            Log.e(TAG, "Failed to save token value");
-        }
     }
 }

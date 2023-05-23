@@ -1,5 +1,52 @@
 <resources>
-    <string name="app_name">KoreanApp</string>
+
+    <string name="app_name" translatable="false">KoreanApp</string>
+    
+    <!-- Setting 페이지 -->
+    <string name="tv_setting">Setting</string>
+    <string name="tv_account_settings">Account Settings</string>
+    <string name="tv_edit_profile">Edit Profile</string>
+    <string name="tv_change_password">Change Password</string>
+    <string name="tv_settings">Settins</string>
+    <string name="tv_language">Language</string>
+    <string name="tv_sound">Sound</string>
+    <string name="tv_push_notifications">Push Notifications</string>
+    <string name="tv_logout">Logout</string>
+
+    <!-- Progress 페이지 -->
+    <string name="tv_progress">Your Progress</string>
+    <string name="tv_level">Level</string>
+    <string name="tv_intermediate">Intermediate</string>
+    <string name="tv_quizzes_completed">Quizzes completed</string>
+    <string name="tv_words_studied">Words studied</string>
+    <string name="tv_time_spending">Time Spending</string>
+
+    <!-- Login 페이지 -->
+    <string name="tv_login">Login</string>
+    <string name="hint_id">Username or Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_auto_login">Auto Login</string>
+    <string name="tv_find_id_pass">Find ID/PASS</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="tv_register_text">Are you not member yet?</string>
+    <string name="tv_go_register">Click here to register</string>
+
+    <!-- Splash 페이지 -->
+    <string name="tv_top">Let\'apostrophe\'s study about Korean Language together</string>
+    <string name="tv_top2">We will manage your learning</string>
+
+    <!-- register 페이지 -->
+    <string name="tv_register">Register</string>
+    <string name="tv_email">Email</string>
+    <string name="hint_register_email">Enter your Email Address</string>
+    <string name="tv_password">Password</string>
+    <string name="hint_register_password">Enter your password</string>
+    <string name="tv_check_password">Check Password</string>
+    <string name="hint_check_password">Re - enter your password</string>
+    <string name="tv_nickname">Nickname</string>
+    <string name="hint_nickname">Write down your nickname</string>
+    <string name="btn_join">Join</string>
+
     <string-array name="words">
         <item>축구</item>
         <item>야구</item>

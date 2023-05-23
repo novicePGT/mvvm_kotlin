@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(view);
 
         LanguageManager languageManager = new LanguageManager(this);
+        languageManager.setLanguage();
         binding.tvLogin.setText(languageManager.getTranslatedString(R.string.tv_login));
         binding.userEmail.setHint(languageManager.getTranslatedString(R.string.hint_id));
         binding.userPassword.setHint(languageManager.getTranslatedString(R.string.hint_password));

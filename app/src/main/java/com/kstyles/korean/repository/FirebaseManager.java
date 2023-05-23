@@ -139,46 +139,28 @@ public class FirebaseManager {
         });
     }
 
-    public void savedIdToken() {
+    public void signInWithEmailAndPass(Activity activity, String email, String password) {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // 인증이 성공한 경우, 다음 화면으로 이동
+                    Intent intent = new Intent(activity, MainActivity.class);
+                    activity.startActivity(intent);
+                    activity.finish();
 
+                    Toast.makeText(activity, "You have successfully logged in with the saved information.", Toast.LENGTH_SHORT).show();
+                } else {
+                    // 인증이 실패한 경우, 로그인 화면으로 이동
+                    Intent intent = new Intent(activity, LoginActivity.class);
+                    activity.startActivity(intent);
+                    activity.finish();
+
+                    Log.e(TAG, "No saved information", task.getException());
+                }
+            }
+        });
     }
-
-    public void signInWithToken(Activity activity) {
-        SharedPreferences sharedPreferences = activity.getApplicationContext().getSharedPreferences("idToken", Context.MODE_PRIVATE);
-        String idToken = sharedPreferences.getString("idToken", "0");
-
-        if (!idToken.equals("0")) {
-            FirebaseAuth.getInstance().signInWithCustomToken(idToken)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // 인증이 성공한 경우, 다음 화면으로 이동
-                                Intent intent = new Intent(activity, MainActivity.class);
-                                activity.startActivity(intent);
-                                activity.finish();
-
-                                Log.e(TAG,"Token Login Success");
-                            } else {
-                                // 인증이 실패한 경우, 로그인 화면으로 이동
-                                Intent intent = new Intent(activity, LoginActivity.class);
-                                activity.startActivity(intent);
-                                activity.finish();
-
-                                Log.e(TAG, "Token Login Failed", task.getException());
-                            }
-                        }
-                    });
-        } else {
-            // 저장된 토큰이 없는 경우, 로그인 화면으로 이동
-            Intent intent = new Intent(activity, LoginActivity.class);
-            activity.startActivity(intent);
-            activity.finish();
-
-            Log.e(TAG, "Token is equals 0 ");
-        }
-    }
-
 
     public void signOut(Activity activity) {
         FirebaseAuth.getInstance().signOut();

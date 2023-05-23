@@ -1,5 +1,6 @@
 package com.kstyles.korean.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -45,11 +46,16 @@ public class SplashActivity extends AppCompatActivity {
         binding.tvTop.setText(languageManager.getTranslatedString(R.string.tv_top));
         binding.tvTop2.setText(languageManager.getTranslatedString(R.string.tv_top2));
 
+
+        SharedPreferences idSharedPreferences = getSharedPreferences("userId", MODE_PRIVATE);
+        String userEmail = idSharedPreferences.getString("userId", "0");
+        SharedPreferences passSharedPreferences = getSharedPreferences("userPass", MODE_PRIVATE);
+        String userPass = passSharedPreferences.getString("userPass", "0");
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 FirebaseManager firebaseManager = new FirebaseManager();
-                firebaseManager.signInWithToken(SplashActivity.this);
+                firebaseManager.signInWithEmailAndPass(SplashActivity.this, userEmail, userPass);
             }
         }, SPLASH_DURATION);
     }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -78,7 +79,14 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // 로그인 성공 로직
                             if (binding.customRadioButton.isChecked()) {
-
+                                SharedPreferences idSharedPreferences = getSharedPreferences("userId", MODE_PRIVATE);
+                                SharedPreferences.Editor idEditor = idSharedPreferences.edit();
+                                SharedPreferences passSharedPreferences = getSharedPreferences("userPass", MODE_PRIVATE);
+                                SharedPreferences.Editor passEditor = passSharedPreferences.edit();
+                                idEditor.putString("userId", userEmail);
+                                passEditor.putString("userPass", userPassword);
+                                idEditor.apply();
+                                passEditor.apply();
                             }
 
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();

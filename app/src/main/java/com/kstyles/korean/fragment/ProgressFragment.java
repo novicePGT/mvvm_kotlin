@@ -35,6 +35,7 @@ import com.kstyles.korean.adapter.progress.ProgressRecyclerAdapter;
 import com.kstyles.korean.custom.CustomMarkerView;
 import com.kstyles.korean.databinding.ActivityFragmentProgressBinding;
 import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.count.QuizCount;
 
 import java.util.ArrayList;
@@ -59,6 +60,8 @@ public class ProgressFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivityFragmentProgressBinding.inflate(inflater, container, false);
+
+        setTranslation();
 
         setBarChartView();
         /**
@@ -114,6 +117,16 @@ public class ProgressFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return binding.getRoot();
+    }
+
+    private void setTranslation() {
+        LanguageManager languageManager = new LanguageManager(getContext());
+        binding.tvProgress.setText(languageManager.getTranslatedString(R.string.tv_progress));
+        binding.tvLevel.setText(languageManager.getTranslatedString(R.string.tv_level));
+        binding.tvIntermediate.setText(languageManager.getTranslatedString(R.string.tv_intermediate));
+        binding.tvQuizzesCompleted.setText(languageManager.getTranslatedString(R.string.tv_quizzes_completed));
+        binding.tvWordsStudied.setText(languageManager.getTranslatedString(R.string.tv_words_studied));
+        binding.tvTimeSpending.setText(languageManager.getTranslatedString(R.string.tv_time_spending));
     }
 
     private void setBarChartView() {

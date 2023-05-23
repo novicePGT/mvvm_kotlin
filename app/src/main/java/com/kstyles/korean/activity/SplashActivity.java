@@ -15,7 +15,9 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivitySplashBinding;
+import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
 
 public class SplashActivity extends AppCompatActivity {
@@ -34,6 +36,14 @@ public class SplashActivity extends AppCompatActivity {
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        /**
+         * Set Translation
+         */
+        LanguageManager languageManager = new LanguageManager(this);
+        languageManager.setLanguage();
+        binding.tvTop.setText(languageManager.getTranslatedString(R.string.tv_top));
+        binding.tvTop2.setText(languageManager.getTranslatedString(R.string.tv_top2));
 
         new Handler().postDelayed(new Runnable() {
             @Override

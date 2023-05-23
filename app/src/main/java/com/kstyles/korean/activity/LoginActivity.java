@@ -15,7 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityLoginBinding;
+import com.kstyles.korean.language.LanguageManager;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,6 +38,16 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        LanguageManager languageManager = new LanguageManager(this);
+        binding.tvLogin.setText(languageManager.getTranslatedString(R.string.tv_login));
+        binding.userEmail.setHint(languageManager.getTranslatedString(R.string.hint_id));
+        binding.userPassword.setHint(languageManager.getTranslatedString(R.string.hint_password));
+        binding.customRadioButton.setText(languageManager.getTranslatedString(R.string.btn_auto_login));
+        binding.findIdPass.setText(languageManager.getTranslatedString(R.string.tv_find_id_pass));
+        binding.btnLogin.setText(languageManager.getTranslatedString(R.string.btn_login));
+        binding.tvRegisterText.setText(languageManager.getTranslatedString(R.string.tv_register_text));
+        binding.loginTvGoRegister.setText(languageManager.getTranslatedString(R.string.tv_go_register));
 
         /**
          * firebase setting

@@ -15,8 +15,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityRegisterBinding;
 import com.kstyles.korean.item.UserAccount;
+import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.verification.EditTextWatcher;
 import com.kstyles.korean.verification.PasswordWatcher;
 
@@ -40,6 +42,21 @@ public class RegisterActivity extends AppCompatActivity {
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        /**
+         * Set Language
+         */
+        LanguageManager languageManager = new LanguageManager(this);
+        binding.tvRegister.setText(languageManager.getTranslatedString(R.string.tv_register));
+        binding.tvEmail.setText(languageManager.getTranslatedString(R.string.tv_email));
+        binding.registerUserEmail.setHint(languageManager.getTranslatedString(R.string.hint_register_email));
+        binding.tvPassword.setText(languageManager.getTranslatedString(R.string.tv_password));
+        binding.registerUserPassword.setHint(languageManager.getTranslatedString(R.string.hint_register_password));
+        binding.tvCheckPassword.setText(languageManager.getTranslatedString(R.string.tv_check_password));
+        binding.registerUserRePassword.setHint(languageManager.getTranslatedString(R.string.hint_check_password));
+        binding.tvNickname.setText(languageManager.getTranslatedString(R.string.tv_nickname));
+        binding.registerUserName.setHint(languageManager.getTranslatedString(R.string.hint_nickname));
+        binding.registerBtnJoin.setText(languageManager.getTranslatedString(R.string.btn_join));
 
         /**
          * firebase setting

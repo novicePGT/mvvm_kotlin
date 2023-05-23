@@ -3,23 +3,34 @@ package com.kstyles.korean.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.load.engine.Resource;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentSettingBinding;
 import com.kstyles.korean.databinding.InputChangePasswordBinding;
 import com.kstyles.korean.databinding.InputLogoutBinding;
+import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
+
+import org.w3c.dom.Text;
+
+import java.util.Locale;
 
 public class SettingFragment extends Fragment {
 
@@ -97,6 +108,19 @@ public class SettingFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 이 곳에 언어번역에 대한 코드를 작성할 것.
+                String selectedLanguage = (String) parent.getItemAtPosition(position);
+
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("language", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("language", selectedLanguage);
+                editor.apply();
+
+                if (selectedLanguage.equals("Vietnamese")) {
+                    editor.putString("language", "vi");
+                }
+                editor.apply();
+
+                setTranslation();
             }
 
             @Override
@@ -106,5 +130,19 @@ public class SettingFragment extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    private void setTranslation() {
+        LanguageManager languageManager = new LanguageManager(getContext());
+        languageManager.setLanguage();
+        binding.tvSetting.setText(languageManager.getTranslatedString(R.string.tv_setting));
+        binding.tvAccountSettings.setText(languageManager.getTranslatedString(R.string.tv_account_settings));
+        binding.tvEditProfile.setText(languageManager.getTranslatedString(R.string.tv_edit_profile));
+        binding.tvChangePassword.setText(languageManager.getTranslatedString(R.string.tv_change_password));
+        binding.tvSettings.setText(languageManager.getTranslatedString(R.string.tv_settings));
+        binding.tvLanguage.setText(languageManager.getTranslatedString(R.string.tv_language));
+        binding.tvSound.setText(languageManager.getTranslatedString(R.string.tv_sound));
+        binding.tvPushNotifications.setText(languageManager.getTranslatedString(R.string.tv_push_notifications));
+        binding.tvLogout.setText(languageManager.getTranslatedString(R.string.tv_logout));
     }
 }

@@ -8,11 +8,13 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -75,6 +77,9 @@ public class SettingFragment extends Fragment {
             }
         });
 
+        /**
+         * Logout Logic
+         */
         binding.settingBtnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +106,23 @@ public class SettingFragment extends Fragment {
         });
 
         /**
+         * Toggle button Sound Control
+         */
+        binding.settingSoundToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+                if (isChecked) {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                }
+                if (!isChecked) {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                }
+            }
+        });
+
+
+        /**
          * Spinner setting
          */
         spinner = binding.settingSpinner;
@@ -115,13 +137,17 @@ public class SettingFragment extends Fragment {
                 SharedPreferences intSharedPreference = getContext().getSharedPreferences("languageNum", Context.MODE_PRIVATE);
                 SharedPreferences.Editor numEditor = intSharedPreference.edit();
 
+                if (selectedLanguage.equals("English")) {
+                    editor.putString("language", "");
+                    numEditor.putString("languageNum", "1");
+                }
                 if (selectedLanguage.equals("Vietnamese")) {
                     editor.putString("language", "vi");
-                    numEditor.putString("languageNum", "1");
+                    numEditor.putString("languageNum", "2");
                 }
                 if (selectedLanguage.equals("French")) {
                     editor.putString("language", "fr");
-                    numEditor.putString("languageNum", "2");
+                    numEditor.putString("languageNum", "3");
                 }
                 editor.apply();
                 numEditor.apply();

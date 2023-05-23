@@ -3,6 +3,7 @@ package com.kstyles.korean.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -121,6 +122,21 @@ public class SettingFragment extends Fragment {
             }
         });
 
+        /**
+         * Toggle button set Notification control
+         */
+        binding.settingNotificationPushToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                if (isChecked) {
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+                }
+                if (!isChecked) {
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+                }
+            }
+        });
 
         /**
          * Spinner setting

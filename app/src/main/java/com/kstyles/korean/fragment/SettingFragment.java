@@ -112,14 +112,22 @@ public class SettingFragment extends Fragment {
 
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("language", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("language", selectedLanguage);
-                editor.apply();
+                SharedPreferences intSharedPreference = getContext().getSharedPreferences("languageNum", Context.MODE_PRIVATE);
+                SharedPreferences.Editor numEditor = intSharedPreference.edit();
 
                 if (selectedLanguage.equals("Vietnamese")) {
                     editor.putString("language", "vi");
+                    numEditor.putString("languageNum", "1");
+                }
+                if (selectedLanguage.equals("French")) {
+                    editor.putString("language", "fr");
+                    numEditor.putString("languageNum", "2");
                 }
                 editor.apply();
+                numEditor.apply();
 
+                String languageNum = intSharedPreference.getString("languageNum", "0");
+                spinner.setSelection(Integer.parseInt(languageNum));
                 setTranslation();
             }
 

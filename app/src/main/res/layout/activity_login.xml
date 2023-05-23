@@ -93,12 +93,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginRight="30dp"
+        android:weightSum="2">
 
         <android.widget.RadioButton
             android:id="@+id/custom_radio_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Auto Login"
             android:textSize="16dp"
             android:textStyle="bold"
@@ -107,11 +109,12 @@
 
         <TextView
             android:id="@+id/find_id_pass"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
             android:text="Find ID/PASS"
             android:textSize="16dp"
-            android:layout_marginLeft="65dp"
             android:textColor="@android:color/darker_gray"/>
 
     </LinearLayout>

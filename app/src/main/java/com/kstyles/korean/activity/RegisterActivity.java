@@ -47,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
          * Set Language
          */
         LanguageManager languageManager = new LanguageManager(this);
+        languageManager.setLanguage();
         binding.tvRegister.setText(languageManager.getTranslatedString(R.string.tv_register));
         binding.tvEmail.setText(languageManager.getTranslatedString(R.string.tv_email));
         binding.registerUserEmail.setHint(languageManager.getTranslatedString(R.string.hint_register_email));

@@ -19,6 +19,7 @@
             android:layout_marginTop="10dp"/>
 
         <TextView
+            android:id="@+id/tv_register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -38,6 +39,7 @@
         android:layout_marginLeft="15dp">
 
         <TextView
+            android:id="@+id/tv_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email"
@@ -98,6 +100,7 @@
         android:layout_marginLeft="15dp">
 
         <TextView
+            android:id="@+id/tv_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Password"
@@ -142,6 +145,7 @@
         android:layout_marginLeft="15dp">
 
         <TextView
+            android:id="@+id/tv_check_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Check Password"
@@ -203,6 +207,7 @@
         android:layout_marginTop="20dp">
 
         <TextView
+            android:id="@+id/tv_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nickname"

@@ -16,6 +16,7 @@
             android:layout_margin="30dp">
 
             <TextView
+                android:id="@+id/tv_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Your Progress"
@@ -32,12 +33,14 @@
             android:layout_marginRight="30dp">
 
             <TextView
+                android:id="@+id/tv_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Level"
                 android:textSize="12sp"/>
 
             <TextView
+                android:id="@+id/tv_intermediate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Intermediate"
@@ -72,6 +75,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tv_quizzes_completed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Quizzes completed"
@@ -111,6 +115,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
+                    android:id="@+id/tv_words_studied"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Words studied"
@@ -129,6 +134,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_time_spending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Time Spending"

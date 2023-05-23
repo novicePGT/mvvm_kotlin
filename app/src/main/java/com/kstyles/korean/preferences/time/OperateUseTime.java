@@ -59,7 +59,7 @@ public class OperateUseTime {
     private String isObtainDate() {
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        String[] dayOfWeekName = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+        String[] dayOfWeekName = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
         String date = dayOfWeekName[dayOfWeek - 1];
 
         calendar.add(Calendar.DAY_OF_MONTH, -7); // 일주일 전으로 이동

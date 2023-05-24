@@ -37,26 +37,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center_horizontal">
+        android:gravity="center">
 
         <TextView
+            android:id="@+id/recycler_up_line"
             android:layout_width="3sp"
-            android:layout_height="60dp"
+            android:layout_height="52dp"
             android:background="@android:color/darker_gray"
             android:layout_gravity="center"/>
 
-        <ToggleButton
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@drawable/toggle_check_black"
-            android:layout_gravity="center"
-            android:textOff=""
-            android:textOn=""
-            android:clickable="false"/>
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/custom_circle_background"
+            android:gravity="center">
+
+            <ToggleButton
+                android:id="@+id/recycler_main_toggle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/custom_toggle_unlock_black"
+                android:textOff=""
+                android:textOn=""
+                android:clickable="false"/>
+
+        </LinearLayout>
 
         <TextView
+            android:id="@+id/recycler_down_line"
             android:layout_width="3sp"
-            android:layout_height="60dp"
+            android:layout_height="52dp"
             android:background="@android:color/darker_gray"
             android:layout_gravity="center"/>
 

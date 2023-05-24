@@ -98,7 +98,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/toggle_check_black"/>
+                android:background="@drawable/custom_toggle_check_black"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -58,3 +58,21 @@
 ### 2023-05-22 (월)
 - 베트남어 언어 번역 일부 진행
 - 오토로그인 기능 수정중...
+
+### 2023-05-23 (화)
+- 프랑스어 번역본 추가
+- 토글 버튼으로 사운드 제어 기능 추가
+- 토글 버튼으로 알림 서비스 제어 기능 추가
+- spinner 기본 설정 변경
+- 사용시간 저장이 다른 날짜에 저장되는 이슈 발생, 수정완
+- auto login 기능에 firebase SDK를 사용할 수 없어 로직 변경
+- 메인페이지 UI 일부 수정
+
+### 2023-05-24 (수)
+- Practice page binary index 발생, 수정완
+- 메인 UI 동적으로 수정
+- docs : 오타수정
+- docs : 토글버튼 디자인 추가
+- auto login 기능 완성
+- setting : audio control 로직 추가
+- setting : notifications control 로직 추가 

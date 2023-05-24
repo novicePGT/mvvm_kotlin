@@ -39,7 +39,7 @@ public class QuizCount {
         editor.apply();
 
         int levelComplete = sharedPreferences.getInt(selectLevelComplete, 0);
-        if (levelComplete == 9) {
+        if (levelComplete == 10) {
             increaseQuizCount();
         }
     }

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
@@ -25,7 +24,7 @@ import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.preferences.count.QuizCount;
 import com.kstyles.korean.repository.FirebaseCallback;
 import com.kstyles.korean.repository.FirebaseManager;
-import com.kstyles.korean.position.SeekbarPosition;
+import com.kstyles.korean.preferences.count.SeekbarPosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +66,11 @@ public class PracticeFragment extends Fragment {
         QuizCount quizCount = new QuizCount(getContext(), selectLevel);
         seekbarPosition = new SeekbarPosition(quizCount.getLevelPosition());
 
+        if (quizCount.getLevelPosition() >= 10){
+            quizCount.setLevelPosition();
+            quizCount.increaseWordCount(selectLevel);
+            getExamToFirebase(quizCount.getLevelPosition());
+        }
         if (getActivity() != null) {
             Button button = getActivity().findViewById(R.id.recycler_item_progress_btn);
             getExamToFirebase(button != null && "Revise".equals(button.getText())
@@ -118,6 +122,7 @@ public class PracticeFragment extends Fragment {
     private void getExamToFirebase(int currentPosition) {
         binding.practicePosition.setText(String.valueOf(currentPosition+1));
         binding.practiceSeekbar.setProgress(currentPosition);
+
         firebaseManager.getPracticeItems(new FirebaseCallback<List<PracticeItem>>() {
             @Override
             public void onSuccess(List<PracticeItem> result) {

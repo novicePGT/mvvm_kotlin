@@ -1,4 +1,4 @@
-package com.kstyles.korean.position;
+package com.kstyles.korean.preferences.count;
 
 public class SeekbarPosition {
 

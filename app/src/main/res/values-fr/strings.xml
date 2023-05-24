@@ -22,12 +22,12 @@
 
     <!-- Login 페이지 -->
     <string name="tv_login">connexion</string>
-    <string name="hint_id">Nom d\'apostrophe\'utilisateur ou adresse électronique</string>
+    <string name="hint_id">Nom d\'utilisateur ou adresse électronique</string>
     <string name="hint_password">Mot de passe</string>
     <string name="btn_auto_login">auto connexion</string>
     <string name="tv_find_id_pass">Trouver ID/PASS</string>
     <string name="btn_login">connexion</string>
-    <string name="tv_register_text">Vous n\'apostrophe\'êtes pas encore membre ?</string>
+    <string name="tv_register_text">Vous n\'êtes pas encore membre ?</string>
     <string name="tv_go_register">Cliquez ici pour vous inscrire</string>
 
     <!-- Splash 페이지 -->

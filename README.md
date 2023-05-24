@@ -66,4 +66,13 @@
 - spinner 기본 설정 변경
 - 사용시간 저장이 다른 날짜에 저장되는 이슈 발생, 수정완
 - auto login 기능에 firebase SDK를 사용할 수 없어 로직 변경
-- 메인페이지 UI 
+- 메인페이지 UI 일부 수정
+
+### 2023-05-24 (수)
+- Practice page binary index 발생, 수정완
+- 메인 UI 동적으로 수정
+- docs : 오타수정
+- docs : 토글버튼 디자인 추가
+- auto login 기능 완성
+- setting : audio control 로직 추가
+- setting : notifications control 로직 추가 

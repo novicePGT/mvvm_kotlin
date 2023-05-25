@@ -133,7 +133,6 @@ public class ProgressFragment extends Fragment {
         MarkerView customMarkerView = new CustomMarkerView(getContext(), R.layout.custom_marker_view);
         progressChart = binding.progressChart;
 
-
         ArrayList<BarEntry> spendingTime = setBarEntity();
 
         BarDataSet barDataSet = new BarDataSet(spendingTime, null);
@@ -156,7 +155,7 @@ public class ProgressFragment extends Fragment {
 
         XAxis xAxis = progressChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        String[] labels = new String[]{"","Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+        String[] labels = new String[]{"", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
         xAxis.setGranularity(1f);
         xAxis.setTextColor(Color.BLACK);
@@ -186,15 +185,15 @@ public class ProgressFragment extends Fragment {
 
     @NonNull
     private ArrayList<BarEntry> setBarEntity() {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("use_time", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("use_time", Context.MODE_PRIVATE);
         int[] useTimeArray = {
+                sharedPreferences.getInt("Sun", 0),
                 sharedPreferences.getInt("Mon", 0),
                 sharedPreferences.getInt("Tue", 0),
                 sharedPreferences.getInt("Wed", 0),
                 sharedPreferences.getInt("Thu", 0),
                 sharedPreferences.getInt("Fri", 0),
-                sharedPreferences.getInt("Sat", 0),
-                sharedPreferences.getInt("Sun", 0)
+                sharedPreferences.getInt("Sat", 0)
         };
 
         ArrayList<BarEntry> spendingTime = IntStream.range(0, useTimeArray.length)

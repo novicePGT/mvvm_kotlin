@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,7 +57,7 @@ public class OperateUseTime {
     private String isObtainDate() {
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        String[] dayOfWeekName = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+        String[] dayOfWeekName = {"Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
         String date = dayOfWeekName[dayOfWeek - 1];
 
         calendar.add(Calendar.DAY_OF_MONTH, -7); // 일주일 전으로 이동

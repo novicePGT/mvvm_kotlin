@@ -38,6 +38,8 @@ public class ProgressRecyclerViewHolder extends RecyclerView.ViewHolder implemen
         if (getLevelPosition == 100) {
             binding.progressLinear.setVisibility(View.INVISIBLE);
             binding.progressCompleteLinear.setVisibility(View.VISIBLE);
+            binding.itemLevel.setText(items.get(position).getLevel());
+            binding.itemName.setText(items.get(position).getName());
             binding.recyclerItemProgressBtn.setText("Revise");
         } else {
             binding.progressLinear.setVisibility(View.VISIBLE);

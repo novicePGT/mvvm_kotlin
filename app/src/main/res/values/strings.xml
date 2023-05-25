@@ -60,6 +60,16 @@
         <item>태권도</item>
         <item>펜싱</item>
         <item>골프</item>
+        <item>도시</item>
+        <item>자동차</item>
+        <item>도서관</item>
+        <item>공원</item>
+        <item>교실</item>
+        <item>바다</item>
+        <item>강아지</item>
+        <item>고양이</item>
+        <item>휴대폰</item>
+        <item>컴퓨터</item>
     </string-array>
 
     <string-array name="nation">

@@ -68,7 +68,6 @@ public class PracticeFragment extends Fragment {
 
         if (quizCount.getLevelPosition() >= 10){
             quizCount.setLevelPosition();
-            quizCount.increaseWordCount(selectLevel);
             getExamToFirebase(quizCount.getLevelPosition());
         }
         if (getActivity() != null) {

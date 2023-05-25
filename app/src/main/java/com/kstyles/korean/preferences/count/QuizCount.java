@@ -29,16 +29,15 @@ public class QuizCount {
 
     public void increaseWordCount(String selectLevel) {
         String selectLevelWord = selectLevel + "Word";
-        String selectLevelComplete = selectLevel + "Complete";
         wordCount = wordCount + 1;
+        levelWord++;
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("wordCount", wordCount);
-        editor.putInt(selectLevelComplete, wordCount);
-        editor.putInt(selectLevelWord, wordCount);
+        editor.putInt(selectLevelWord, levelWord);
         editor.apply();
 
-        int levelComplete = sharedPreferences.getInt(selectLevelComplete, 0);
+        int levelComplete = sharedPreferences.getInt(selectLevelWord, 0);
         if (levelComplete == 10) {
             increaseQuizCount();
         }

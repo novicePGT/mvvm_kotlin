@@ -64,6 +64,9 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
         }
         if (position == nextPosition) {
             binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_unlock_black));
+            if (value >= 10) {
+                binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_check_black));
+            }
         }
     }
 

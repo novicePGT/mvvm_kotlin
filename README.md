@@ -76,3 +76,12 @@
 - auto login 기능 완성
 - setting : audio control 로직 추가
 - setting : notifications control 로직 추가 
+
+### 2023-05-25 (목)
+- Progress : 날짜 순서가 잘못되어 수정
+- docs : level 2 문제 추가
+- Progress : data.compareTo() 부분에서 무한 재귀 발생, 수정완
+- Practice : 오류 수정했던 부분 rollback
+- fix : level 2 테스트 중 문제를 끝내도 뷰에서 체크로 바뀌지 않는 현상 발생, 수정완
+- fix : level 2 테스트 중 quiz completed 값 증가하지 않는 이슈 발생, 수정완
+- fix : ProgressRecycler Revise 상태에서 Name & Image 로드 오류 발생, 수정완

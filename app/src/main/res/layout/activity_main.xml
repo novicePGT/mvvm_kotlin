@@ -23,21 +23,21 @@
            android:id="@+id/main_btn_home"
            android:layout_width="30dp"
            android:layout_height="30dp"
-           android:layout_marginRight="75dp"
+           android:layout_marginRight="85dp"
            android:background="@drawable/icon_home"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/main_btn_ex2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="75dp"
-            android:background="@drawable/icon_search"/>
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/main_btn_ex2"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginRight="75dp"-->
+<!--            android:background="@drawable/icon_search"/>-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_btn_progress"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginRight="75dp"
+            android:layout_marginRight="85dp"
             android:background="@drawable/icon_clip"/>
 
         <androidx.appcompat.widget.AppCompatButton

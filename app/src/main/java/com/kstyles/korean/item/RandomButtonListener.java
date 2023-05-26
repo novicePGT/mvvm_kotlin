@@ -1,6 +1,13 @@
 package com.kstyles.korean.item;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -42,18 +49,25 @@ public class RandomButtonListener {
 
         for (int i = 0; i < buttons.length; i++) {
             String valueText = buttons[i].getText().toString();
+            final Button button = buttons[i]; // final 변수로 할당
+
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (valueText.equals(answer)) {
                         Toast.makeText(context, "정답", Toast.LENGTH_SHORT).show();
                         quizCount.increaseWordCount(selectLevel);
-
+                        button.setBackground(context.getDrawable(R.drawable.custom_btn_correct));
+                        button.setTextColor(Color.WHITE);
                     } else {
                         Toast.makeText(context, "오답", Toast.LENGTH_SHORT).show();
+                        button.setBackground(context.getDrawable(R.drawable.custom_btn_incorrect));
+                        button.setTextColor(Color.WHITE);
                     }
                 }
             });
+            button.setBackground(context.getDrawable(R.drawable.custom_btn_white));
+            button.setTextColor(Color.BLACK);
         }
     }
 
@@ -64,15 +78,24 @@ public class RandomButtonListener {
         List<String> buttonTexts = new ArrayList<>(Collections.nCopies(buttons.length, ""));
         buttonTexts.set(randomIndex, answer);
 
+        List<Integer> usedIndices = new ArrayList<>();
+        usedIndices.add(randomIndex);
+
+        Random random = new Random();
+
         for (int i = 0; i < buttons.length; i++) {
             if (i != randomIndex) {
-                String buttonText = buttonList.get(new Random().nextInt(buttonList.size()));
-                while (buttonTexts.subList(0, i).contains(buttonText)) {
-                    buttonText = buttonList.get(new Random().nextInt(buttonList.size()));
+                int randomButtonIndex = random.nextInt(buttonList.size());
+
+                while (usedIndices.contains(randomButtonIndex)) {
+                    randomButtonIndex = random.nextInt(buttonList.size());
                 }
-                buttonTexts.set(i, buttonText);
+
+                usedIndices.add(randomButtonIndex);
+                buttonTexts.set(i, buttonList.get(randomButtonIndex));
             }
         }
+
         return buttonTexts;
     }
 }

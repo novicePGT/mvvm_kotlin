@@ -108,16 +108,13 @@ public class FirebaseManager {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Log.d(TAG, "User password updated successfully");
-                                Toast.makeText(context, "비밀번호 교체 성공", Toast.LENGTH_SHORT).show();
                             } else {
                                 Log.e(TAG, "User password update failed: " + task.getException().getMessage());
-                                Toast.makeText(context, "비밀번호 교체 실패", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 } else {
                     Log.e(TAG, "User authentication failed: " + task.getException().getMessage());
-                    Toast.makeText(context, "비밀번호 인증 실패", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -129,12 +126,12 @@ public class FirebaseManager {
                 UserAccount value = snapshot.getValue(UserAccount.class);
                 value.setUserPassword(newPassword);
                 reference.setValue(value);
-                Toast.makeText(context, "데이터베이스 교체도 성공", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "데이터베이스 비밀번호 교체 성공");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(context, "데이터베이스 교체 실패", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "데이터베이스 비밀번호 교체 실패");
             }
         });
     }
@@ -157,6 +154,19 @@ public class FirebaseManager {
                     activity.finish();
 
                     Log.e(TAG, "No saved information", task.getException());
+                }
+            }
+        });
+    }
+
+    public void sendPasswordRestByEmail(String email) {
+        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "비밀번호 초기화 이메일 발송");
+                } else {
+                    Log.e(TAG, "비밀번호 초기화 메일 발송 실패");
                 }
             }
         });

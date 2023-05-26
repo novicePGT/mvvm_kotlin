@@ -1,11 +1,16 @@
 package com.kstyles.korean.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,7 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityLoginBinding;
+import com.kstyles.korean.databinding.InputFindPassBinding;
 import com.kstyles.korean.language.LanguageManager;
+import com.kstyles.korean.repository.FirebaseManager;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -99,6 +106,34 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+        binding.findIdPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputFindPassBinding bindingDialog = InputFindPassBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setTitle("Find password By Email")
+                        .setView(bindingDialog.getRoot())
+                        .setPositiveButton("Modify", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String email = bindingDialog.loginFindEmail.getText().toString();
+                                String password = bindingDialog.loginSetPass.getText().toString();
+
+                                FirebaseManager firebaseManager = new FirebaseManager();
+                                firebaseManager.sendPasswordRestByEmail(email);
+                                Log.d(TAG, "SUCCESS");
+                            }
+                        })
+                        .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.d(TAG, "ERROR");
+                            }
+                        }).show();
             }
         });
     }

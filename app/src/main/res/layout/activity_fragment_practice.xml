@@ -96,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_btn_white"
                 android:text="Word"
+                android:textStyle="bold"
                 android:layout_marginBottom="15dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -104,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_btn_white"
                 android:text="Word"
+                android:textStyle="bold"
                 android:layout_marginBottom="15dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -112,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_btn_white"
                 android:text="Word"
+                android:textStyle="bold"
                 android:layout_marginBottom="15dp"/>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -120,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_btn_white"
                 android:text="Word"
+                android:textStyle="bold"
                 android:layout_marginBottom="15dp"/>
 
         </LinearLayout>

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         switchFragment(fragments[0]);
 
         binding.mainBtnHome.setOnClickListener(v -> switchFragment(fragments[0]));
-        binding.mainBtnEx2.setOnClickListener(v -> switchFragment(fragments[1]));
+//        binding.mainBtnEx2.setOnClickListener(v -> switchFragment(fragments[1]));
         binding.mainBtnProgress.setOnClickListener(v -> switchFragment(fragments[2]));
         binding.mainBtnSetting.setOnClickListener(v -> switchFragment(fragments[3]));
     }
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
 
         binding.mainBtnHome.setBackgroundResource(fragment instanceof MainFragment ? R.drawable.icon_home_black : R.drawable.icon_home);
-        binding.mainBtnEx2.setBackgroundResource(fragment instanceof Ex2Fragment ? R.drawable.icon_search_black : R.drawable.icon_search);
+//        binding.mainBtnEx2.setBackgroundResource(fragment instanceof Ex2Fragment ? R.drawable.icon_search_black : R.drawable.icon_search);
         binding.mainBtnProgress.setBackgroundResource(fragment instanceof ProgressFragment ? R.drawable.icon_clip_black : R.drawable.icon_clip);
         binding.mainBtnSetting.setBackgroundResource(fragment instanceof SettingFragment ? R.drawable.icon_setup_black : R.drawable.icon_setup);
 

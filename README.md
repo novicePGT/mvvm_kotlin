@@ -85,3 +85,14 @@
 - fix : level 2 테스트 중 문제를 끝내도 뷰에서 체크로 바뀌지 않는 현상 발생, 수정완
 - fix : level 2 테스트 중 quiz completed 값 증가하지 않는 이슈 발생, 수정완
 - fix : ProgressRecycler Revise 상태에서 Name & Image 로드 오류 발생, 수정완
+
+### 2023-05-26 (금)
+- 비밀번호 변경을 위한 UI 추가
+- Login page : 비밀번호 변경 로직 완성
+- Ex2 프레임 제거
+- 앱 로고 적용
+- 상단 상태 바 색상 검정색으로 변경
+- Practice page : CardView 사용해서 모서리 조금 둥글게 사용함
+- level 3 & 4 추가
+- 버튼 디자인 fix
+- 버튼 정답 유무 색상 변경 구문 추가

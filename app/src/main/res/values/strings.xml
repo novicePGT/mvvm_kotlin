@@ -70,6 +70,26 @@
         <item>고양이</item>
         <item>휴대폰</item>
         <item>컴퓨터</item>
+        <item>공항</item>
+        <item>비행기</item>
+        <item>친구</item>
+        <item>가족</item>
+        <item>은행</item>
+        <item>대학교</item>
+        <item>축제</item>
+        <item>카페</item>
+        <item>커피</item>
+        <item>전시회</item>
+        <item>병원</item>
+        <item>영화관</item>
+        <item>게임</item>
+        <item>물</item>
+        <item>꽃</item>
+        <item>음식</item>
+        <item>백화점</item>
+        <item>휴일</item>
+        <item>청소</item>
+        <item>호텔</item>
     </string-array>
 
     <string-array name="nation">

@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -24,6 +26,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.kstyles.korean.activity.LoginActivity;
 import com.kstyles.korean.activity.MainActivity;
 import com.kstyles.korean.item.PracticeItem;
@@ -39,12 +44,14 @@ public class FirebaseManager {
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private FirebaseAuth auth;
+    private FirebaseStorage storage;
     private String pathString;
 
     public FirebaseManager() {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference();
         auth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
     }
 
     public void getRecyclerItems(final FirebaseCallback<List<RecyclerItem>> callback) {
@@ -134,6 +141,26 @@ public class FirebaseManager {
                 Log.e(TAG, "데이터베이스 비밀번호 교체 실패");
             }
         });
+    }
+
+    public void uploadUserProfile(Uri selectedImageUri) {
+        StorageReference storageReference = storage.getReference();
+
+        StorageReference profileReference = storageReference.child("images/user_profiles" + selectedImageUri);
+
+        profileReference.putFile(selectedImageUri)
+                .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                        Log.d(TAG, "Profile image uploaded successfully");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "Profile image upload failed: " + e.getMessage());
+                    }
+                });
     }
 
     public void signInWithEmailAndPass(Activity activity, String email, String password) {

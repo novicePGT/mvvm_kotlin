@@ -24,6 +24,7 @@ import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityRegisterBinding;
 import com.kstyles.korean.item.UserAccount;
 import com.kstyles.korean.language.LanguageManager;
+import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.verification.EditTextWatcher;
 import com.kstyles.korean.verification.PasswordWatcher;
 
@@ -36,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     private String userEmail;
     private String userPassword;
     private String userName;
+    private Uri userProfile;
     private int REQUEST_CODE = 1001;
 
     @Override
@@ -145,6 +147,9 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+                FirebaseManager firebaseManager = new FirebaseManager();
+                firebaseManager.uploadUserProfile(userProfile);
             }
         });
     }
@@ -153,9 +158,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            Uri selectedImageUri = data.getData();
+            userProfile = data.getData();
             Glide.with(this)
-                    .load(selectedImageUri)
+                    .load(userProfile)
                     .override(500, 500)
                     .circleCrop()
                     .format(DecodeFormat.PREFER_ARGB_8888)

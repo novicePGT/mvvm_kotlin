@@ -99,13 +99,13 @@
 
 ### 2023-05-29 (월)
 
-- docs : 토글버튼 디자인 추가
-[feat]: firebase storage 에 유저 프로필 저장 성공
-[docs]: Ui 재수정
-[feat]: 저장소에 올리기 위한 메서드 추가
-[chore]: database Storage 를 사용하기 위한 의존성 추가
-[docs]: profile 설정 추가
-[feat]: 이미지 설정 기능 추가
-[chore]: 갤러리 접근 권한 추가
-[docs]: imageView 백그라운드 뷰 추가
-[docs]: level 5 & 6 추가
+- docs: 토글버튼 디자인 추가
+- feat: firebase storage 에 유저 프로필 저장 성공   
+- docs: Ui 재수정   
+- feat: 저장소에 올리기 위한 메서드 추가   
+- chore: database Storage 를 사용하기 위한 의존성 추가   
+- docs: profile 설정 추가   
+- feat: 이미지 설정 기능 추가   
+- chore: 갤러리 접근 권한 추가   
+- docs: imageView 백그라운드 뷰 추가   
+- docs: level 5 & 6 추가   

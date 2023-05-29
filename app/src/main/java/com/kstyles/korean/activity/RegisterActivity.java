@@ -1,13 +1,18 @@
 package com.kstyles.korean.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,10 +32,11 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth; // 파이어베이스 인증
     private DatabaseReference reference; // 실시간 데이터 베이스
     private ActivityRegisterBinding binding;
-
+    private String TAG = "[Register]";
     private String userEmail;
     private String userPassword;
     private String userName;
+    private int REQUEST_CODE = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +96,18 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         /**
+         * User Profile Setting
+         */
+        binding.registerUserProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
+
+        /**
          * firebaseAuth을 사용해 이메일 url 인증 기능을 포함한 이벤트 리스너
          * Join 버튼을 클릭하면 Email, password, name 을 가지고 데이터베이스로 넘어간다.
          */
@@ -129,5 +147,21 @@ public class RegisterActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            Uri selectedImageUri = data.getData();
+            Glide.with(this)
+                    .load(selectedImageUri)
+                    .override(500, 500)
+                    .circleCrop()
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .into(binding.registerUserProfile);
+        } else {
+            Log.e(TAG, "image 로드 오류");
+        }
     }
 }

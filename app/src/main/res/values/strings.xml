@@ -90,6 +90,25 @@
         <item>휴일</item>
         <item>청소</item>
         <item>호텔</item>
+        <item>유물</item>
+        <item>자수</item>
+        <item>서랍</item>
+        <item>화분</item>
+        <item>방울</item>
+        <item>액자</item>
+        <item>침대</item>
+        <item>화장대</item>
+        <item>팔찌</item>
+        <item>신발장</item>
+        <item>책장</item>
+        <item>석판</item>
+        <item>샹들리에</item>
+        <item>지갑</item>
+        <item>장갑</item>
+        <item>벨트</item>
+        <item>캐리어</item>
+        <item>목걸이</item>
+        <item>금고</item>
     </string-array>
 
     <string-array name="nation">

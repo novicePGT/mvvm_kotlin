@@ -1,44 +1,46 @@
 package com.kstyles.korean.fragment;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.load.engine.Resource;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentSettingBinding;
 import com.kstyles.korean.databinding.InputChangePasswordBinding;
+import com.kstyles.korean.databinding.InputEditProfileBinding;
 import com.kstyles.korean.databinding.InputLogoutBinding;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
-
-import org.w3c.dom.Text;
-
-import java.util.Locale;
 
 public class SettingFragment extends Fragment {
 
     private ActivityFragmentSettingBinding binding;
     private Spinner spinner;
+    private int REQUEST_CODE = 1002;
+    private String TAG = "[SettingFragment}";
+    private Uri userProfile;
+    private InputEditProfileBinding inputEditProfileBinding;
 
     public SettingFragment() {}
 
@@ -101,6 +103,43 @@ public class SettingFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // 거절버튼 수행
+                            }
+                        }).show();
+            }
+        });
+
+        /**
+         * Update User Profile
+         */
+        binding.settingBtnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                inputEditProfileBinding = InputEditProfileBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
+
+                inputEditProfileBinding.inputUserProfile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                        intent.setType("image/*");
+                        startActivityForResult(intent, REQUEST_CODE);
+                    }
+                });
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Update your profile")
+                        .setView(inputEditProfileBinding.getRoot())
+                        .setPositiveButton("Modify", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 수락 버튼 수행
+                                FirebaseManager firebaseManager = new FirebaseManager();
+                                firebaseManager.deleteAndUpdateProfile(getContext(), userProfile);
+                            }
+                        })
+                        .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
                             }
                         }).show();
             }
@@ -180,6 +219,22 @@ public class SettingFragment extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && data != null) {
+            userProfile = data.getData();
+            Glide.with(this)
+                    .load(userProfile)
+                    .override(500, 500)
+                    .circleCrop()
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .into(inputEditProfileBinding.inputUserProfile);
+        } else {
+            Log.e(TAG, "image 로드 오류");
+        }
     }
 
     private void setTranslation() {

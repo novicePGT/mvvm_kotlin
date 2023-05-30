@@ -140,16 +140,20 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-
                             Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+
+                            FirebaseManager firebaseManager = new FirebaseManager();
+                            firebaseManager.uploadUserProfile(RegisterActivity.this, userProfile);
+
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+
                         } else {
                             Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-                FirebaseManager firebaseManager = new FirebaseManager();
-                firebaseManager.uploadUserProfile(userProfile);
             }
         });
     }

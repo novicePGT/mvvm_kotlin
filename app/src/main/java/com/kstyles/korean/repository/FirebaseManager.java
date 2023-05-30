@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -143,24 +144,42 @@ public class FirebaseManager {
         });
     }
 
-    public void uploadUserProfile(Uri selectedImageUri) {
+    public void uploadUserProfile(Context context, Uri selectedImageUri) {
         StorageReference storageReference = storage.getReference();
 
-        StorageReference profileReference = storageReference.child("images/user_profiles" + selectedImageUri);
+        StorageReference profileReference = storageReference.child("images/user_profiles/" + selectedImageUri.getLastPathSegment());
 
         profileReference.putFile(selectedImageUri)
                 .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        Log.d(TAG, "Profile image uploaded successfully");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "Profile image upload failed: " + e.getMessage());
+                        if (task.isSuccessful()) {
+                            // 업로드 성공
+                            profileReference.getDownloadUrl()
+                                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                        @Override
+                                        public void onSuccess(Uri downloadUrl) {
+                                            String imageUrl = downloadUrl.toString();
+
+                                            SharedPreferences sharedPreferences = context.getSharedPreferences("user_profile", Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putString("user_profile", imageUrl);
+                                            editor.apply();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+
+                                        }
+                                    });
+                        } else {
+                            Exception exception = task.getException();
+                            Log.d(TAG, exception.getMessage());
+                        }
                     }
                 });
+
     }
 
     public void signInWithEmailAndPass(Activity activity, String email, String password) {

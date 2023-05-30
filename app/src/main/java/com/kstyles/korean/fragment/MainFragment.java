@@ -12,10 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DatabaseError;
+import com.kstyles.korean.R;
 import com.kstyles.korean.adapter.main.RecyclerAdapter;
 import com.kstyles.korean.databinding.ActivityFragmentMainBinding;
 import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.preferences.user.UserProfile;
 import com.kstyles.korean.repository.FirebaseCallback;
 import com.kstyles.korean.repository.FirebaseManager;
 
@@ -51,6 +56,11 @@ public class MainFragment extends Fragment {
         items = new ArrayList<>();
 
         /**
+         * Set User Profile
+         */
+        setUserProfile();
+
+        /**
          * firebase data 구현 리스너
          */
         firebaseManager = new FirebaseManager();
@@ -72,5 +82,21 @@ public class MainFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         return binding.getRoot();
+    }
+
+    private void setUserProfile() {
+        UserProfile userProfile = new UserProfile();
+        String userProfileImageUrl = userProfile.getUserProfileImageUrl(getContext());
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.icon_user)
+                .error(R.drawable.icon_user);
+
+        Glide.with(binding.getRoot())
+                .load(userProfileImageUrl)
+                .override(500, 500)
+                .circleCrop()
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .apply(requestOptions)
+                .into(binding.mainUserProfile);
     }
 }

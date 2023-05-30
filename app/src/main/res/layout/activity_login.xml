@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:text="Login"
             android:textAlignment="center"
-            android:textSize="30dp"
+            android:textSize="28sp"
+            android:fontFamily="sans-serif-light"
             android:textStyle="bold"/>
 
     </LinearLayout>

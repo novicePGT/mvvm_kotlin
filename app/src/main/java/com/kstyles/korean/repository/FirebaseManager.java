@@ -182,6 +182,29 @@ public class FirebaseManager {
 
     }
 
+    public void deleteAndUpdateProfile(Context context, Uri selectedImageUri) {
+        StorageReference storageReference = storage.getReference();
+        StorageReference profileReference = storageReference.child("images/user_profiles/" + selectedImageUri.getLastPathSegment());
+
+        profileReference.delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // 프로필 삭제 성공
+                        // 업로드 함수 호출
+                        uploadUserProfile(context, selectedImageUri);
+                        Log.d(TAG, "delete And Update Profile Succeed");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // 프로필 삭제 실패
+                        Log.e(TAG, e.getMessage());
+                    }
+                });
+    }
+
     public void signInWithEmailAndPass(Activity activity, String email, String password) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

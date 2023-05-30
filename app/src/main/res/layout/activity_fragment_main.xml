@@ -25,6 +25,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/main_user_profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginRight="35dp"

@@ -50,6 +50,7 @@
                 android:layout_gravity="center"/>
 
             <Button
+                android:id="@+id/setting_btn_edit_profile"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:background="@drawable/icon_setting_arrow"

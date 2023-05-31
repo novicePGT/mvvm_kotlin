@@ -3,8 +3,8 @@ package com.kstyles.korean.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference databaseReference; // 실시간 데이터 베이스
 
     private ActivityLoginBinding binding;
+    private boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.tvLogin.setText(languageManager.getTranslatedString(R.string.tv_login));
         binding.userEmail.setHint(languageManager.getTranslatedString(R.string.hint_id));
         binding.userPassword.setHint(languageManager.getTranslatedString(R.string.hint_password));
-        binding.customRadioButton.setText(languageManager.getTranslatedString(R.string.btn_auto_login));
+        binding.loginAutoLogin.setText(languageManager.getTranslatedString(R.string.tv_auto_login));
         binding.findIdPass.setText(languageManager.getTranslatedString(R.string.tv_find_id_pass));
         binding.btnLogin.setText(languageManager.getTranslatedString(R.string.btn_login));
         binding.tvRegisterText.setText(languageManager.getTranslatedString(R.string.tv_register_text));
@@ -74,6 +75,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        binding.loginLinearAuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (flag) {
+                    binding.loginIconButton.setBackground(getDrawable(R.drawable.icon_button_unchecked));
+                    flag = false;
+                } else {
+                    binding.loginIconButton.setBackground(getDrawable(R.drawable.icon_button_check));
+                    flag = true;
+                }
+            }
+        });
+
+
+
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // 로그인 성공 로직
-                            if (binding.customRadioButton.isChecked()) {
+                            if (flag) {
                                 SharedPreferences idSharedPreferences = getSharedPreferences("userId", MODE_PRIVATE);
                                 SharedPreferences.Editor idEditor = idSharedPreferences.edit();
                                 SharedPreferences passSharedPreferences = getSharedPreferences("userPass", MODE_PRIVATE);
@@ -121,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String email = bindingDialog.loginFindEmail.getText().toString();
-                                String password = bindingDialog.loginSetPass.getText().toString();
 
                                 FirebaseManager firebaseManager = new FirebaseManager();
                                 firebaseManager.sendPasswordRestByEmail(email);

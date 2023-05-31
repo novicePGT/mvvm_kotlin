@@ -1,6 +1,8 @@
 package com.kstyles.korean.fragment;
 
 
+import static com.kstyles.korean.verification.noti.NotificationPolicy.isNotificationPolicyAccessGranted;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
@@ -168,12 +170,15 @@ public class SettingFragment extends Fragment {
         binding.settingSoundToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
-                if (isChecked) {
-                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                }
-                if (!isChecked) {
-                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                if (isNotificationPolicyAccessGranted(getContext())) {
+                    AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+                    if (isChecked) {
+                        audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                    } else {
+                        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                    }
+                } else {
+                    showNotificationPolicyAccessDialog();
                 }
             }
         });
@@ -184,12 +189,16 @@ public class SettingFragment extends Fragment {
         binding.settingNotificationPushToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-                if (isChecked) {
-                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
-                }
-                if (!isChecked) {
-                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+                if (isNotificationPolicyAccessGranted(getContext())) {
+                    NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                    if (isChecked) {
+                        notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+                    }
+                    if (!isChecked) {
+                        notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+                    }
+                } else {
+                    showNotificationPolicyAccessDialog();
                 }
             }
         });
@@ -252,6 +261,26 @@ public class SettingFragment extends Fragment {
         } else {
             Log.e(TAG, "image 로드 오류");
         }
+    }
+
+    private void showNotificationPolicyAccessDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Notification Policy Access")
+                .setMessage("Please grant notification policy access to enable this feature.")
+                .setPositiveButton("Grant Access", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 사용자가 권한을 거부한 경우 처리할 로직을 작성합니다.
+                    }
+                })
+                .show();
     }
 
     private void setTranslation() {

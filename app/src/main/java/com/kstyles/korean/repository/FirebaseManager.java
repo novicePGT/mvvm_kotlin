@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.kstyles.korean.activity.LoginActivity;
@@ -146,8 +147,7 @@ public class FirebaseManager {
 
     public void uploadUserProfile(Context context, Uri selectedImageUri) {
         StorageReference storageReference = storage.getReference();
-
-        StorageReference profileReference = storageReference.child("images/user_profiles/" + selectedImageUri.getLastPathSegment());
+        StorageReference profileReference = storageReference.child("images/user_profiles").child(String.valueOf(selectedImageUri.getLastPathSegment()));
 
         profileReference.putFile(selectedImageUri)
                 .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -165,6 +165,8 @@ public class FirebaseManager {
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
                                             editor.putString("user_profile", imageUrl);
                                             editor.apply();
+
+                                            Log.d(TAG, "Succeed Update User Profile");
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
@@ -179,21 +181,18 @@ public class FirebaseManager {
                         }
                     }
                 });
-
     }
 
-    public void deleteAndUpdateProfile(Context context, Uri selectedImageUri) {
-        StorageReference storageReference = storage.getReference();
-        StorageReference profileReference = storageReference.child("images/user_profiles/" + selectedImageUri.getLastPathSegment());
+    public void deleteUserProfile(Uri previousImageUri) {
+        // 이전 프로필 이미지의 다운로드 URI를 사용하여 StorageReference 가져오기
+        StorageReference profileReference = storage.getReferenceFromUrl(previousImageUri.toString());
 
         profileReference.delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         // 프로필 삭제 성공
-                        // 업로드 함수 호출
-                        uploadUserProfile(context, selectedImageUri);
-                        Log.d(TAG, "delete And Update Profile Succeed");
+                        Log.d(TAG, "Delete Profile Succeed");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -204,6 +203,7 @@ public class FirebaseManager {
                     }
                 });
     }
+
 
     public void signInWithEmailAndPass(Activity activity, String email, String password) {
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

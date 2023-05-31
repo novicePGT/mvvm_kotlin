@@ -40,6 +40,7 @@ public class SettingFragment extends Fragment {
     private int REQUEST_CODE = 1002;
     private String TAG = "[SettingFragment}";
     private Uri userProfile;
+    private Uri previousUserProfile;
     private InputEditProfileBinding inputEditProfileBinding;
 
     public SettingFragment() {}
@@ -115,7 +116,16 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 inputEditProfileBinding = InputEditProfileBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
-
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_profile", Context.MODE_PRIVATE);
+                previousUserProfile = Uri.parse(sharedPreferences.getString("user_profile", ""));
+                if (!previousUserProfile.equals("")) {
+                    Glide.with(getContext())
+                            .load(previousUserProfile)
+                            .override(500, 500)
+                            .circleCrop()
+                            .format(DecodeFormat.PREFER_ARGB_8888)
+                            .into(inputEditProfileBinding.inputUserProfile);
+                }
                 inputEditProfileBinding.inputUserProfile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -132,8 +142,15 @@ public class SettingFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // 수락 버튼 수행
-                                FirebaseManager firebaseManager = new FirebaseManager();
-                                firebaseManager.deleteAndUpdateProfile(getContext(), userProfile);
+                                if (!previousUserProfile.equals("") && userProfile != null) {
+                                    FirebaseManager firebaseManager = new FirebaseManager();
+                                    firebaseManager.deleteUserProfile(previousUserProfile);
+                                    firebaseManager.uploadUserProfile(getContext(), userProfile);
+
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("user_profile", String.valueOf(userProfile));
+                                    editor.apply();
+                                }
                             }
                         })
                         .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {

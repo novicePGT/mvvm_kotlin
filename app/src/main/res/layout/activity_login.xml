@@ -97,16 +97,30 @@
         android:layout_marginRight="30dp"
         android:weightSum="2">
 
-        <android.widget.RadioButton
-            android:id="@+id/custom_radio_button"
+        <LinearLayout
+            android:id="@+id/login_linear_auto"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Auto Login"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/darker_gray"
-            android:paddingRight="65dp"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/login_icon_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/icon_button_unchecked"/>
+
+            <TextView
+                android:id="@+id/login_auto_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Auto Login"
+                android:fontFamily="sans-serif-light"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@android:color/darker_gray"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/find_id_pass"
@@ -115,7 +129,9 @@
             android:layout_weight="1"
             android:gravity="end|center_vertical"
             android:text="Find ID/PASS"
-            android:textSize="16dp"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="bold"
+            android:textSize="14sp"
             android:textColor="@android:color/darker_gray"/>
 
     </LinearLayout>

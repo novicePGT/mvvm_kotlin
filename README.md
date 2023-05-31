@@ -109,3 +109,23 @@
 - chore: 갤러리 접근 권한 추가   
 - docs: imageView 백그라운드 뷰 추가   
 - docs: level 5 & 6 추가   
+
+### 2023-05-30 (화)
+- docs: edit profile docs
+- docs: UI fix
+- feat: 회원가입 완료 후 처리 로직 추가
+- docs: UI 폰트 & 이미지 뷰 사이즈 수정
+- feat: User Profile 설정 기능 완료
+- fix: 배경색 회색으로 fix
+- feat: User Profile 업로드하고 shared에 저장
+- feat: Get User Profile 메서드 분리
+- docs: 디자인 수정
+
+### 2023-05-31 (수)
+- fix: update User Profile 오류 fix
+- docs: setting page UI 수정 완
+- refactor: auto login view refactor
+- docs: login UI 수정
+- feat: 권한 추가 기능 구현
+- docs: 권한 추가
+- feat: Delete And Update User Profile

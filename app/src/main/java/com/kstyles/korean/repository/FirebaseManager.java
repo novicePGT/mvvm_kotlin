@@ -187,21 +187,23 @@ public class FirebaseManager {
         // 이전 프로필 이미지의 다운로드 URI를 사용하여 StorageReference 가져오기
         StorageReference profileReference = storage.getReferenceFromUrl(previousImageUri.toString());
 
-        profileReference.delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // 프로필 삭제 성공
-                        Log.d(TAG, "Delete Profile Succeed");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // 프로필 삭제 실패
-                        Log.e(TAG, e.getMessage());
-                    }
-                });
+        if (previousImageUri != null && !profileReference.toString().isEmpty()) {
+            profileReference.delete()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // 프로필 삭제 성공
+                            Log.d(TAG, "Delete Profile Succeed");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // 프로필 삭제 실패
+                            Log.e(TAG, e.getMessage());
+                        }
+                    });
+        }
     }
 
 

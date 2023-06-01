@@ -24,7 +24,7 @@
     <string name="tv_login">Đăng nhập</string>
     <string name="hint_id">Tên người dùng hoặc địa chỉ email</string>
     <string name="hint_password">Mật khẩu</string>
-    <string name="btn_auto_login">Đăng nhập tự động</string>
+    <string name="tv_auto_login">Đăng nhập tự động</string>
     <string name="tv_find_id_pass">Tìm ID/ PASS</string>
     <string name="btn_login">sự đăng nhập</string>
     <string name="tv_register_text">Cậu vẫn chưa thành viên à?</string>

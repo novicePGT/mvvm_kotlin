@@ -95,25 +95,6 @@ public class PracticeFragment extends Fragment {
             }
         });
 
-        binding.practiceSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                seekbarPosition = new SeekbarPosition(progress);
-                int currentPosition = seekbarPosition.getPosition();
-                getExamToFirebase(currentPosition);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
         return binding.getRoot();
     }
 

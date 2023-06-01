@@ -97,54 +97,6 @@ public class FirebaseManager {
         });
     }
 
-    /**
-     * User 의 email과 password를 받아서 다시 로그인하고 로그인 한 정보를 바탕으로 비밀번호를 수정함.
-     * @param context
-     * @param email
-     * @param password
-     * @param newPassword
-     */
-    public void setUserPassword(Context context, String email, String password, String newPassword) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        AuthCredential credential = EmailAuthProvider.getCredential(email, password);
-        user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    user.updatePassword(newPassword).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "User password updated successfully");
-                            } else {
-                                Log.e(TAG, "User password update failed: " + task.getException().getMessage());
-                            }
-                        }
-                    });
-                } else {
-                    Log.e(TAG, "User authentication failed: " + task.getException().getMessage());
-                }
-            }
-        });
-
-        reference = FirebaseDatabase.getInstance().getReference("UserAccount").child(user.getUid());
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserAccount value = snapshot.getValue(UserAccount.class);
-                value.setUserPassword(newPassword);
-                reference.setValue(value);
-                Log.d(TAG, "데이터베이스 비밀번호 교체 성공");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e(TAG, "데이터베이스 비밀번호 교체 실패");
-            }
-        });
-    }
-
     public void uploadUserProfile(Context context, Uri selectedImageUri) {
         StorageReference storageReference = storage.getReference();
         StorageReference profileReference = storageReference.child("images/user_profiles").child(String.valueOf(selectedImageUri.getLastPathSegment()));

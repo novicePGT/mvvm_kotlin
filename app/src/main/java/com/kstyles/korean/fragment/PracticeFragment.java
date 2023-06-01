@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -102,6 +101,7 @@ public class PracticeFragment extends Fragment {
     private void getExamToFirebase(int currentPosition) {
         binding.practicePosition.setText(String.valueOf(currentPosition+1));
         binding.practiceSeekbar.setProgress(currentPosition);
+        binding.correctView.setVisibility(View.INVISIBLE);
 
         firebaseManager.getPracticeItems(new FirebaseCallback<List<PracticeItem>>() {
             @Override
@@ -116,7 +116,7 @@ public class PracticeFragment extends Fragment {
                 RandomButtonListener randomButtonListener = new RandomButtonListener(
                         binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3,
                         binding.practiceBtn4, binding.getRoot().getContext(),
-                        practiceItems.get(currentPosition).getAnswer(), selectLevel
+                        practiceItems.get(currentPosition).getAnswer(), selectLevel, binding.correctView
                 );
                 randomButtonListener.randomButtonEvent();
             }

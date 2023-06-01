@@ -120,6 +120,7 @@ public class SettingFragment extends Fragment {
                 inputEditProfileBinding = InputEditProfileBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_profile", Context.MODE_PRIVATE);
                 previousUserProfile = Uri.parse(sharedPreferences.getString("user_profile", ""));
+
                 if (!previousUserProfile.equals("")) {
                     Glide.with(getContext())
                             .load(previousUserProfile)

@@ -129,3 +129,19 @@
 - feat: 권한 추가 기능 구현
 - docs: 권한 추가
 - feat: Delete And Update User Profile
+
+### 2023-06-01 (목)
+[feat]: add character action
+[feat]: add character action
+[refactor]: delete update pass
+[docs]: add action file
+[docs]: add lottie event
+[chore]: add lottie repository
+[docs]: 번역본 추가
+[fix]: Exception 처리
+[docs]: 화면 밖으로 나가는 현상 변경
+[docs]: 화면 밖으로 나가는 현상 변경
+[delete]: Delete seekbar action
+[docs]: UI 비율 맞게 수정
+[docs]: 겉면 리니어로 변경
+[docs]: seekbar -> progressbar

@@ -2,18 +2,13 @@ package com.kstyles.korean.item;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
-import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.kstyles.korean.R;
 import com.kstyles.korean.preferences.count.QuizCount;
 
@@ -30,12 +25,14 @@ public class RandomButtonListener {
     private Context context;
     private String answer;
     private String selectLevel;
+    private LottieAnimationView lottieAnimationView;
 
-    public RandomButtonListener(Button button1, Button button2, Button button3, Button button4, Context context, String answer, String selectLevel) {
+    public RandomButtonListener(Button button1, Button button2, Button button3, Button button4, Context context, String answer, String selectLevel, LottieAnimationView lottieAnimationView) {
         buttons = new Button[]{button1, button2, button3, button4};
         this.context = context;
         this.answer = answer;
         this.selectLevel = selectLevel;
+        this.lottieAnimationView = lottieAnimationView;
     }
 
     public void randomButtonEvent() {
@@ -55,7 +52,8 @@ public class RandomButtonListener {
                 @Override
                 public void onClick(View v) {
                     if (valueText.equals(answer)) {
-                        Toast.makeText(context, "정답", Toast.LENGTH_SHORT).show();
+                        lottieAnimationView.setVisibility(View.VISIBLE);
+                        lottieAnimationView.playAnimation();
                         quizCount.increaseWordCount(selectLevel);
                         button.setBackground(context.getDrawable(R.drawable.custom_btn_correct));
                         button.setTextColor(Color.WHITE);

@@ -28,9 +28,11 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.kstyles.korean.R;
+import com.kstyles.korean.activity.LoginActivity;
 import com.kstyles.korean.databinding.ActivityFragmentSettingBinding;
 import com.kstyles.korean.databinding.InputChangePasswordBinding;
 import com.kstyles.korean.databinding.InputEditProfileBinding;
+import com.kstyles.korean.databinding.InputFindPassBinding;
 import com.kstyles.korean.databinding.InputLogoutBinding;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
@@ -58,26 +60,25 @@ public class SettingFragment extends Fragment {
         binding.settingChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InputChangePasswordBinding bindingDialog = InputChangePasswordBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
+                InputFindPassBinding bindingDialog = InputFindPassBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Change Password")
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+                builder.setTitle("Find password By Email")
                         .setView(bindingDialog.getRoot())
                         .setPositiveButton("Modify", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // 확인버튼 수행
-                                String email = bindingDialog.settingEmail.getText().toString();
-                                String password = bindingDialog.settingPassword.getText().toString();
-                                String newPassword = bindingDialog.settingChangePassword.getText().toString();
+                                String email = bindingDialog.loginFindEmail.getText().toString();
+
                                 FirebaseManager firebaseManager = new FirebaseManager();
-                                firebaseManager.setUserPassword(getContext(), email, password, newPassword);
+                                firebaseManager.sendPasswordRestByEmail(email);
+                                Log.d(TAG, "SUCCESS");
                             }
                         })
                         .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // 거절버튼 수행
+                                Log.d(TAG, "ERROR");
                             }
                         }).show();
             }

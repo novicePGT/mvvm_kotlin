@@ -32,7 +32,7 @@ public class EditTextWatcher implements TextWatcher {
             verificationView.setText("Email is a valid format.");
             verificationView.setTextColor(Color.GREEN);
         }
-        if (EmailValidator.isValidEmail(text) == false) {
+        if (!EmailValidator.isValidEmail(text)) {
             verificationView.setText("Email is not in a valid format.");
             verificationView.setTextColor(Color.RED);
         }

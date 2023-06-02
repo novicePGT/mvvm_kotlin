@@ -145,3 +145,13 @@
 - [docs]: UI 비율 맞게 수정
 - [docs]: 겉면 리니어로 변경
 - [docs]: seekbar -> progressbar
+
+### 2023-06-02 (금)
+- docs: 비밀번호 검증 조건 삽입
+- chore: Change main color
+- refator]
+- feat: 정규식으로 비밀번호 검증
+- feat: 비밀번호 처리 로직 변경
+- feat: register 예외처리 완
+- feat: button 중복 제거
+- feat: add character action

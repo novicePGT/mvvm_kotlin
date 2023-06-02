@@ -28,7 +28,6 @@ import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.verification.EditTextWatcher;
 import com.kstyles.korean.verification.PasswordValidator;
-import com.kstyles.korean.verification.PasswordWatcher;
 
 public class RegisterActivity extends AppCompatActivity {
 

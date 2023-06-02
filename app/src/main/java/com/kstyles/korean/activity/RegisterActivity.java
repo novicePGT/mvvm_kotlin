@@ -1,6 +1,7 @@
 package com.kstyles.korean.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.kstyles.korean.item.UserAccount;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.verification.EditTextWatcher;
+import com.kstyles.korean.verification.PasswordValidator;
 import com.kstyles.korean.verification.PasswordWatcher;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -80,12 +82,6 @@ public class RegisterActivity extends AppCompatActivity {
         binding.registerUserEmail.addTextChangedListener(editTextWatcher);
 
         /**
-         * 비밀번호가 6자리 이하면 텍스트로 정보를 노출
-         */
-        PasswordWatcher passwordWatcher = new PasswordWatcher(binding.registerTvPasswordVerification, binding.registerUserPassword, binding.registerUserRePassword);
-        binding.registerUserPassword.addTextChangedListener(passwordWatcher);
-
-        /**
          * 뒤로가기 버튼 구현
          */
         binding.registerBtnBack.setOnClickListener(new View.OnClickListener() {
@@ -121,39 +117,58 @@ public class RegisterActivity extends AppCompatActivity {
                 userPassword = binding.registerUserPassword.getText().toString();
                 userName = binding.registerUserName.getText().toString();
 
-                firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-                            UserAccount userAccount = new UserAccount(userEmail, userPassword, userName, firebaseAuth.getUid());
-                            reference.child("UserAccount").child(currentUser.getUid()).setValue(userAccount);
+                String password1 = binding.registerUserPassword.getText().toString();
+                String password2 = binding.registerUserRePassword.getText().toString();
+                if (PasswordValidator.validatePassword(password1, password2) && !binding.registerUserName.equals("") && !binding.registerUserEmail.equals("")) {
+                    binding.registerTvPasswordVerification.setText("The two passwords match.");
+                    binding.registerTvPasswordVerification.setTextColor(Color.BLUE);
+                    register();
+                }
+                if (!PasswordValidator.validatePassword(password1, password2)) {
+                    binding.registerTvPasswordVerification.setText("Check : Matching password, 8 characters or more, Include capital letters, Include special characters");
+                    binding.registerTvPasswordVerification.setTextColor(Color.RED);
+                }
+                if (password1.isEmpty() || password2.isEmpty()) {
+                    binding.registerTvPasswordVerification.setText("");
+                }
+            }
+        });
+    }
 
-                            // 이메일 인증 메일 보내기
-                            currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(RegisterActivity.this, "이메일 인증 메일을 보냈습니다. 이메일을 확인해주세요.", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(RegisterActivity.this, "이메일 인증 메일 보내기 실패", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                            Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+    private void register() {
+        firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                    UserAccount userAccount = new UserAccount(userEmail, userPassword, userName, firebaseAuth.getUid());
+                    reference.child("UserAccount").child(currentUser.getUid()).setValue(userAccount);
 
-                            FirebaseManager firebaseManager = new FirebaseManager();
-                            firebaseManager.uploadUserProfile(RegisterActivity.this, userProfile);
-
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish();
-
-                        } else {
-                            Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
+                    // 이메일 인증 메일 보내기
+                    currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(RegisterActivity.this, "이메일 인증 메일을 보냈습니다. 이메일을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "이메일 인증 메일 보내기 실패", Toast.LENGTH_SHORT).show();
+                            }
                         }
+                    });
+                    Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+
+                    if (userProfile != null) {
+                        FirebaseManager firebaseManager = new FirebaseManager();
+                        firebaseManager.uploadUserProfile(RegisterActivity.this, userProfile);
                     }
-                });
+
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } else {
+                    Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

@@ -51,6 +51,7 @@ public class RandomButtonListener {
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    button.setClickable(false);
                     if (valueText.equals(answer)) {
                         lottieAnimationView.setVisibility(View.VISIBLE);
                         lottieAnimationView.playAnimation();

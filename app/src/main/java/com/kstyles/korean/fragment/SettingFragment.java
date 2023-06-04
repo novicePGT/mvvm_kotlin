@@ -222,29 +222,32 @@ public class SettingFragment extends Fragment {
                 SharedPreferences intSharedPreference = getContext().getSharedPreferences("languageNum", Context.MODE_PRIVATE);
                 SharedPreferences.Editor numEditor = intSharedPreference.edit();
 
+                String languageNum = intSharedPreference.getString("languageNum", "0");
+                spinner.setSelection(Integer.parseInt(languageNum));
+
                 if (selectedLanguage.equals("English")) {
                     editor.putString("language", "");
-                    numEditor.putString("languageNum", "1");
+                    numEditor.putString("languageNum", "0");
                 }
                 if (selectedLanguage.equals("Vietnamese")) {
                     editor.putString("language", "vi");
-                    numEditor.putString("languageNum", "2");
+                    numEditor.putString("languageNum", "1");
+                    spinner.setSelection(1);
                 }
                 if (selectedLanguage.equals("French")) {
                     editor.putString("language", "fr");
-                    numEditor.putString("languageNum", "3");
+                    numEditor.putString("languageNum", "2");
+                    spinner.setSelection(2);
                 }
                 editor.apply();
                 numEditor.apply();
 
-                String languageNum = intSharedPreference.getString("languageNum", "0");
-                spinner.setSelection(Integer.parseInt(languageNum));
+
                 setTranslation();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -281,7 +284,7 @@ public class SettingFragment extends Fragment {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // 사용자가 권한을 거부한 경우 처리할 로직을 작성합니다.
+
                     }
                 })
                 .show();

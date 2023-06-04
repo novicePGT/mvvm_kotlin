@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityMainBinding;
-import com.kstyles.korean.fragment.Ex2Fragment;
 import com.kstyles.korean.fragment.ProgressFragment;
 import com.kstyles.korean.fragment.SettingFragment;
 import com.kstyles.korean.fragment.MainFragment;
@@ -18,7 +17,7 @@ import com.kstyles.korean.preferences.time.OperateUseTime;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final Fragment[] fragments = {new MainFragment(), new Ex2Fragment(), new ProgressFragment(), new SettingFragment()};
+    private final Fragment[] fragments = {new MainFragment(), new ProgressFragment(), new SettingFragment()};
 
     private String TAG = "[MainActivity]";
     private ActivityMainBinding binding;
@@ -40,9 +39,8 @@ public class MainActivity extends AppCompatActivity {
         switchFragment(fragments[0]);
 
         binding.mainBtnHome.setOnClickListener(v -> switchFragment(fragments[0]));
-//        binding.mainBtnEx2.setOnClickListener(v -> switchFragment(fragments[1]));
-        binding.mainBtnProgress.setOnClickListener(v -> switchFragment(fragments[2]));
-        binding.mainBtnSetting.setOnClickListener(v -> switchFragment(fragments[3]));
+        binding.mainBtnProgress.setOnClickListener(v -> switchFragment(fragments[1]));
+        binding.mainBtnSetting.setOnClickListener(v -> switchFragment(fragments[2]));
     }
 
     private void switchFragment(Fragment fragment) {
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
 
         binding.mainBtnHome.setBackgroundResource(fragment instanceof MainFragment ? R.drawable.icon_home_black : R.drawable.icon_home);
-//        binding.mainBtnEx2.setBackgroundResource(fragment instanceof Ex2Fragment ? R.drawable.icon_search_black : R.drawable.icon_search);
         binding.mainBtnProgress.setBackgroundResource(fragment instanceof ProgressFragment ? R.drawable.icon_clip_black : R.drawable.icon_clip);
         binding.mainBtnSetting.setBackgroundResource(fragment instanceof SettingFragment ? R.drawable.icon_setup_black : R.drawable.icon_setup);
 

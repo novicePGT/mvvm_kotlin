@@ -119,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password1 = binding.registerUserPassword.getText().toString();
                 String password2 = binding.registerUserRePassword.getText().toString();
                 if (PasswordValidator.validatePassword(password1, password2) && !binding.registerUserName.equals("") && !binding.registerUserEmail.equals("")) {
-                    binding.registerTvPasswordVerification.setText("The two passwords match.");
+                    binding.registerTvPasswordVerification.setText("The two passwords match");
                     binding.registerTvPasswordVerification.setTextColor(Color.BLUE);
                     register();
                 }

@@ -53,6 +53,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
 
         if (position == 0) {
             binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_unlock_black));
+            binding.recyclerItem.setClickable(false);
         }
         if (value >= 10) {
             binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_check_black));
@@ -61,12 +62,14 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
             editor.apply();
         } else {
             binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_lock_black));
+            binding.recyclerItem.setClickable(false);
         }
         if (position == nextPosition) {
             binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_unlock_black));
             if (value >= 10) {
                 binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_check_black));
             }
+            binding.recyclerItem.setClickable(true);
         }
     }
 

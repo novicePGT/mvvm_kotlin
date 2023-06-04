@@ -14,14 +14,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="If you log out, you will need to log in again."
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textAlignment="center"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="Are you sure you want to log out?"
             android:textSize="14sp"
             android:textColor="@color/black"

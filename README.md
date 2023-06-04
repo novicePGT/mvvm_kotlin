@@ -1,4 +1,4 @@
-# KoreanApp
+# KoreanAppCancel changes
 2023.04 ~ KStyles의 외국인들이 쉽게 한국어를 배울 수 있도록 학습 환경을 제공하고 관리해주는 어플리케이션을 제작하는 프로젝트를 진행한다.
 
 ### 2023-04-21 (금)
@@ -149,9 +149,24 @@
 ### 2023-06-02 (금)
 - docs: 비밀번호 검증 조건 삽입
 - chore: Change main color
-- refator]
+- refator
 - feat: 정규식으로 비밀번호 검증
 - feat: 비밀번호 처리 로직 변경
 - feat: register 예외처리 완
 - feat: button 중복 제거
 - feat: add character action
+
+### 2023-06-04 (일)
+- [feat]: Change spinner default setting
+- [feat]: logout 시 정보 날림
+- [feat]: item이 rock 이면 클릭 비활성화
+- [refactor]: delete .
+- [refactor]: delete fragment num
+- [docs]: refactor Ui
+- [fix]: delete .
+- add arrow icon
+- [docs]: delete textView
+- [docs]: editText 수정
+- [docs]: logout 문구 수정
+- [docs]: 번역 파일 수정
+- [refactor]: login activity 수정사항 커밋

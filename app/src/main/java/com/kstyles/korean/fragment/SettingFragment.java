@@ -28,9 +28,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.kstyles.korean.R;
-import com.kstyles.korean.activity.LoginActivity;
 import com.kstyles.korean.databinding.ActivityFragmentSettingBinding;
-import com.kstyles.korean.databinding.InputChangePasswordBinding;
 import com.kstyles.korean.databinding.InputEditProfileBinding;
 import com.kstyles.korean.databinding.InputFindPassBinding;
 import com.kstyles.korean.databinding.InputLogoutBinding;
@@ -101,6 +99,10 @@ public class SettingFragment extends Fragment {
                                 // 수락버튼 수행
                                 FirebaseManager firebaseManager = new FirebaseManager();
                                 firebaseManager.signOut((Activity) getContext());
+                                SharedPreferences sharedPreferences = getContext().getSharedPreferences("userPass", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.clear();
+                                editor.apply();
                             }
                         })
                         .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {

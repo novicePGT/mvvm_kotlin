@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
 
         LanguageManager languageManager = new LanguageManager(this);
         languageManager.setLanguage();
-        binding.tvLogin.setText(languageManager.getTranslatedString(R.string.tv_login));
         binding.userEmail.setHint(languageManager.getTranslatedString(R.string.hint_id));
         binding.userPassword.setHint(languageManager.getTranslatedString(R.string.hint_password));
         binding.loginAutoLogin.setText(languageManager.getTranslatedString(R.string.tv_auto_login));

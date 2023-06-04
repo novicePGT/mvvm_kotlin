@@ -21,7 +21,6 @@
     <string name="tv_time_spending">Tiêu tốn thời gian</string>
 
     <!-- Login 페이지 -->
-    <string name="tv_login">Đăng nhập</string>
     <string name="hint_id">Tên người dùng hoặc địa chỉ email</string>
     <string name="hint_password">Mật khẩu</string>
     <string name="tv_auto_login">Đăng nhập tự động</string>

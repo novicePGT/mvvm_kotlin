@@ -22,7 +22,6 @@
     <string name="tv_time_spending">Time Spending</string>
 
     <!-- Login 페이지 -->
-    <string name="tv_login">Login</string>
     <string name="hint_id">Username or Email Address</string>
     <string name="hint_password">Password</string>
     <string name="tv_auto_login">Auto Login</string>
@@ -112,11 +111,9 @@
     </string-array>
 
     <string-array name="nation">
-        <item>**Country**</item>
+        <item></item>
         <item>English</item>
         <item>Vietnamese</item>
         <item>French</item>
-        <item>English</item>
-        <item>Russian</item>
     </string-array>
 </resources>

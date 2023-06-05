@@ -170,3 +170,14 @@
 - [docs]: logout 문구 수정
 - [docs]: 번역 파일 수정
 - [refactor]: login activity 수정사항 커밋
+
+### 2023-06-05 (월)
+- [fix]: count가 잘못되는 오류 수정
+- [feat]: 단어장 기능 완성
+- [docs]: 단어 해석본 추가
+- [feat]: 버튼으로 넘어가는 부분 삭 & 뷰 최적화
+- [docs]: 버튼으로 넘어가는 부분 삭제
+- [docs]: 다이얼로그 애니메이션 뷰 추가
+- [feat]: RandomButtonListener view merged
+- [delete]: RandomButtonListener view merged
+- [refactor]: 로티 애니메이션 이전

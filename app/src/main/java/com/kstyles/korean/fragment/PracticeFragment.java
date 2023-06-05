@@ -24,10 +24,10 @@ import com.kstyles.korean.databinding.ActivityFragmentPracticeBinding;
 import com.kstyles.korean.databinding.InputPracticeViewBinding;
 import com.kstyles.korean.item.PracticeItem;
 import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.count.QuizCount;
 import com.kstyles.korean.repository.FirebaseCallback;
 import com.kstyles.korean.repository.FirebaseManager;
-import com.kstyles.korean.preferences.count.SeekbarPosition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +48,6 @@ public class PracticeFragment extends Fragment {
     private Button buttons[];
     private int position;
     private String answer;
-    private SeekbarPosition seekbarPosition;
 
     public PracticeFragment() {
         recyclerItems = MainFragment.items;
@@ -70,11 +69,12 @@ public class PracticeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivityFragmentPracticeBinding.inflate(inflater, container, false);
 
+
+
         selectLevel = String.format("%s %s", recyclerItems.get(position).getLevel(), recyclerItems.get(position).getName());
         binding.practiceLevel.setText(selectLevel);
         firebaseManager.setPathString(selectLevel);
         quizCount = new QuizCount(getContext(), selectLevel);
-        seekbarPosition = new SeekbarPosition(quizCount.getLevelPosition());
 
         setPracticeView();
 
@@ -107,6 +107,7 @@ public class PracticeFragment extends Fragment {
     }
 
     private void randomButtonEvent() {
+        LanguageManager languageManager = new LanguageManager(getContext());
         buttons = new Button[]{binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3, binding.practiceBtn4};
         int buttonIndex = new Random().nextInt(4);
 
@@ -129,9 +130,11 @@ public class PracticeFragment extends Fragment {
                         button.setTextColor(Color.WHITE);
 
                         InputPracticeViewBinding inputPracticeViewBinding = InputPracticeViewBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
+
                         int identifier = getResources().getIdentifier(answer, "string", getContext().getPackageName());
                         String findByAnswer = getContext().getString(identifier);
                         inputPracticeViewBinding.description.setText(findByAnswer);
+
                         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                         inputPracticeViewBinding.correctView.playAnimation();
                         builder.setView(inputPracticeViewBinding.getRoot())
@@ -156,12 +159,13 @@ public class PracticeFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setPracticeView() {
+        Button button = getActivity().findViewById(R.id.recycler_item_progress_btn);
+
         if (quizCount.getLevelPosition() >= 10) {
             quizCount.setLevelPosition();
             getExamToFirebase(quizCount.getLevelPosition());
         }
-        if (getActivity() != null) {
-            Button button = getActivity().findViewById(R.id.recycler_item_progress_btn);
+        if (button != null && "Revise".equals(button.getText())) {
             getExamToFirebase(button != null && "Revise".equals(button.getText())
                     ? quizCount.setLevelPosition()
                     : quizCount.getLevelPosition());

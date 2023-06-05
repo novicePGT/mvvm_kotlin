@@ -8,6 +8,7 @@ public class QuizCount {
     private int wordCount = 0;
     private int quizCount = 0;
     private int levelWord = 0;
+    private int levelTotalCount = 0;
     private SharedPreferences sharedPreferences;
 
     public QuizCount(Context context, String level) {
@@ -15,6 +16,7 @@ public class QuizCount {
         this.quizCount = sharedPreferences.getInt("quizCount", quizCount);
         this.wordCount = sharedPreferences.getInt("wordCount", wordCount);
         this.levelWord = sharedPreferences.getInt(level+"Word", levelWord);
+        this.levelTotalCount = sharedPreferences.getInt(level + "Word", 0);
         if (this.quizCount == 0) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("quizCount", 0);
@@ -31,10 +33,11 @@ public class QuizCount {
         String selectLevelWord = selectLevel + "Word";
         wordCount = wordCount + 1;
         levelWord++;
+        levelTotalCount++;
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("wordCount", wordCount);
-        editor.putInt(selectLevelWord, levelWord);
+        editor.putInt(selectLevelWord, levelTotalCount);
         editor.apply();
 
         int levelComplete = sharedPreferences.getInt(selectLevelWord, 0);

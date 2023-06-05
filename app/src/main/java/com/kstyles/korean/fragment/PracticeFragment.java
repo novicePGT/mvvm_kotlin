@@ -78,26 +78,9 @@ public class PracticeFragment extends Fragment {
 
         setPracticeView();
 
-        binding.practiceBtnGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int currentPosition = seekbarPosition.increasePosition(seekbarPosition.getPosition());
-                getExamToFirebase(currentPosition);
-            }
-        });
-
-        binding.practiceBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int currentPosition = seekbarPosition.decreasePosition(seekbarPosition.getPosition());
-                getExamToFirebase(currentPosition);
-            }
-        });
-
         return binding.getRoot();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void getExamToFirebase(int currentPosition) {
         binding.practicePosition.setText(String.valueOf(currentPosition+1));
         binding.practiceSeekbar.setProgress(currentPosition);
@@ -121,19 +104,6 @@ public class PracticeFragment extends Fragment {
                 Log.e(TAG, "onFailure() 메서드가 호출됨. {}", error.toException());
             }
         });
-
-        if (currentPosition == binding.practiceSeekbar.getMax()) {
-            binding.practiceBtnGo.setVisibility(View.INVISIBLE);
-            binding.practiceBtnBack.setVisibility(View.VISIBLE);
-        }
-        if (currentPosition == binding.practiceSeekbar.getMin()) {
-            binding.practiceBtnBack.setVisibility(View.INVISIBLE);
-            binding.practiceBtnGo.setVisibility(View.VISIBLE);
-        }
-        if (currentPosition != binding.practiceSeekbar.getMax() && currentPosition != binding.practiceSeekbar.getMin()) {
-            binding.practiceBtnBack.setVisibility(View.VISIBLE);
-            binding.practiceBtnGo.setVisibility(View.VISIBLE);
-        }
     }
 
     private void randomButtonEvent() {

@@ -108,6 +108,7 @@
     <string name="캐리어">캐리어: The meaning of this is a suitcase</string>
     <string name="목걸이">목걸이: It means a necklace</string>
     <string name="금고">금고: It means a safe box</string>
+    <string name="두건">두건: It means a headscarf</string>
 
     <string-array name="words">
         <item>축구</item>
@@ -171,6 +172,7 @@
         <item>캐리어</item>
         <item>목걸이</item>
         <item>금고</item>
+        <item>두건</item>
     </string-array>
 
     <string-array name="nation">

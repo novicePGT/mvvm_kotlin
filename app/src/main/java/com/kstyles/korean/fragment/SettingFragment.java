@@ -23,6 +23,7 @@ import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -125,6 +126,8 @@ public class SettingFragment extends Fragment {
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_profile", Context.MODE_PRIVATE);
                 previousUserProfile = Uri.parse(sharedPreferences.getString("user_profile", ""));
 
+                inputEditProfileBinding.inputUserProfile.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.icon_user));
+
                 if (!previousUserProfile.equals("")) {
                     Glide.with(getContext())
                             .load(previousUserProfile)
@@ -148,17 +151,16 @@ public class SettingFragment extends Fragment {
                         .setPositiveButton("Modify", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // 수락 버튼 수행
-                                if (!previousUserProfile.equals("") && userProfile != null) {
+                                try {
                                     firebaseManager.deleteUserProfile(previousUserProfile);
+                                } catch (Exception e) {
+                                    Log.e(TAG, "등록된 유저 프로필 없음");
+                                } finally {
                                     firebaseManager.uploadUserProfile(getContext(), userProfile);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("user_profile", String.valueOf(userProfile));
+                                    editor.apply();
                                 }
-                                if (previousUserProfile.equals("") && userProfile != null) {
-                                    firebaseManager.uploadUserProfile(getContext(), userProfile);
-                                }
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("user_profile", String.valueOf(userProfile));
-                                editor.apply();
                             }
                         })
                         .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {

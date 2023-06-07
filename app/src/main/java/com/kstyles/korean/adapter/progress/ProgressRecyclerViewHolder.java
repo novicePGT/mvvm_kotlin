@@ -36,18 +36,29 @@ public class ProgressRecyclerViewHolder extends RecyclerView.ViewHolder implemen
         quizCount = new QuizCount(context, level);
         int getLevelPosition = quizCount.getLevelPosition() * 10;
         if (getLevelPosition == 100) {
+            binding.recyclerItemProgressBtn.setClickable(true);
             binding.progressLinear.setVisibility(View.INVISIBLE);
             binding.progressCompleteLinear.setVisibility(View.VISIBLE);
             binding.itemLevel.setText(items.get(position).getLevel());
             binding.itemName.setText(items.get(position).getName());
             binding.recyclerItemProgressBtn.setText("Revise");
-        } else {
+        } else if(getLevelPosition >= 10) {
+            binding.recyclerItemProgressBtn.setClickable(true);
             binding.progressLinear.setVisibility(View.VISIBLE);
             binding.progressCompleteLinear.setVisibility(View.INVISIBLE);
             binding.itemLevel.setText(items.get(position).getLevel());
             binding.itemName.setText(items.get(position).getName());
             binding.recyclerItemProgressProgress.setProgress(getLevelPosition);
             binding.recyclerItemProgressPercent.setText(getLevelPosition + " %");
+        } else {
+            binding.recyclerItemProgressBtn.setClickable(false);
+            binding.progressLinear.setVisibility(View.VISIBLE);
+            binding.progressCompleteLinear.setVisibility(View.INVISIBLE);
+            binding.itemLevel.setText(items.get(position).getLevel());
+            binding.itemName.setText(items.get(position).getName());
+            binding.recyclerItemProgressProgress.setProgress(getLevelPosition);
+            binding.recyclerItemProgressPercent.setText(getLevelPosition + " %");
+            binding.recyclerItemProgressBtn.setVisibility(View.INVISIBLE);
         }
     }
 

@@ -183,6 +183,7 @@
 - [refactor]: 로티 애니메이션 이전
 
 ### 2023-06-07 (수)
+- [chore]: 데이터베이스 기업 계정으로 
 - [feat]: 한 번도 시도하지 못한 레벨이라면 클릭 불가능하게 변경
 - [refactor]: upload user profile refactoring
 - [fix]: 번역본 없는 부분 수정

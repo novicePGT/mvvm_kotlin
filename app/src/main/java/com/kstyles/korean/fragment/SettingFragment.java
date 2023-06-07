@@ -213,34 +213,29 @@ public class SettingFragment extends Fragment {
          * Spinner setting
          */
         spinner = binding.settingSpinner;
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("language", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences intSharedPreference = getContext().getSharedPreferences("languageNum", Context.MODE_PRIVATE);
+        SharedPreferences.Editor numEditor = intSharedPreference.edit();
+        String languageNum = intSharedPreference.getString("languageNum", "0");
+        spinner.setSelection(Integer.parseInt(languageNum));
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // 이 곳에 언어번역에 대한 코드를 작성할 것.
                 String selectedLanguage = (String) parent.getItemAtPosition(position);
 
-                SharedPreferences sharedPreferences = getContext().getSharedPreferences("language", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                SharedPreferences intSharedPreference = getContext().getSharedPreferences("languageNum", Context.MODE_PRIVATE);
-                SharedPreferences.Editor numEditor = intSharedPreference.edit();
-
-                String languageNum = intSharedPreference.getString("languageNum", "0");
-                spinner.setSelection(Integer.parseInt(languageNum));
-
                 if (selectedLanguage.equals("Vietnamese")) {
                     editor.putString("language", "vi");
                     numEditor.putString("languageNum", "1");
-                    spinner.setSelection(1);
                 }
                 if (selectedLanguage.equals("French")) {
                     editor.putString("language", "fr");
                     numEditor.putString("languageNum", "2");
-                    spinner.setSelection(2);
                 }
                 if (selectedLanguage.equals("English")) {
                     editor.putString("language", "");
                     numEditor.putString("languageNum", "0");
-                    spinner.setSelection(0);
                 }
                 editor.apply();
                 numEditor.apply();

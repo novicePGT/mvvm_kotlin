@@ -181,3 +181,12 @@
 - [feat]: RandomButtonListener view merged
 - [delete]: RandomButtonListener view merged
 - [refactor]: 로티 애니메이션 이전
+
+### 2023-06-07 (수)
+- [feat]: 한 번도 시도하지 못한 레벨이라면 클릭 불가능하게 변경
+- [refactor]: upload user profile refactoring
+- [fix]: 번역본 없는 부분 수정
+- [refactor]: Spinner 최종 수정
+- [fix]: 공백 수정
+- [fix]: userprofile 부분 수정
+- [fix]: 첫 번째 아이템 클릭 수정

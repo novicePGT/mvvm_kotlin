@@ -69,8 +69,6 @@ public class PracticeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivityFragmentPracticeBinding.inflate(inflater, container, false);
 
-
-
         selectLevel = String.format("%s %s", recyclerItems.get(position).getLevel(), recyclerItems.get(position).getName());
         binding.practiceLevel.setText(selectLevel);
         firebaseManager.setPathString(selectLevel);
@@ -108,6 +106,7 @@ public class PracticeFragment extends Fragment {
 
     private void randomButtonEvent() {
         LanguageManager languageManager = new LanguageManager(getContext());
+        languageManager.setLanguage();
         buttons = new Button[]{binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3, binding.practiceBtn4};
         int buttonIndex = new Random().nextInt(4);
 

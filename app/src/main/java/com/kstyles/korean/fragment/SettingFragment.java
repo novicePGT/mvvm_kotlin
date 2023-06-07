@@ -120,6 +120,7 @@ public class SettingFragment extends Fragment {
         binding.settingBtnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseManager firebaseManager = new FirebaseManager();
                 inputEditProfileBinding = InputEditProfileBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_profile", Context.MODE_PRIVATE);
                 previousUserProfile = Uri.parse(sharedPreferences.getString("user_profile", ""));
@@ -149,14 +150,15 @@ public class SettingFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 // 수락 버튼 수행
                                 if (!previousUserProfile.equals("") && userProfile != null) {
-                                    FirebaseManager firebaseManager = new FirebaseManager();
                                     firebaseManager.deleteUserProfile(previousUserProfile);
                                     firebaseManager.uploadUserProfile(getContext(), userProfile);
-
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("user_profile", String.valueOf(userProfile));
-                                    editor.apply();
                                 }
+                                if (previousUserProfile.equals("") && userProfile != null) {
+                                    firebaseManager.uploadUserProfile(getContext(), userProfile);
+                                }
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("user_profile", String.valueOf(userProfile));
+                                editor.apply();
                             }
                         })
                         .setNegativeButton("Refuse", new DialogInterface.OnClickListener() {
@@ -225,10 +227,6 @@ public class SettingFragment extends Fragment {
                 String languageNum = intSharedPreference.getString("languageNum", "0");
                 spinner.setSelection(Integer.parseInt(languageNum));
 
-                if (selectedLanguage.equals("English")) {
-                    editor.putString("language", "");
-                    numEditor.putString("languageNum", "0");
-                }
                 if (selectedLanguage.equals("Vietnamese")) {
                     editor.putString("language", "vi");
                     numEditor.putString("languageNum", "1");
@@ -238,6 +236,11 @@ public class SettingFragment extends Fragment {
                     editor.putString("language", "fr");
                     numEditor.putString("languageNum", "2");
                     spinner.setSelection(2);
+                }
+                if (selectedLanguage.equals("English")) {
+                    editor.putString("language", "");
+                    numEditor.putString("languageNum", "0");
+                    spinner.setSelection(0);
                 }
                 editor.apply();
                 numEditor.apply();

@@ -19,7 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,10 +36,11 @@ import com.kstyles.korean.databinding.ActivityFragmentSettingBinding;
 import com.kstyles.korean.databinding.InputEditProfileBinding;
 import com.kstyles.korean.databinding.InputFindPassBinding;
 import com.kstyles.korean.databinding.InputLogoutBinding;
+import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
 
-public class SettingFragment extends Fragment {
+public class SettingFragment extends Fragment implements BottomViewManipulationListener {
 
     private ActivityFragmentSettingBinding binding;
     private Spinner spinner;
@@ -52,6 +56,8 @@ public class SettingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivityFragmentSettingBinding.inflate(inflater, container, false);
+
+        showBottomView();
 
         /**
          * 비밀번호 변경 로직을 포함한 AlertDialog
@@ -302,5 +308,18 @@ public class SettingFragment extends Fragment {
         binding.tvSound.setText(languageManager.getTranslatedString(R.string.tv_sound));
         binding.tvPushNotifications.setText(languageManager.getTranslatedString(R.string.tv_push_notifications));
         binding.tvLogout.setText(languageManager.getTranslatedString(R.string.tv_logout));
+    }
+
+    @Override
+    public void hideBottomView() {
+
+    }
+
+    @Override
+    public void showBottomView() {
+        TextView textView = (TextView) getActivity().findViewById(R.id.bottom_navigate_shadow);
+        textView.setVisibility(View.VISIBLE);
+        LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.bottom_navigate_view);
+        layout.setVisibility(View.VISIBLE);
     }
 }

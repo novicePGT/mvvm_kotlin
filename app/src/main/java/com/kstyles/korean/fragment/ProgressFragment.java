@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +37,7 @@ import com.kstyles.korean.adapter.main.RecyclerAdapter;
 import com.kstyles.korean.adapter.progress.ProgressRecyclerAdapter;
 import com.kstyles.korean.custom.CustomMarkerView;
 import com.kstyles.korean.databinding.ActivityFragmentProgressBinding;
+import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.count.QuizCount;
@@ -42,7 +46,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ProgressFragment extends Fragment {
+public class ProgressFragment extends Fragment implements BottomViewManipulationListener {
 
     private final String TAG = "[ProgressFragment] :";
     private ActivityFragmentProgressBinding binding;
@@ -62,6 +66,8 @@ public class ProgressFragment extends Fragment {
         binding = ActivityFragmentProgressBinding.inflate(inflater, container, false);
 
         setTranslation();
+
+        showBottomView();
 
         setBarChartView();
         /**
@@ -200,5 +206,18 @@ public class ProgressFragment extends Fragment {
                 .mapToObj(i -> new BarEntry((float)(i+1), useTimeArray[i]))
                 .collect(Collectors.toCollection(ArrayList::new));
         return spendingTime;
+    }
+
+    @Override
+    public void hideBottomView() {
+
+    }
+
+    @Override
+    public void showBottomView() {
+        TextView textView = (TextView) getActivity().findViewById(R.id.bottom_navigate_shadow);
+        textView.setVisibility(View.VISIBLE);
+        LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.bottom_navigate_view);
+        layout.setVisibility(View.VISIBLE);
     }
 }

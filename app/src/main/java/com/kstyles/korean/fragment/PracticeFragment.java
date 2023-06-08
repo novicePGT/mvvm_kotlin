@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentPracticeBinding;
 import com.kstyles.korean.databinding.InputPracticeViewBinding;
+import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.item.PracticeItem;
 import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.language.LanguageManager;
@@ -38,7 +42,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class PracticeFragment extends Fragment {
+public class PracticeFragment extends Fragment implements BottomViewManipulationListener {
 
     private final String TAG = "[PracticeFragment]";
     private ActivityFragmentPracticeBinding binding;
@@ -75,6 +79,8 @@ public class PracticeFragment extends Fragment {
         binding.practiceLevel.setText(selectLevel);
         firebaseManager.setPathString(selectLevel);
         quizCount = new QuizCount(getContext(), selectLevel);
+
+        hideBottomView();
 
         setPracticeView();
 
@@ -212,5 +218,18 @@ public class PracticeFragment extends Fragment {
         }
 
         return buttonTexts;
+    }
+
+    @Override
+    public void hideBottomView() {
+        TextView textView = (TextView) getActivity().findViewById(R.id.bottom_navigate_shadow);
+        textView.setVisibility(View.GONE);
+        LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.bottom_navigate_view);
+        layout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showBottomView() {
+
     }
 }

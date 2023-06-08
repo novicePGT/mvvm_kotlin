@@ -5,6 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.R;
 import com.kstyles.korean.adapter.main.RecyclerAdapter;
 import com.kstyles.korean.databinding.ActivityFragmentMainBinding;
+import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.preferences.user.UserProfile;
 import com.kstyles.korean.repository.FirebaseCallback;
@@ -27,7 +31,7 @@ import com.kstyles.korean.repository.FirebaseManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements BottomViewManipulationListener {
 
     private final String TAG = "[MainFragment]";
     private ActivityFragmentMainBinding binding;
@@ -54,6 +58,8 @@ public class MainFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         items = new ArrayList<>();
+
+        hideBottomView();
 
         /**
          * Set User Profile
@@ -98,5 +104,18 @@ public class MainFragment extends Fragment {
                 .format(DecodeFormat.PREFER_ARGB_8888)
                 .apply(requestOptions)
                 .into(binding.mainUserProfile);
+    }
+
+    @Override
+    public void hideBottomView() {
+
+    }
+
+    @Override
+    public void showBottomView() {
+        TextView textView = (TextView) getActivity().findViewById(R.id.bottom_navigate_shadow);
+        textView.setVisibility(View.VISIBLE);
+        LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.bottom_navigate_view);
+        layout.setVisibility(View.VISIBLE);
     }
 }

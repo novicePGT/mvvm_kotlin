@@ -13,6 +13,7 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/bottom_navigate_view"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_alignParentBottom="true"
@@ -25,13 +26,6 @@
            android:layout_height="30dp"
            android:layout_marginRight="85dp"
            android:background="@drawable/icon_home"/>
-
-<!--        <androidx.appcompat.widget.AppCompatButton-->
-<!--            android:id="@+id/main_btn_ex2"-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:layout_marginRight="75dp"-->
-<!--            android:background="@drawable/icon_search"/>-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_btn_progress"
@@ -49,6 +43,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/bottom_navigate_shadow"
         android:layout_width="match_parent"
         android:layout_height="5sp"
         android:background="@drawable/custom_line_shadow"

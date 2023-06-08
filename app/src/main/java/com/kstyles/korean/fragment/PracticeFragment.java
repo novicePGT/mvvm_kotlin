@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseError;
@@ -134,16 +136,7 @@ public class PracticeFragment extends Fragment {
                         String findByAnswer = getContext().getString(identifier);
                         inputPracticeViewBinding.description.setText(findByAnswer);
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        inputPracticeViewBinding.correctView.playAnimation();
-                        builder.setView(inputPracticeViewBinding.getRoot())
-                                .setPositiveButton("Next", new DialogInterface.OnClickListener() {
-                                    @RequiresApi(api = Build.VERSION_CODES.O)
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        setPracticeView();
-                                    }
-                                }).show();
+                        nextDialog(inputPracticeViewBinding);
                     } else {
                         Toast.makeText(getContext(), "오답", Toast.LENGTH_SHORT).show();
                         button.setBackground(getContext().getDrawable(R.drawable.custom_btn_incorrect));
@@ -156,18 +149,39 @@ public class PracticeFragment extends Fragment {
         }
     }
 
+    private void nextDialog(InputPracticeViewBinding inputPracticeViewBinding) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        inputPracticeViewBinding.correctView.playAnimation();
+        builder.setView(inputPracticeViewBinding.getRoot())
+                .setPositiveButton("Next", new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (quizCount.getLevelPosition() >= 10) {
+                            quizCount.setLevelPosition();
+                            ProgressFragment progressFragment = new ProgressFragment();
+                            FragmentManager fragmentManager = requireFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.main_frame, progressFragment);
+                            fragmentTransaction.commit();
+                        }
+                        setPracticeView();
+                    }
+                }).show();
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setPracticeView() {
         Button button = getActivity().findViewById(R.id.recycler_item_progress_btn);
 
         if (quizCount.getLevelPosition() >= 10) {
             quizCount.setLevelPosition();
-            getExamToFirebase(quizCount.getLevelPosition());
         }
         if (button != null && "Revise".equals(button.getText())) {
             getExamToFirebase(button != null && "Revise".equals(button.getText())
                     ? quizCount.setLevelPosition()
                     : quizCount.getLevelPosition());
+            quizCount.increaseWordCount(selectLevel);
         } else {
             getExamToFirebase(quizCount.getLevelPosition());
         }

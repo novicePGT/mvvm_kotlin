@@ -191,3 +191,9 @@
 - [fix]: 공백 수정
 - [fix]: userprofile 부분 수정
 - [fix]: 첫 번째 아이템 클릭 수정
+
+### 2023-06-08 (목)
+- [docs]: id 값 추가
+- [feat]: add control bottom view
+- [feat]: create fragment interface
+- [feat]: 문제를 다 풀면 Progress fragment 로 이동

@@ -197,3 +197,11 @@
 - [feat]: add control bottom view
 - [feat]: create fragment interface
 - [feat]: 문제를 다 풀면 Progress fragment 로 이동
+
+### 2023-06-09 (금)
+- [feat]: 하단에 틀린 문제도 설명해주는 기능 추가
+- [docs]: 프레임레이아웃의 공간을 잘못차지하는 부분 수정
+- [docs]: 프레임레이아웃의 공간을 잘못차지하는 부분 수정
+- [refactor]: quiz count 로 인해 value 값이 뒤틀린 부분 수정
+- [refactor]: quiz count 로 인해 생겼던 데이터 오류 해결
+- [refactor]: quiz count 각 shared 데이터 꼬여있던 부분 해결

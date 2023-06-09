@@ -118,6 +118,9 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         buttons = new Button[]{binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3, binding.practiceBtn4};
         int buttonIndex = new Random().nextInt(4);
 
+        int identifier = getResources().getIdentifier(answer, "string", getContext().getPackageName());
+        String findByAnswer = getContext().getString(identifier);
+
         List<String> buttonTexts = setButtonText(buttonIndex);
 
         IntStream.range(0, buttons.length)
@@ -142,9 +145,13 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
                         String findByAnswer = getContext().getString(identifier);
                         inputPracticeViewBinding.description.setText(findByAnswer);
 
-                        nextDialog(inputPracticeViewBinding);
+                        showDialog(inputPracticeViewBinding);
                     } else {
-                        Toast.makeText(getContext(), "오답", Toast.LENGTH_SHORT).show();
+                        String buttonText = button.getText().toString();
+                        int identifier = getResources().getIdentifier(buttonText, "string", getContext().getPackageName());
+                        String findByButtonText = getContext().getString(identifier);
+                        binding.practiceDescription.setText(findByButtonText);
+
                         button.setBackground(getContext().getDrawable(R.drawable.custom_btn_incorrect));
                         button.setTextColor(Color.WHITE);
                     }
@@ -155,7 +162,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         }
     }
 
-    private void nextDialog(InputPracticeViewBinding inputPracticeViewBinding) {
+    private void showDialog(InputPracticeViewBinding inputPracticeViewBinding) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         inputPracticeViewBinding.correctView.playAnimation();
         builder.setView(inputPracticeViewBinding.getRoot())

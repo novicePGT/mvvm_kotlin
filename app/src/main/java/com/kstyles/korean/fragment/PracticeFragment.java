@@ -132,7 +132,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
                 public void onClick(View v) {
                     button.setClickable(false);
                     if (valueText.equals(answer)) {
-                        quizCount.increaseWordCount(selectLevel);
+                        quizCount.increaseWordCount();
                         button.setBackground(getContext().getDrawable(R.drawable.custom_btn_correct));
                         button.setTextColor(Color.WHITE);
 
@@ -164,14 +164,14 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (quizCount.getLevelPosition() >= 10) {
-                            quizCount.setLevelPosition();
                             ProgressFragment progressFragment = new ProgressFragment();
                             FragmentManager fragmentManager = requireFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             fragmentTransaction.replace(R.id.main_frame, progressFragment);
                             fragmentTransaction.commit();
+                        } else {
+                            setPracticeView();
                         }
-                        setPracticeView();
                     }
                 }).show();
     }
@@ -187,7 +187,6 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
             getExamToFirebase(button != null && "Revise".equals(button.getText())
                     ? quizCount.setLevelPosition()
                     : quizCount.getLevelPosition());
-            quizCount.increaseWordCount(selectLevel);
         } else {
             getExamToFirebase(quizCount.getLevelPosition());
         }

@@ -31,7 +31,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
     }
 
     public void bind(ArrayList<RecyclerItem> items, int position) {
-        String selectLevel = String.format("%s %s", items.get(position).getLevel(), items.get(position).getName()) + "Word";
+        String selectLevel = String.format("%s %s", items.get(position).getLevel(), items.get(position).getName());
 
         binding.itemLevel.setText(items.get(position).getLevel());
         binding.itemName.setText(items.get(position).getName());
@@ -46,8 +46,8 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
             binding.recyclerDownLine.setVisibility(View.VISIBLE);
         }
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("wordCount", 0);
-        int value = sharedPreferences.getInt(selectLevel, 0);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("wordCount", Context.MODE_PRIVATE);
+        int value = sharedPreferences.getInt(selectLevel + "WordTotal", 0);
         SharedPreferences sharedPreferences1 = context.getSharedPreferences("nextPosition", Context.MODE_PRIVATE);
         int nextPosition = sharedPreferences1.getInt("nextPosition", 0);
 

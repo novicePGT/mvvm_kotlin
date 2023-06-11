@@ -58,15 +58,19 @@ public class RegisterActivity extends AppCompatActivity {
         LanguageManager languageManager = new LanguageManager(this);
         languageManager.setLanguage();
         binding.tvRegister.setText(languageManager.getTranslatedString(R.string.tv_register));
+        binding.registerTvUser.setText(languageManager.getTranslatedString(R.string.tv_user_profile));
         binding.tvEmail.setText(languageManager.getTranslatedString(R.string.tv_email));
         binding.registerUserEmail.setHint(languageManager.getTranslatedString(R.string.hint_register_email));
         binding.tvPassword.setText(languageManager.getTranslatedString(R.string.tv_password));
         binding.registerUserPassword.setHint(languageManager.getTranslatedString(R.string.hint_register_password));
         binding.tvCheckPassword.setText(languageManager.getTranslatedString(R.string.tv_check_password));
         binding.registerUserRePassword.setHint(languageManager.getTranslatedString(R.string.hint_check_password));
+        binding.registerTvPasswordVerification.setText(languageManager.getTranslatedString(R.string.tv_password_expression));
         binding.tvNickname.setText(languageManager.getTranslatedString(R.string.tv_nickname));
         binding.registerUserName.setHint(languageManager.getTranslatedString(R.string.hint_nickname));
         binding.registerBtnJoin.setText(languageManager.getTranslatedString(R.string.btn_join));
+        String pass_valid = languageManager.getTranslatedString(R.string.tv_pass_valid);
+        String pass_invalid = languageManager.getTranslatedString(R.string.tv_pass_invalid);
 
         /**
          * firebase setting
@@ -119,12 +123,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String password1 = binding.registerUserPassword.getText().toString();
                 String password2 = binding.registerUserRePassword.getText().toString();
                 if (PasswordValidator.validatePassword(password1, password2) && !binding.registerUserName.equals("") && !binding.registerUserEmail.equals("")) {
-                    binding.registerTvPasswordVerification.setText("The two passwords match");
+                    binding.registerTvPasswordVerification.setText(pass_valid);
                     binding.registerTvPasswordVerification.setTextColor(Color.BLUE);
                     register();
                 }
                 if (!PasswordValidator.validatePassword(password1, password2)) {
-                    binding.registerTvPasswordVerification.setText("Check : Matching password, 8 characters or more, Include capital letters, Include special characters");
+                    binding.registerTvPasswordVerification.setText(pass_invalid);
                     binding.registerTvPasswordVerification.setTextColor(Color.RED);
                 }
                 if (password1.isEmpty() || password2.isEmpty()) {

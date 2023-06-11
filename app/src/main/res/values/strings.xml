@@ -23,10 +23,11 @@
 
     <!-- Login 페이지 -->
     <string name="hint_id">Username or Email Address</string>
+    <string name="tv_success_login">Login successful</string>
+    <string name="tv_fail_login">Login failed, Check your email or password</string>
     <string name="hint_password">Password</string>
     <string name="tv_auto_login">Auto Login</string>
     <string name="tv_find_id_pass">Find ID/PASS</string>
-    <string name="btn_login">LOGIN</string>
     <string name="tv_register_text">Are you not member yet?</string>
     <string name="tv_go_register">Click here to register</string>
 
@@ -36,10 +37,12 @@
 
     <!-- register 페이지 -->
     <string name="tv_register">Register</string>
+    <string name="tv_user_profile">Set User Profile</string>
     <string name="tv_email">Email</string>
     <string name="hint_register_email">Enter your Email Address</string>
     <string name="tv_password">Password</string>
     <string name="hint_register_password">Enter your password</string>
+    <string name="tv_password_expression">8 characters or more, capital letters, special characters</string>
     <string name="tv_check_password">Check Password</string>
     <string name="hint_check_password">Re - enter your password</string>
     <string name="tv_nickname">Nickname</string>

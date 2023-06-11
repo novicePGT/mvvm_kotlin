@@ -54,9 +54,10 @@ public class LoginActivity extends AppCompatActivity {
         binding.userPassword.setHint(languageManager.getTranslatedString(R.string.hint_password));
         binding.loginAutoLogin.setText(languageManager.getTranslatedString(R.string.tv_auto_login));
         binding.findIdPass.setText(languageManager.getTranslatedString(R.string.tv_find_id_pass));
-        binding.btnLogin.setText(languageManager.getTranslatedString(R.string.btn_login));
         binding.tvRegisterText.setText(languageManager.getTranslatedString(R.string.tv_register_text));
         binding.loginTvGoRegister.setText(languageManager.getTranslatedString(R.string.tv_go_register));
+        String login_success = languageManager.getTranslatedString(R.string.tv_success_login);
+        String login_failed = languageManager.getTranslatedString(R.string.tv_fail_login);
 
         /**
          * firebase setting
@@ -109,13 +110,13 @@ public class LoginActivity extends AppCompatActivity {
                                 passEditor.apply();
                             }
 
-                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, login_success, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
                             // 로그인 실패 로직
-                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, login_failed, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -38,6 +38,10 @@
     <!-- register 페이지 -->
     <string name="tv_register">Register</string>
     <string name="tv_user_profile">Set User Profile</string>
+    <string name="tv_email_valid">Email is a valid format</string>
+    <string name="tv_email_invalid">Email is not in a valid format</string>
+    <string name="tv_pass_valid">The two passwords match</string>
+    <string name="tv_pass_invalid">Check : Matching password, 8 characters or more, Include capital letters, Include special characters</string>
     <string name="tv_email">Email</string>
     <string name="hint_register_email">Enter your Email Address</string>
     <string name="tv_password">Password</string>

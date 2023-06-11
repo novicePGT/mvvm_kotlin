@@ -22,6 +22,8 @@
 
     <!-- Login 페이지 -->
     <string name="hint_id">Tên người dùng hoặc địa chỉ email</string>
+    <string name="tv_success_login">Đăng nhập thành công</string>
+    <string name="tv_fail_login">Đăng nhập thất bại, Kiểm tra email hoặc mật khẩu của bạn</string>
     <string name="hint_password">Mật khẩu</string>
     <string name="tv_auto_login">Đăng nhập tự động</string>
     <string name="tv_find_id_pass">Tìm ID/ PASS</string>
@@ -34,12 +36,18 @@
 
     <!-- register 페이지 -->
     <string name="tv_register">Đăng ký</string>
+    <string name="tv_user_profile">Đặt hồ sơ người dùng</string>
+    <string name="tv_email_valid">Email có định dạng hợp lệ</string>
+    <string name="tv_email_invalid">Email không có định dạng hợp lệ</string>
+    <string name="tv_pass_valid">Hai mật khẩu khớp nhau</string>
+    <string name="tv_pass_invalid">Mật khẩu khớp nhau, 8 ký tự trở lên, bao gồm chữ in hoa, bao gồm ký tự đặc biệt</string>
     <string name="tv_email">Thư điện tử</string>
     <string name="hint_register_email">Nhập địa chỉ email của bạn</string>
     <string name="tv_password">Mật khẩu</string>
     <string name="hint_register_password">Nhập mật khẩu của bạn</string>
     <string name="tv_check_password">Kiểm tra mật khẩu</string>
     <string name="hint_check_password">Nhập lại mật khẩu của bạn</string>
+    <string name="tv_password_expression">8 ký tự trở lên, chữ hoa, ký tự đặc biệt</string>
     <string name="tv_nickname">Biệt danh</string>
     <string name="hint_nickname">Ghi lại nickname của bạn</string>
     <string name="btn_join">nhập</string>

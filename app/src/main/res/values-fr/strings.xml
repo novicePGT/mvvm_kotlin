@@ -22,6 +22,8 @@
 
     <!-- Login 페이지 -->
     <string name="hint_id">Nom d\'utilisateur ou adresse électronique</string>
+    <string name="tv_success_login">Ouverture de session réussie</string>
+    <string name="tv_fail_login">L\'ouverture de session a échoué, Vérifiez votre courriel ou votre mot de passe</string>
     <string name="hint_password">Mot de passe</string>
     <string name="tv_auto_login">auto connexion</string>
     <string name="tv_find_id_pass">Trouver ID/PASS</string>
@@ -34,12 +36,18 @@
 
     <!-- register 페이지 -->
     <string name="tv_register">Inscription</string>
+    <string name="tv_user_profile">Définir le profil de l\'utilisateur</string>
+    <string name="tv_email_valid">L\'e-mail est au bon format</string>
+    <string name="tv_email_invalid">L\'e-mail n\'est pas au bon format</string>
+    <string name="tv_pass_valid">Les deux mots de passe correspondent</string>
+    <string name="tv_pass_invalid">Mot de passe correspondant, 8 caractères ou plus, inclure des lettres majuscules, inclure des caractères spéciaux</string>
     <string name="tv_email">Email</string>
     <string name="hint_register_email">Entrez votre adresse électronique</string>
     <string name="tv_password">Mot de passe</string>
     <string name="hint_register_password">Entrez votre mot de passe</string>
     <string name="tv_check_password">Vérifier Mot de passe</string>
     <string name="hint_check_password">Saisissez à nouveau votre mot de passe</string>
+    <string name="tv_password_expression">8 caractères ou plus, lettres majuscules, caractères spéciaux</string>
     <string name="tv_nickname">Surnom</string>
     <string name="hint_nickname">Écrivez votre surnom</string>
     <string name="btn_join">Joignez-vous à nous</string>

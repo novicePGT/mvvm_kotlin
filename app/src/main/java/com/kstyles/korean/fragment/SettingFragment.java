@@ -233,13 +233,17 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
                 // 이 곳에 언어번역에 대한 코드를 작성할 것.
                 String selectedLanguage = (String) parent.getItemAtPosition(position);
 
-                if (selectedLanguage.equals("Vietnamese")) {
+                if (selectedLanguage.equals("Việt Nam")) {
                     editor.putString("language", "vi");
                     numEditor.putString("languageNum", "1");
                 }
-                if (selectedLanguage.equals("French")) {
+                if (selectedLanguage.equals("France")) {
                     editor.putString("language", "fr");
                     numEditor.putString("languageNum", "2");
+                }
+                if (selectedLanguage.equals("日本")) {
+                    editor.putString("language", "ja");
+                    numEditor.putString("languageNum", "3");
                 }
                 if (selectedLanguage.equals("English")) {
                     editor.putString("language", "");

@@ -7,7 +7,8 @@
     <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigate_shadow">
 
     </FrameLayout>
 
@@ -16,28 +17,28 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
-       <androidx.appcompat.widget.AppCompatButton
-           android:id="@+id/main_btn_home"
-           android:layout_width="30dp"
-           android:layout_height="30dp"
-           android:layout_marginRight="85dp"
-           android:background="@drawable/icon_home"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/main_btn_home"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="85dp"
+            android:background="@drawable/icon_home" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_btn_progress"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="85dp"
-            android:background="@drawable/icon_clip"/>
+            android:background="@drawable/icon_clip" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_btn_setting"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/icon_setup"/>
+            android:background="@drawable/icon_setup" />
 
     </LinearLayout>
 

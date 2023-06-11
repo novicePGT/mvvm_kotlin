@@ -184,7 +184,8 @@
 
     <string-array name="nation">
         <item>English</item>
-        <item>Vietnamese</item>
-        <item>French</item>
+        <item>Việt Nam</item>
+        <item>France</item>
+        <item>日本</item>
     </string-array>
 </resources>

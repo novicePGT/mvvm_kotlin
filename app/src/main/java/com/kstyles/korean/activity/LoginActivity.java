@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,10 +33,12 @@ import com.kstyles.korean.repository.FirebaseManager;
 public class LoginActivity extends AppCompatActivity {
 
     private final String TAG = "LoginActivity";
+    private String login_success;
+    private String login_failed;
     private FirebaseAuth firebaseAuth; // 파이어베이스 인증
     private FirebaseUser user;
     private DatabaseReference databaseReference; // 실시간 데이터 베이스
-
+    private Spinner spinner;
     private ActivityLoginBinding binding;
     private boolean flag = false;
 
@@ -47,17 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
-        LanguageManager languageManager = new LanguageManager(this);
-        languageManager.setLanguage();
-        binding.userEmail.setHint(languageManager.getTranslatedString(R.string.hint_id));
-        binding.userPassword.setHint(languageManager.getTranslatedString(R.string.hint_password));
-        binding.loginAutoLogin.setText(languageManager.getTranslatedString(R.string.tv_auto_login));
-        binding.findIdPass.setText(languageManager.getTranslatedString(R.string.tv_find_id_pass));
-        binding.tvRegisterText.setText(languageManager.getTranslatedString(R.string.tv_register_text));
-        binding.loginTvGoRegister.setText(languageManager.getTranslatedString(R.string.tv_go_register));
-        String login_success = languageManager.getTranslatedString(R.string.tv_success_login);
-        String login_failed = languageManager.getTranslatedString(R.string.tv_fail_login);
 
         /**
          * firebase setting
@@ -85,6 +79,46 @@ public class LoginActivity extends AppCompatActivity {
                     binding.loginIconButton.setBackground(getDrawable(R.drawable.icon_button_check));
                     flag = true;
                 }
+            }
+        });
+
+        spinner = binding.loginSpinner;
+        SharedPreferences sharedPreferences = getSharedPreferences("language", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences intSharedPreference = getSharedPreferences("languageNum", MODE_PRIVATE);
+        SharedPreferences.Editor numEditor = sharedPreferences.edit();
+        String languageNum = intSharedPreference.getString("languageNum", "0");
+        spinner.setSelection(Integer.parseInt(languageNum));
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedLanguage = (String) parent.getItemAtPosition(position);
+
+                if (selectedLanguage.equals("Việt Nam")) {
+                    editor.putString("language", "vi");
+                    numEditor.putString("languageNum", "1");
+                }
+                if (selectedLanguage.equals("France")) {
+                    editor.putString("language", "fr");
+                    numEditor.putString("languageNum", "2");
+                }
+                if (selectedLanguage.equals("日本")) {
+                    editor.putString("language", "ja");
+                    numEditor.putString("languageNum", "3");
+                }
+                if (selectedLanguage.equals("English")) {
+                    editor.putString("language", "");
+                    numEditor.putString("languageNum", "0");
+                }
+                editor.apply();
+                numEditor.apply();
+
+                setTranslation();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -149,5 +183,18 @@ public class LoginActivity extends AppCompatActivity {
                         }).show();
             }
         });
+    }
+
+    private void setTranslation() {
+        LanguageManager languageManager = new LanguageManager(this);
+        languageManager.setLanguage();
+        binding.userEmail.setHint(languageManager.getTranslatedString(R.string.hint_id));
+        binding.userPassword.setHint(languageManager.getTranslatedString(R.string.hint_password));
+        binding.loginAutoLogin.setText(languageManager.getTranslatedString(R.string.tv_auto_login));
+        binding.findIdPass.setText(languageManager.getTranslatedString(R.string.tv_find_id_pass));
+        binding.tvRegisterText.setText(languageManager.getTranslatedString(R.string.tv_register_text));
+        binding.loginTvGoRegister.setText(languageManager.getTranslatedString(R.string.tv_go_register));
+        login_success = languageManager.getTranslatedString(R.string.tv_success_login);
+        login_failed = languageManager.getTranslatedString(R.string.tv_fail_login);
     }
 }

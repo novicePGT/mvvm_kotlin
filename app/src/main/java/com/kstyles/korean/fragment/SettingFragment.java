@@ -245,13 +245,16 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
                     editor.putString("language", "ja");
                     numEditor.putString("languageNum", "3");
                 }
+                if (selectedLanguage.equals("Deutschland")) {
+                    editor.putString("language", "de");
+                    numEditor.putString("languageNum", "4");
+                }
                 if (selectedLanguage.equals("English")) {
                     editor.putString("language", "");
                     numEditor.putString("languageNum", "0");
                 }
                 editor.apply();
                 numEditor.apply();
-
 
                 setTranslation();
             }

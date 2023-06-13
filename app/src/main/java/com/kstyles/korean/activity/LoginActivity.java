@@ -83,10 +83,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         spinner = binding.loginSpinner;
-        SharedPreferences sharedPreferences = getSharedPreferences("language", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("language", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        SharedPreferences intSharedPreference = getSharedPreferences("languageNum", MODE_PRIVATE);
-        SharedPreferences.Editor numEditor = sharedPreferences.edit();
+        SharedPreferences intSharedPreference = getSharedPreferences("languageNum", Context.MODE_PRIVATE);
+        SharedPreferences.Editor numEditor = intSharedPreference.edit();
         String languageNum = intSharedPreference.getString("languageNum", "0");
         spinner.setSelection(Integer.parseInt(languageNum));
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -105,6 +105,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (selectedLanguage.equals("日本")) {
                     editor.putString("language", "ja");
                     numEditor.putString("languageNum", "3");
+                }
+                if (selectedLanguage.equals("Deutschland")) {
+                    editor.putString("language", "de");
+                    numEditor.putString("languageNum", "4");
                 }
                 if (selectedLanguage.equals("English")) {
                     editor.putString("language", "");
@@ -128,32 +132,34 @@ public class LoginActivity extends AppCompatActivity {
                 String userEmail = binding.userEmail.getText().toString();
                 String userPassword = binding.userPassword.getText().toString();
 
-                firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // 로그인 성공 로직
-                            if (flag) {
-                                SharedPreferences idSharedPreferences = getSharedPreferences("userId", MODE_PRIVATE);
-                                SharedPreferences.Editor idEditor = idSharedPreferences.edit();
-                                SharedPreferences passSharedPreferences = getSharedPreferences("userPass", MODE_PRIVATE);
-                                SharedPreferences.Editor passEditor = passSharedPreferences.edit();
-                                idEditor.putString("userId", userEmail);
-                                passEditor.putString("userPass", userPassword);
-                                idEditor.apply();
-                                passEditor.apply();
-                            }
+                if (userEmail != null && userPassword != null) {
+                    firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // 로그인 성공 로직
+                                if (flag) {
+                                    SharedPreferences idSharedPreferences = getSharedPreferences("userId", MODE_PRIVATE);
+                                    SharedPreferences.Editor idEditor = idSharedPreferences.edit();
+                                    SharedPreferences passSharedPreferences = getSharedPreferences("userPass", MODE_PRIVATE);
+                                    SharedPreferences.Editor passEditor = passSharedPreferences.edit();
+                                    idEditor.putString("userId", userEmail);
+                                    passEditor.putString("userPass", userPassword);
+                                    idEditor.apply();
+                                    passEditor.apply();
+                                }
 
-                            Toast.makeText(LoginActivity.this, login_success, Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            // 로그인 실패 로직
-                            Toast.makeText(LoginActivity.this, login_failed, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, login_success, Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // 로그인 실패 로직
+                                Toast.makeText(LoginActivity.this, login_failed, Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
 

@@ -205,3 +205,20 @@
 - [refactor]: quiz count 로 인해 value 값이 뒤틀린 부분 수정
 - [refactor]: quiz count 로 인해 생겼던 데이터 오류 해결
 - [refactor]: quiz count 각 shared 데이터 꼬여있던 부분 해결
+
+### 2023-06-11 (일)
+- [feat]: 각 국가에 맞는 언어로 변경 ex) japanese ->  日本)
+- [feat]: 일본어 번역본 추가
+- [feat]: 일본어 번역을 위한 코드 추가
+- [docs]: 번역 빠진 부분 추가
+- [feat]: register 번역 수정
+- [feat]: id 값 추가
+- [feat]: 이메일 검증 번역
+- [feat]: 토스트메세지 번역본으로 수정
+- [docs]: frame layout 이 바텀 뷰까지 영역 침범하여 차지하는 현상 수정 
+
+### 2023-06-13 (화)
+- [feat]: 태국어 추가
+- [feat]: 독일어 추가
+- [feat]: login 화면에 언어선택 부분 추가
+- [docs]: login 화면에 언어 선택 뷰 추가

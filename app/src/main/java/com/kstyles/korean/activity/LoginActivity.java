@@ -110,6 +110,10 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("language", "de");
                     numEditor.putString("languageNum", "4");
                 }
+                if (selectedLanguage.equals("ประเทศไทย")) {
+                    editor.putString("language", "th");
+                    numEditor.putString("languageNum", "5");
+                }
                 if (selectedLanguage.equals("English")) {
                     editor.putString("language", "");
                     numEditor.putString("languageNum", "0");

@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -62,11 +61,13 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
         showBottomView();
 
         /**
-         * user
+         * user & SharedPreferences
          */
         FirebaseManager firebaseManager = new FirebaseManager();
         User user = firebaseManager.getUser();
         uid = user.getUid();
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(uid, Context.MODE_PRIVATE);
 
         /**
          * 비밀번호 변경 로직을 포함한 AlertDialog
@@ -115,7 +116,6 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
                                 // 수락버튼 수행
                                 FirebaseManager firebaseManager = new FirebaseManager();
                                 firebaseManager.signOut((Activity) getContext());
-                                SharedPreferences sharedPreferences = getContext().getSharedPreferences("userPass", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.clear();
                                 editor.apply();
@@ -138,7 +138,6 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
             public void onClick(View v) {
                 FirebaseManager firebaseManager = new FirebaseManager();
                 inputEditProfileBinding = InputEditProfileBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
-                SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_profile", Context.MODE_PRIVATE);
                 previousUserProfile = Uri.parse(sharedPreferences.getString("user_profile", ""));
 
                 inputEditProfileBinding.inputUserProfile.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.icon_user));
@@ -230,7 +229,6 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
          * Spinner setting
          */
         spinner = binding.settingSpinner;
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(uid, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         int language_num = sharedPreferences.getInt("language_num", 0);
         spinner.setSelection(language_num);

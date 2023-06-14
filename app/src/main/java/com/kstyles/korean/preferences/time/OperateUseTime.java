@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.repository.user.User;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,6 +16,7 @@ import java.util.Locale;
 public class OperateUseTime {
 
     private String TAG = "[OperateUseTime]";
+    private String uid;
     private Activity activity;
     private long startTime = 0;
     private long endTime = 0;
@@ -23,6 +27,9 @@ public class OperateUseTime {
 
     public void onStart() {
         startTime = System.currentTimeMillis();
+        FirebaseManager firebaseManager = new FirebaseManager();
+        User user = firebaseManager.getUser();
+        uid = user.getUid();
     }
 
     public void onStop() {
@@ -43,14 +50,14 @@ public class OperateUseTime {
     }
 
     private void saveUseTime(Activity activity, String date, int useTimeMin) {
-        SharedPreferences sharedPreferences = activity.getSharedPreferences("use_time", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(uid, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(date, useTimeMin);
         editor.apply();
     }
 
     private int loadUseTime(Activity activity, String date) {
-        SharedPreferences sharedPreferences = activity.getSharedPreferences("use_time", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(uid, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(date, 0);
     }
 
@@ -78,7 +85,7 @@ public class OperateUseTime {
     }
 
     private void clearAllData() {
-        SharedPreferences sharedPreferences = activity.getSharedPreferences("use_time", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(uid, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();

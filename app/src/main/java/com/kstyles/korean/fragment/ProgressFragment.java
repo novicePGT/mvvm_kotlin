@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +32,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kstyles.korean.R;
-import com.kstyles.korean.adapter.main.RecyclerAdapter;
 import com.kstyles.korean.adapter.progress.ProgressRecyclerAdapter;
 import com.kstyles.korean.custom.CustomMarkerView;
 import com.kstyles.korean.databinding.ActivityFragmentProgressBinding;
@@ -41,6 +39,8 @@ import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.count.QuizCount;
+import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.repository.user.User;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -49,6 +49,7 @@ import java.util.stream.IntStream;
 public class ProgressFragment extends Fragment implements BottomViewManipulationListener {
 
     private final String TAG = "[ProgressFragment] :";
+    private String uid;
     private ActivityFragmentProgressBinding binding;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -70,6 +71,14 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
         showBottomView();
 
         setBarChartView();
+
+        /**
+         * user
+         */
+        FirebaseManager firebaseManager = new FirebaseManager();
+        User user = firebaseManager.getUser();
+        uid = user.getUid();
+
         /**
          * 몇 문제를 해결했는지, 몇 클래스를 완료했는지 나타내준다.
          */
@@ -191,7 +200,7 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
 
     @NonNull
     private ArrayList<BarEntry> setBarEntity() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("use_time", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(uid, Context.MODE_PRIVATE);
         int[] useTimeArray = {
                 sharedPreferences.getInt("Sun", 0),
                 sharedPreferences.getInt("Mon", 0),

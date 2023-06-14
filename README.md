@@ -223,7 +223,7 @@
 - [feat]: login 화면에 언어선택 부분 추가
 - [docs]: login 화면에 언어 선택 뷰 추가
 
-###
+### 2023-06-14 (수)
 - [refactor]: User Uid 기반 Shared Preferences 로 user profile 데이터 저장
 - [refactor]: User Uid 기반 Shared Preferences 로 setting 데이터 저장
 - [refactor]: User Uid 기반 Shared Preferences 로 progress 데이터 저장

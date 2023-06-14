@@ -14,28 +14,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.kstyles.korean.activity.LoginActivity;
 import com.kstyles.korean.activity.MainActivity;
 import com.kstyles.korean.item.PracticeItem;
 import com.kstyles.korean.item.RecyclerItem;
-import com.kstyles.korean.item.UserAccount;
+import com.kstyles.korean.repository.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,6 +197,17 @@ public class FirebaseManager {
         activity.finish();
     }
 
+    public User getUser() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+            return new User(uid);
+        } else {
+           String defaultUid = "";
+           return new User(defaultUid);
+        }
+    }
 
     public void setPathString(String pathString) {
         this.pathString = pathString;

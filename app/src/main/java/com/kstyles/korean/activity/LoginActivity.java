@@ -55,11 +55,14 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(view);
 
         /**
-         * user
+         * user & SharedPreferences
          */
         FirebaseManager firebaseManager = new FirebaseManager();
         User user1 = firebaseManager.getUser();
         uid = user1.getUid();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(uid, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         /**
          * firebase setting
@@ -91,8 +94,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         spinner = binding.loginSpinner;
-        SharedPreferences sharedPreferences = getSharedPreferences(uid, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         int language_num = sharedPreferences.getInt("language_num", 0);
         spinner.setSelection(language_num);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -148,14 +149,9 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // 로그인 성공 로직
                                 if (flag) {
-                                    SharedPreferences idSharedPreferences = getSharedPreferences("userId", MODE_PRIVATE);
-                                    SharedPreferences.Editor idEditor = idSharedPreferences.edit();
-                                    SharedPreferences passSharedPreferences = getSharedPreferences("userPass", MODE_PRIVATE);
-                                    SharedPreferences.Editor passEditor = passSharedPreferences.edit();
-                                    idEditor.putString("userId", userEmail);
-                                    passEditor.putString("userPass", userPassword);
-                                    idEditor.apply();
-                                    passEditor.apply();
+                                    editor.putString("user_id", userEmail);
+                                    editor.putString("user_pass", userPassword);
+                                    editor.apply();
                                 }
 
                                 Toast.makeText(LoginActivity.this, login_success, Toast.LENGTH_SHORT).show();

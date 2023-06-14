@@ -37,6 +37,7 @@ import java.util.List;
 public class FirebaseManager {
 
     private final String TAG = "FirebaseManager";
+    private String uid;
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private FirebaseAuth auth;
@@ -48,6 +49,7 @@ public class FirebaseManager {
         reference = database.getReference();
         auth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
+        uid = getUser().getUid();
     }
 
     public void getRecyclerItems(final FirebaseCallback<List<RecyclerItem>> callback) {
@@ -107,7 +109,7 @@ public class FirebaseManager {
                                         public void onSuccess(Uri downloadUrl) {
                                             String imageUrl = downloadUrl.toString();
 
-                                            SharedPreferences sharedPreferences = context.getSharedPreferences("user_profile", Context.MODE_PRIVATE);
+                                            SharedPreferences sharedPreferences = context.getSharedPreferences(uid, Context.MODE_PRIVATE);
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
                                             editor.putString("user_profile", imageUrl);
                                             editor.apply();

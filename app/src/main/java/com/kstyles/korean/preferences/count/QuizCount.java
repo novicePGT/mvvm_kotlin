@@ -3,6 +3,9 @@ package com.kstyles.korean.preferences.count;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.repository.user.User;
+
 public class QuizCount {
 
     private int wordCount = 0;
@@ -13,7 +16,10 @@ public class QuizCount {
     private SharedPreferences sharedPreferences;
 
     public QuizCount(Context context, String selectLevel) {
-        sharedPreferences = context.getSharedPreferences("wordCount", 0);
+        FirebaseManager firebaseManager = new FirebaseManager();
+        User user = firebaseManager.getUser();
+        String uid = user.getUid();
+        sharedPreferences = context.getSharedPreferences(uid, 0);
         this.selectLevel = selectLevel;
         this.quizCount = sharedPreferences.getInt("quizCount", quizCount);
         this.wordCount = sharedPreferences.getInt("wordCount", wordCount);

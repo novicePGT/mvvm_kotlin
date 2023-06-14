@@ -14,6 +14,8 @@ import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.RecyclerItemBinding;
 import com.kstyles.korean.fragment.PracticeFragment;
 import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.repository.user.User;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,10 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
     public void bind(ArrayList<RecyclerItem> items, int position) {
         String selectLevel = String.format("%s %s", items.get(position).getLevel(), items.get(position).getName());
 
+        FirebaseManager firebaseManager = new FirebaseManager();
+        User user = firebaseManager.getUser();
+        String uid = user.getUid();
+
         binding.itemLevel.setText(items.get(position).getLevel());
         binding.itemName.setText(items.get(position).getName());
 
@@ -46,10 +52,9 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
             binding.recyclerDownLine.setVisibility(View.VISIBLE);
         }
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("wordCount", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(uid, Context.MODE_PRIVATE);
         int value = sharedPreferences.getInt(selectLevel + "WordTotal", 0);
-        SharedPreferences sharedPreferences1 = context.getSharedPreferences("nextPosition", Context.MODE_PRIVATE);
-        int nextPosition = sharedPreferences1.getInt("nextPosition", 0);
+        int nextPosition = sharedPreferences.getInt("nextPosition", 0);
 
         if (position == 0) {
             binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_unlock_black));
@@ -57,7 +62,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
         }
         if (value >= 10) {
             binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_check_black));
-            SharedPreferences.Editor editor = sharedPreferences1.edit();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putInt("nextPosition", position + 1);
             editor.apply();
         } else {

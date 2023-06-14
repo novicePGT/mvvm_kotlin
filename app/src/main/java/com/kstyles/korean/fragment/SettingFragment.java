@@ -39,10 +39,12 @@ import com.kstyles.korean.databinding.InputLogoutBinding;
 import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.repository.user.User;
 
 public class SettingFragment extends Fragment implements BottomViewManipulationListener {
 
     private ActivityFragmentSettingBinding binding;
+    private String uid;
     private Spinner spinner;
     private int REQUEST_CODE = 1002;
     private String TAG = "[SettingFragment}";
@@ -58,6 +60,13 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
         binding = ActivityFragmentSettingBinding.inflate(inflater, container, false);
 
         showBottomView();
+
+        /**
+         * user
+         */
+        FirebaseManager firebaseManager = new FirebaseManager();
+        User user = firebaseManager.getUser();
+        uid = user.getUid();
 
         /**
          * 비밀번호 변경 로직을 포함한 AlertDialog
@@ -221,44 +230,40 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
          * Spinner setting
          */
         spinner = binding.settingSpinner;
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("language", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(uid, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        SharedPreferences intSharedPreference = getContext().getSharedPreferences("languageNum", Context.MODE_PRIVATE);
-        SharedPreferences.Editor numEditor = intSharedPreference.edit();
-        String languageNum = intSharedPreference.getString("languageNum", "0");
-        spinner.setSelection(Integer.parseInt(languageNum));
+        int language_num = sharedPreferences.getInt("language_num", 0);
+        spinner.setSelection(language_num);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // 이 곳에 언어번역에 대한 코드를 작성할 것.
                 String selectedLanguage = (String) parent.getItemAtPosition(position);
 
                 if (selectedLanguage.equals("Việt Nam")) {
                     editor.putString("language", "vi");
-                    numEditor.putString("languageNum", "1");
+                    editor.putInt("language_num", 1);
                 }
                 if (selectedLanguage.equals("France")) {
                     editor.putString("language", "fr");
-                    numEditor.putString("languageNum", "2");
+                    editor.putInt("language_num", 2);
                 }
                 if (selectedLanguage.equals("日本")) {
                     editor.putString("language", "ja");
-                    numEditor.putString("languageNum", "3");
+                    editor.putInt("language_num", 3);
                 }
                 if (selectedLanguage.equals("Deutschland")) {
                     editor.putString("language", "de");
-                    numEditor.putString("languageNum", "4");
+                    editor.putInt("language_num", 4);
                 }
                 if (selectedLanguage.equals("ประเทศไทย")) {
                     editor.putString("language", "th");
-                    numEditor.putString("languageNum", "5");
+                    editor.putInt("language_num", 5);
                 }
                 if (selectedLanguage.equals("English")) {
                     editor.putString("language", "");
-                    numEditor.putString("languageNum", "0");
+                    editor.putInt("language_num", 0);
                 }
                 editor.apply();
-                numEditor.apply();
 
                 setTranslation();
             }

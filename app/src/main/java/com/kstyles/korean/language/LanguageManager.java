@@ -4,16 +4,24 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+
+import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.repository.user.User;
+
 import java.util.Locale;
 
 public class LanguageManager {
 
     private Context context;
     private String currentLanguage;
+    private FirebaseManager firebaseManager;
 
     public LanguageManager(Context context) {
         this.context = context;
-        SharedPreferences sharedPreferences = context.getSharedPreferences("language", Context.MODE_PRIVATE);
+        firebaseManager = new FirebaseManager();
+        User user = firebaseManager.getUser();
+        String uid = user.getUid();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(uid, Context.MODE_PRIVATE);
         currentLanguage = sharedPreferences.getString("language", "ko");
     }
 

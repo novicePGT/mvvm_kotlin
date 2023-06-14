@@ -3,7 +3,6 @@ package com.kstyles.korean.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,10 +28,12 @@ import com.kstyles.korean.databinding.ActivityLoginBinding;
 import com.kstyles.korean.databinding.InputFindPassBinding;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.repository.user.User;
 
 public class LoginActivity extends AppCompatActivity {
 
     private final String TAG = "LoginActivity";
+    private String uid;
     private String login_success;
     private String login_failed;
     private FirebaseAuth firebaseAuth; // 파이어베이스 인증
@@ -52,6 +53,13 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        /**
+         * user
+         */
+        FirebaseManager firebaseManager = new FirebaseManager();
+        User user1 = firebaseManager.getUser();
+        uid = user1.getUid();
 
         /**
          * firebase setting
@@ -83,12 +91,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         spinner = binding.loginSpinner;
-        SharedPreferences sharedPreferences = getSharedPreferences("language", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(uid, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        SharedPreferences intSharedPreference = getSharedPreferences("languageNum", Context.MODE_PRIVATE);
-        SharedPreferences.Editor numEditor = intSharedPreference.edit();
-        String languageNum = intSharedPreference.getString("languageNum", "0");
-        spinner.setSelection(Integer.parseInt(languageNum));
+        int language_num = sharedPreferences.getInt("language_num", 0);
+        spinner.setSelection(language_num);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -96,30 +102,29 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (selectedLanguage.equals("Việt Nam")) {
                     editor.putString("language", "vi");
-                    numEditor.putString("languageNum", "1");
+                    editor.putInt("language_num", 1);
                 }
                 if (selectedLanguage.equals("France")) {
                     editor.putString("language", "fr");
-                    numEditor.putString("languageNum", "2");
+                    editor.putInt("language_num", 2);
                 }
                 if (selectedLanguage.equals("日本")) {
                     editor.putString("language", "ja");
-                    numEditor.putString("languageNum", "3");
+                    editor.putInt("language_num", 3);
                 }
                 if (selectedLanguage.equals("Deutschland")) {
                     editor.putString("language", "de");
-                    numEditor.putString("languageNum", "4");
+                    editor.putInt("language_num", 4);
                 }
                 if (selectedLanguage.equals("ประเทศไทย")) {
                     editor.putString("language", "th");
-                    numEditor.putString("languageNum", "5");
+                    editor.putInt("language_num", 5);
                 }
                 if (selectedLanguage.equals("English")) {
                     editor.putString("language", "");
-                    numEditor.putString("languageNum", "0");
+                    editor.putInt("language_num", 0);
                 }
                 editor.apply();
-                numEditor.apply();
 
                 setTranslation();
             }

@@ -23,13 +23,13 @@ public class OperateUseTime {
 
     public OperateUseTime(Activity activity) {
         this.activity = activity;
+        FirebaseManager firebaseManager = new FirebaseManager();
+        User user = firebaseManager.getUser();
+        uid = user.getUid();
     }
 
     public void onStart() {
         startTime = System.currentTimeMillis();
-        FirebaseManager firebaseManager = new FirebaseManager();
-        User user = firebaseManager.getUser();
-        uid = user.getUid();
     }
 
     public void onStop() {

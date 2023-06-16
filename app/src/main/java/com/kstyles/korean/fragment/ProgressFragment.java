@@ -39,10 +39,13 @@ import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.item.RecyclerItem;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.count.QuizCount;
+import com.kstyles.korean.preferences.time.OperateUseTime;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.repository.user.User;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -58,8 +61,12 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
     private ProgressRecyclerAdapter adapter;
     private ArrayList<RecyclerItem> items;
     private BarChart progressChart;
+    private OperateUseTime operateUseTime;
+    private Timer timer;
 
-    public ProgressFragment() {}
+    public ProgressFragment() {
+        operateUseTime = new OperateUseTime(getActivity());
+    }
 
     @Nullable
     @Override
@@ -215,6 +222,23 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
                 .mapToObj(i -> new BarEntry((float)(i+1), useTimeArray[i]))
                 .collect(Collectors.toCollection(ArrayList::new));
         return spendingTime;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setBarChartView();
+                    }
+                });
+            }
+        }, 0, 60000);
     }
 
     @Override

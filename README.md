@@ -222,3 +222,13 @@
 - [feat]: 독일어 추가
 - [feat]: login 화면에 언어선택 부분 추가
 - [docs]: login 화면에 언어 선택 뷰 추가
+
+### 2023-06-14 (수)
+- [refactor]: User Uid 기반 Shared Preferences 로 user profile 데이터 저장
+- [refactor]: User Uid 기반 Shared Preferences 로 setting 데이터 저장
+- [refactor]: User Uid 기반 Shared Preferences 로 progress 데이터 저장
+- [refactor]: User Uid 기반 Shared Preferences 로 quiz count 데이터 저장
+- [refactor]: User Uid 기반 Shared Preferences 로 로그인 데이터 저장
+- [refactor]: User Uid 기반 Shared Preferences 로 로그인 데이터 저장
+- [refactor]: User Uid 기반 Shared Preferences 로 언어 번역 데이터 저장
+- [feat]: User Uid 기반 Shared Preferences 로 수정 데이터 반영

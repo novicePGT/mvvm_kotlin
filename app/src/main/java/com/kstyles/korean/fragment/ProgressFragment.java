@@ -1,7 +1,5 @@
 package com.kstyles.korean.fragment;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,8 +44,6 @@ import com.kstyles.korean.repository.user.User;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class ProgressFragment extends Fragment implements BottomViewManipulationListener {
 
@@ -65,7 +61,6 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
     private Timer timer;
 
     public ProgressFragment() {
-        operateUseTime = new OperateUseTime(getActivity());
     }
 
     @Nullable
@@ -73,11 +68,11 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = ActivityFragmentProgressBinding.inflate(inflater, container, false);
 
+        operateUseTime = new OperateUseTime(getActivity());
+
         setTranslation();
 
         showBottomView();
-
-        setBarChartView();
 
         /**
          * user
@@ -155,7 +150,7 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
         MarkerView customMarkerView = new CustomMarkerView(getContext(), R.layout.custom_marker_view);
         progressChart = binding.progressChart;
 
-        ArrayList<BarEntry> spendingTime = setBarEntity();
+        ArrayList<BarEntry> spendingTime = operateUseTime.getSpendingTime();
 
         BarDataSet barDataSet = new BarDataSet(spendingTime, null);
         barDataSet.setColor(Color.rgb(155, 155, 155));
@@ -205,30 +200,22 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
         legend.setDrawInside(false);
     }
 
-    @NonNull
-    private ArrayList<BarEntry> setBarEntity() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(uid, Context.MODE_PRIVATE);
-        int[] useTimeArray = {
-                sharedPreferences.getInt("Sun", 0),
-                sharedPreferences.getInt("Mon", 0),
-                sharedPreferences.getInt("Tue", 0),
-                sharedPreferences.getInt("Wed", 0),
-                sharedPreferences.getInt("Thu", 0),
-                sharedPreferences.getInt("Fri", 0),
-                sharedPreferences.getInt("Sat", 0)
-        };
-
-        ArrayList<BarEntry> spendingTime = IntStream.range(0, useTimeArray.length)
-                .mapToObj(i -> new BarEntry((float)(i+1), useTimeArray[i]))
-                .collect(Collectors.toCollection(ArrayList::new));
-        return spendingTime;
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
+        operateUseTime.onStart();
+        startTimer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        operateUseTime.onStop();
+        stopTimer();
+    }
+
+    private void startTimer() {
+        TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 getActivity().runOnUiThread(new Runnable() {
@@ -238,7 +225,17 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
                     }
                 });
             }
-        }, 0, 60000);
+        };
+
+        timer = new Timer();
+        timer.schedule(timerTask, 0, 60000);
+    }
+
+    private void stopTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
     }
 
     @Override

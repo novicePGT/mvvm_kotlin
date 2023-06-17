@@ -232,3 +232,13 @@
 - [refactor]: User Uid 기반 Shared Preferences 로 로그인 데이터 저장
 - [refactor]: User Uid 기반 Shared Preferences 로 언어 번역 데이터 저장
 - [feat]: User Uid 기반 Shared Preferences 로 수정 데이터 반영
+
+### 2023-06-16 (금)
+- [feat]: bar chart 를 비동기식으로 해서 1분에 한 번씩 바뀐 데이터를 불러오도록함
+
+### 2023-06-17 (토)
+- [refactor]: onStart -> onResume, onStop -> onPause 로 변경하여 단계를 낮춤
+- [feat]: User profile이 삭제되는 문제 해결
+- [feat]: 백그라운드에서 차트를 지속적으로 업데이트하도록 함
+- [refactor]: bar chart 데이터를 받아오는 부분 수정
+- [refactor]: 로그아웃 시 모든 데이터를 날리는 부분을 id / pass 만 날리는 방식으로 수정

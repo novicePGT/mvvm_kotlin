@@ -5,13 +5,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.github.mikephil.charting.data.BarEntry;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.repository.user.User;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class OperateUseTime {
 
@@ -47,6 +51,25 @@ public class OperateUseTime {
         Log.d(TAG, "앱 동작 시간: " + useTimeMin + " min");
         Log.d(TAG, "앱 이전 실행 시간: " + beforeUseTime + " min");
         Log.d(TAG, "앱 토탈 실행 시간: " + mergeUseTime + " min");
+    }
+
+    public ArrayList<BarEntry> getSpendingTime() {
+        SharedPreferences sharedPreferences = activity.getSharedPreferences(uid, Context.MODE_PRIVATE);
+        int[] useTimeArray = {
+                sharedPreferences.getInt("Sun", 0),
+                sharedPreferences.getInt("Mon", 0),
+                sharedPreferences.getInt("Tue", 0),
+                sharedPreferences.getInt("Wed", 0),
+                sharedPreferences.getInt("Thu", 0),
+                sharedPreferences.getInt("Fri", 0),
+                sharedPreferences.getInt("Sat", 0)
+        };
+
+        ArrayList<BarEntry> spendingTime = IntStream.range(0, useTimeArray.length)
+                .mapToObj(i -> new BarEntry((float) (i + 1), useTimeArray[i]))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        return spendingTime;
     }
 
     private void saveUseTime(Activity activity, String date, int useTimeMin) {

@@ -117,7 +117,8 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
                                 FirebaseManager firebaseManager = new FirebaseManager();
                                 firebaseManager.signOut((Activity) getContext());
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.clear();
+                                editor.remove("user_id");
+                                editor.remove("user_pass");
                                 editor.apply();
                             }
                         })

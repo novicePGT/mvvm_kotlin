@@ -203,14 +203,12 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
     @Override
     public void onResume() {
         super.onResume();
-        operateUseTime.onStart();
         startTimer();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        operateUseTime.onStop();
         stopTimer();
     }
 

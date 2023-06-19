@@ -1,4 +1,4 @@
-package com.kstyles.korean.adapter.progress;
+package com.kstyles.korean.fragment.adapter.progress;
 
 import android.content.Context;
 import android.os.Bundle;

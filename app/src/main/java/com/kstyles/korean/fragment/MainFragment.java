@@ -19,7 +19,7 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.R;
-import com.kstyles.korean.adapter.main.RecyclerAdapter;
+import com.kstyles.korean.fragment.adapter.main.RecyclerAdapter;
 import com.kstyles.korean.databinding.ActivityFragmentMainBinding;
 import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.item.RecyclerItem;

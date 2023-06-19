@@ -30,7 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kstyles.korean.R;
-import com.kstyles.korean.adapter.progress.ProgressRecyclerAdapter;
+import com.kstyles.korean.fragment.adapter.progress.ProgressRecyclerAdapter;
 import com.kstyles.korean.custom.CustomMarkerView;
 import com.kstyles.korean.databinding.ActivityFragmentProgressBinding;
 import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;

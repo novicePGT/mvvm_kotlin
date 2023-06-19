@@ -1,4 +1,4 @@
-package com.kstyles.korean.adapter.main;
+package com.kstyles.korean.fragment.adapter.main;
 
 import android.content.Context;
 import android.view.LayoutInflater;

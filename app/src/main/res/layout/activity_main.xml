@@ -24,15 +24,22 @@
             android:id="@+id/main_btn_home"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginRight="85dp"
+            android:layout_marginRight="65dp"
             android:background="@drawable/icon_home" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_btn_progress"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginRight="85dp"
+            android:layout_marginRight="65dp"
             android:background="@drawable/icon_clip" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/main_btn_word"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="65dp"
+            android:background="@drawable/icon_book" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_btn_setting"

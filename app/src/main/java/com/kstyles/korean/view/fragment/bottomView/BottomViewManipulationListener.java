@@ -1,4 +1,4 @@
-package com.kstyles.korean.fragment.bottomView;
+package com.kstyles.korean.view.fragment.bottomView;
 
 public interface BottomViewManipulationListener {
     void hideBottomView();

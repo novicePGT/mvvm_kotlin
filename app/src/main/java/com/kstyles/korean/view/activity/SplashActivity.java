@@ -1,9 +1,8 @@
-package com.kstyles.korean.activity;
+package com.kstyles.korean.view.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

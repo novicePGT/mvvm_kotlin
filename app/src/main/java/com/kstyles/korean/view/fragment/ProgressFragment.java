@@ -1,4 +1,4 @@
-package com.kstyles.korean.fragment;
+package com.kstyles.korean.view.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,11 +30,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kstyles.korean.R;
-import com.kstyles.korean.fragment.adapter.progress.ProgressRecyclerAdapter;
+import com.kstyles.korean.view.fragment.adapter.progress.ProgressRecyclerAdapter;
 import com.kstyles.korean.custom.CustomMarkerView;
 import com.kstyles.korean.databinding.ActivityFragmentProgressBinding;
-import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
-import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
+import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.count.QuizCount;
 import com.kstyles.korean.preferences.time.OperateUseTime;

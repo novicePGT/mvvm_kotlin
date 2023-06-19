@@ -1,4 +1,4 @@
-package com.kstyles.korean.activity;
+package com.kstyles.korean.view.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +10,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityMainBinding;
-import com.kstyles.korean.fragment.AllWordFragment;
-import com.kstyles.korean.fragment.ProgressFragment;
-import com.kstyles.korean.fragment.SettingFragment;
-import com.kstyles.korean.fragment.MainFragment;
+import com.kstyles.korean.view.fragment.AllWordFragment;
+import com.kstyles.korean.view.fragment.ProgressFragment;
+import com.kstyles.korean.view.fragment.SettingFragment;
+import com.kstyles.korean.view.fragment.MainFragment;
 import com.kstyles.korean.preferences.time.OperateUseTime;
 
 public class MainActivity extends AppCompatActivity {

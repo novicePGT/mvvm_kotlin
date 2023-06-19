@@ -1,4 +1,4 @@
-package com.kstyles.korean.fragment;
+package com.kstyles.korean.view.fragment;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,9 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentPracticeBinding;
 import com.kstyles.korean.databinding.InputPracticeViewBinding;
-import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
-import com.kstyles.korean.item.PracticeItem;
-import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
+import com.kstyles.korean.view.fragment.item.PracticeItem;
+import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.count.QuizCount;
 import com.kstyles.korean.repository.FirebaseCallback;

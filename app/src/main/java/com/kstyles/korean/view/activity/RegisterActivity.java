@@ -1,4 +1,4 @@
-package com.kstyles.korean.activity;
+package com.kstyles.korean.view.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,7 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityRegisterBinding;
-import com.kstyles.korean.item.UserAccount;
+import com.kstyles.korean.view.fragment.item.UserAccount;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.verification.EditTextWatcher;

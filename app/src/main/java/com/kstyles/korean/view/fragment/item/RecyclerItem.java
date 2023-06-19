@@ -1,4 +1,4 @@
-package com.kstyles.korean.item;
+package com.kstyles.korean.view.fragment.item;
 
 public class RecyclerItem {
 

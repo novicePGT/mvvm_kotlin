@@ -1,4 +1,4 @@
-package com.kstyles.korean.fragment.adapter.main;
+package com.kstyles.korean.view.fragment.adapter.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.RecyclerItemBinding;
-import com.kstyles.korean.fragment.PracticeFragment;
-import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.view.fragment.PracticeFragment;
+import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.repository.user.User;
 

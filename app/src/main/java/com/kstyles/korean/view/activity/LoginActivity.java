@@ -1,4 +1,4 @@
-package com.kstyles.korean.activity;
+package com.kstyles.korean.view.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;

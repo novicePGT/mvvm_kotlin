@@ -25,10 +25,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.kstyles.korean.activity.LoginActivity;
-import com.kstyles.korean.activity.MainActivity;
-import com.kstyles.korean.item.PracticeItem;
-import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.view.activity.LoginActivity;
+import com.kstyles.korean.view.activity.MainActivity;
+import com.kstyles.korean.view.fragment.item.PracticeItem;
+import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.repository.user.User;
 
 import java.util.ArrayList;

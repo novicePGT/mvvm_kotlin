@@ -1,4 +1,4 @@
-package com.kstyles.korean.fragment.adapter.progress;
+package com.kstyles.korean.view.fragment.adapter.progress;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kstyles.korean.databinding.RecyclerItemProgressBinding;
-import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.view.fragment.item.RecyclerItem;
 
 import java.util.ArrayList;
 

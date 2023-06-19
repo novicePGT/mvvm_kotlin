@@ -1,4 +1,4 @@
-package com.kstyles.korean.fragment;
+package com.kstyles.korean.view.fragment;
 
 
 import static com.kstyles.korean.verification.noti.NotificationPolicy.isNotificationPolicyAccessGranted;
@@ -35,7 +35,7 @@ import com.kstyles.korean.databinding.ActivityFragmentSettingBinding;
 import com.kstyles.korean.databinding.InputEditProfileBinding;
 import com.kstyles.korean.databinding.InputFindPassBinding;
 import com.kstyles.korean.databinding.InputLogoutBinding;
-import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
+import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.repository.user.User;

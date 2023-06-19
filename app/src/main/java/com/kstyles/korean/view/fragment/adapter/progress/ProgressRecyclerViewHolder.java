@@ -1,18 +1,17 @@
-package com.kstyles.korean.fragment.adapter.progress;
+package com.kstyles.korean.view.fragment.adapter.progress;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.RecyclerItemProgressBinding;
-import com.kstyles.korean.fragment.PracticeFragment;
-import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.view.fragment.PracticeFragment;
+import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.preferences.count.QuizCount;
 
 import java.util.ArrayList;

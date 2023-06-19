@@ -1,4 +1,4 @@
-package com.kstyles.korean.item;
+package com.kstyles.korean.view.fragment.item;
 
 public class UserAccount {
 
@@ -7,7 +7,6 @@ public class UserAccount {
     private String userPassword;
     private String userName;
     private String date;
-
     private String idToken;
 
     public UserAccount(String userEmail, String userPassword, String userName, String idToken) {
@@ -65,9 +64,5 @@ public class UserAccount {
 
     public String getIdToken() {
         return idToken;
-    }
-
-    public void setIdToken(String idToken) {
-        this.idToken = idToken;
     }
 }

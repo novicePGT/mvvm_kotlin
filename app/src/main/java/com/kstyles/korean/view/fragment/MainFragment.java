@@ -1,4 +1,4 @@
-package com.kstyles.korean.fragment;
+package com.kstyles.korean.view.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,10 +19,10 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.R;
-import com.kstyles.korean.fragment.adapter.main.RecyclerAdapter;
+import com.kstyles.korean.view.fragment.adapter.main.RecyclerAdapter;
 import com.kstyles.korean.databinding.ActivityFragmentMainBinding;
-import com.kstyles.korean.fragment.bottomView.BottomViewManipulationListener;
-import com.kstyles.korean.item.RecyclerItem;
+import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
+import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.preferences.user.UserProfile;
 import com.kstyles.korean.repository.FirebaseCallback;
 import com.kstyles.korean.repository.FirebaseManager;

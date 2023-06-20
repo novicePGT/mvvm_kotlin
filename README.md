@@ -252,3 +252,15 @@
 - [feat]: Word fragment 로 전환하기 위한 메서드 추가
 - [docs]: Word fragment 를 위한 아이콘 추가
 - [refactor]: 패키지 이동, basic -> fragment
+
+### 2023-06-20 (화)
+- [feat]: Add class for support word manager
+- [feat]: Add class for specifying word manager
+- [docs]: add All word translation
+- [docs]: add recycler item view
+- [refactor]: Delete unused method
+- [feat]: Word List View Holder
+- [feat]: Word List View Adapter
+- [feat]: add All Word fragment
+- [docs]: add All Word View
+- [fix]: 리스트에 없는 아이템 삭제

@@ -13,7 +13,7 @@
         android:layout_margin="25dp">
 
         <TextView
-            android:id="@+id/tv_progress"
+            android:id="@+id/tv_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="All Word"

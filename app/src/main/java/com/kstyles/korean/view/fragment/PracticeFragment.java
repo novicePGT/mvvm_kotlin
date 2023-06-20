@@ -116,9 +116,6 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         buttons = new Button[]{binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3, binding.practiceBtn4};
         int buttonIndex = new Random().nextInt(4);
 
-        int identifier = getResources().getIdentifier(answer, "string", getContext().getPackageName());
-        String findByAnswer = getContext().getString(identifier);
-
         List<String> buttonTexts = setButtonText(buttonIndex);
 
         IntStream.range(0, buttons.length)

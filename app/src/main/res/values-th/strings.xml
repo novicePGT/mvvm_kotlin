@@ -52,6 +52,9 @@
     <string name="hint_nickname">เขียนชื่อเล่นของคุณ</string>
     <string name="btn_join">เข้าร่วม</string>
 
+    <!-- all word 페이지 -->
+    <string name="tv_all_word">ทุกคำ</string>
+
     <!-- 문제해설 -->
     <string name="축구">축구: คำนี้หมายถึงฟุตบอล</string>
     <string name="야구">야구: คำนี้หมายถึงเบสบอล</string>

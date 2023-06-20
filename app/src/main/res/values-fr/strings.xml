@@ -52,6 +52,9 @@
     <string name="hint_nickname">Écrivez votre surnom</string>
     <string name="btn_join">Joignez-vous à nous</string>
 
+    <!-- all word 페이지 -->
+    <string name="tv_all_word">Tout est dit</string>
+
     <!-- 문제 해설 -->
     <string name="축구">축구: Ça veut dire football</string>
     <string name="야구">야구: Ça veut dire baseball</string>

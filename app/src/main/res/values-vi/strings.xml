@@ -52,6 +52,9 @@
     <string name="hint_nickname">Ghi lại nickname của bạn</string>
     <string name="btn_join">nhập</string>
 
+    <!-- all word 페이지 -->
+    <string name="tv_all_word">Tất cả lời nói</string>
+
     <!-- 문제 해설 -->
     <string name="축구">축구: Nghĩa là bóng đá</string>
     <string name="야구">야구: Nghĩa là bóng chày</string>

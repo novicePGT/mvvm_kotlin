@@ -53,6 +53,9 @@
     <string name="hint_nickname">Write down your nickname</string>
     <string name="btn_join">Join</string>
 
+    <!-- all word 페이지 -->
+    <string name="tv_all_word">All Word</string>
+
     <!-- 문제 해설 -->
     <string name="축구">축구: The meaning of this is soccer</string>
     <string name="야구">야구: The meaning of this is baseball</string>

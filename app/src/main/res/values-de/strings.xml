@@ -52,6 +52,9 @@
     <string name="hint_nickname">Geben Sie Ihren Spitznamen ein</string>
     <string name="btn_join">Beitreten</string>
 
+    <!-- all word 페이지 -->
+    <string name="tv_all_word">Alles Wort</string>
+
     <!-- 문제 해설 -->
     <string name="축구">축구: Dies bedeutet Fußball</string>
     <string name="야구">야구: Dies bedeutet Baseball</string>

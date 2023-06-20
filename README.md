@@ -242,3 +242,25 @@
 - [feat]: 백그라운드에서 차트를 지속적으로 업데이트하도록 함
 - [refactor]: bar chart 데이터를 받아오는 부분 수정
 - [refactor]: 로그아웃 시 모든 데이터를 날리는 부분을 id / pass 만 날리는 방식으로 수정
+
+### 2023-06-19 (월)
+- [feat]: Item 형식을 규정하기 위한 클래스 추가
+- [docs]: add All word view
+- [docs]: add All word view item
+- [docs]: 북 아이콘 추가
+- [refactor]: 더욱 더 찾기 쉬운 패키징 방식으로 수정
+- [feat]: Word fragment 로 전환하기 위한 메서드 추가
+- [docs]: Word fragment 를 위한 아이콘 추가
+- [refactor]: 패키지 이동, basic -> fragment
+
+### 2023-06-20 (화)
+- [feat]: Add class for support word manager
+- [feat]: Add class for specifying word manager
+- [docs]: add All word translation
+- [docs]: add recycler item view
+- [refactor]: Delete unused method
+- [feat]: Word List View Holder
+- [feat]: Word List View Adapter
+- [feat]: add All Word fragment
+- [docs]: add All Word View
+- [fix]: 리스트에 없는 아이템 삭제

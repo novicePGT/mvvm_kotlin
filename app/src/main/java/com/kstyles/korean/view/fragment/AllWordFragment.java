@@ -1,5 +1,6 @@
 package com.kstyles.korean.view.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.kstyles.korean.view.fragment.adapter.word.AllWordRecyclerAdapter;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.view.fragment.item.WordItem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AllWordFragment extends Fragment implements BottomViewManipulationListener {
@@ -59,9 +61,35 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
         recyclerView.setAdapter(adapter);
 
+        binding.wordBtnBeginner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // instanceOf 사용해서 텍스트 색상 or 백그라운드 수정 !!
+                wordManager.loadBeginnerWords(requireContext());
+                adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
+        binding.wordBtnIntermediate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wordManager.loadIntermediateWords(requireContext());
+                adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
+        binding.wordBtnAdvanced.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wordManager.loadAdvancedWords(requireContext());
+                adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
         showBottomView();
-
-
 
         return binding.getRoot();
     }

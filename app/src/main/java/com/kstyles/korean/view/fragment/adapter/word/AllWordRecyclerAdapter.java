@@ -1,6 +1,5 @@
 package com.kstyles.korean.view.fragment.adapter.word;
 
-import static com.kstyles.korean.view.fragment.MainFragment.items;
 
 import android.content.Context;
 import android.view.LayoutInflater;

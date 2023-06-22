@@ -2,9 +2,8 @@ package com.kstyles.korean.view.fragment.item;
 
 public class PracticeItem {
 
-    private String imageUrl;
-
     private String answer;
+    private String imageUrl;
 
     public PracticeItem() {
     }
@@ -13,15 +12,7 @@ public class PracticeItem {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public String getAnswer() {
         return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
     }
 }

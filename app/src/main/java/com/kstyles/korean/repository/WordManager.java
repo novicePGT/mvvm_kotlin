@@ -24,7 +24,58 @@ public class WordManager {
         Resources resources = context.getResources();
         String packageName = context.getPackageName();
 
-        String[] wordNames = resources.getStringArray(R.array.words);
+        String[] wordNames = resources.getStringArray(R.array.beginner);
+
+        for (String wordName : wordNames) {
+            int resourceIdString = resources.getIdentifier(wordName, "string", packageName);
+            if (resourceIdString != 0) {
+                String description = resources.getString(resourceIdString);
+                WordItem wordItem = new WordItem(wordName, description);
+                wordsMap.put(wordName, wordItem);
+            }
+        }
+    }
+
+    public void loadBeginnerWords(Context context) {
+        wordsMap.clear();
+        Resources resources = context.getResources();
+        String packageName = context.getPackageName();
+
+        String[] wordNames = resources.getStringArray(R.array.beginner);
+
+        for (String wordName : wordNames) {
+            int resourceIdString = resources.getIdentifier(wordName, "string", packageName);
+            if (resourceIdString != 0) {
+                String description = resources.getString(resourceIdString);
+                WordItem wordItem = new WordItem(wordName, description);
+                wordsMap.put(wordName, wordItem);
+            }
+        }
+    }
+
+    public void loadIntermediateWords(Context context) {
+        wordsMap.clear();
+        Resources resources = context.getResources();
+        String packageName = context.getPackageName();
+
+        String[] wordNames = resources.getStringArray(R.array.intermediate);
+
+        for (String wordName : wordNames) {
+            int resourceIdString = resources.getIdentifier(wordName, "string", packageName);
+            if (resourceIdString != 0) {
+                String description = resources.getString(resourceIdString);
+                WordItem wordItem = new WordItem(wordName, description);
+                wordsMap.put(wordName, wordItem);
+            }
+        }
+    }
+
+    public void loadAdvancedWords(Context context) {
+        wordsMap.clear();
+        Resources resources = context.getResources();
+        String packageName = context.getPackageName();
+
+        String[] wordNames = resources.getStringArray(R.array.advanced);
 
         for (String wordName : wordNames) {
             int resourceIdString = resources.getIdentifier(wordName, "string", packageName);

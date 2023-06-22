@@ -77,6 +77,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         binding.practiceLevel.setText(selectLevel);
         firebaseManager.setPathString(selectLevel);
         quizCount = new QuizCount(getContext(), selectLevel);
+        practiceItems = new ArrayList<>();
 
         hideBottomView();
 
@@ -85,7 +86,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         return binding.getRoot();
     }
 
-    private void getExamToFirebase(int currentPosition) {
+    private void setExam(int currentPosition) {
         binding.practicePosition.setText(String.valueOf(currentPosition+1));
         binding.practiceSeekbar.setProgress(currentPosition);
 
@@ -93,8 +94,9 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
             @Override
             public void onSuccess(List<PracticeItem> result) {
                 binding.practiceImg.setBackground(null);
-                practiceItems = new ArrayList<>();
-                practiceItems.addAll(result);
+                if (practiceItems.size() == 0) {
+                    practiceItems.addAll(result);
+                }
                 Glide.with(binding.getRoot())
                         .load(practiceItems.get(currentPosition).getImageUrl())
                         .centerCrop()
@@ -184,13 +186,14 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
 
         if (quizCount.getLevelPosition() >= 10) {
             quizCount.setLevelPosition();
+            practiceItems.clear();
         }
         if (button != null && "Revise".equals(button.getText())) {
-            getExamToFirebase(button != null && "Revise".equals(button.getText())
+            setExam(button != null && "Revise".equals(button.getText())
                     ? quizCount.setLevelPosition()
                     : quizCount.getLevelPosition());
         } else {
-            getExamToFirebase(quizCount.getLevelPosition());
+            setExam(quizCount.getLevelPosition());
         }
     }
 

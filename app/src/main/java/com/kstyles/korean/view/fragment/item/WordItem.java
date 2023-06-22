@@ -8,6 +8,10 @@ public class WordItem {
     private String wordName;
     private String description;
 
+    public WordItem(String wordName) {
+        this.wordName = wordName;
+    }
+
     public WordItem(String wordName, String description) {
         this.wordName = wordName;
         this.description = description;

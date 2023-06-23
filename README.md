@@ -272,3 +272,8 @@
 - [feat]: 레벨에 맞는 단어로 HashMap 만드는 메서드 추가
 - [feat]: Item의 name 만 set 할 수 있는 생성자 생성
 - [feat]: practiceItems 의 size 가 0 인 경우에만 리스트를 만들도록 변경
+
+### 2023-06-23 (금)
+- [refactor]: 클릭이벤트 구조 변경
+- [docs]: 버튼 클릭 이벤트 생성
+- [docs]: 수정을 위한 뷰 분기점 생성 : 버튼 수정

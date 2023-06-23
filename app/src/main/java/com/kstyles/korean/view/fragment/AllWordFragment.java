@@ -1,6 +1,5 @@
 package com.kstyles.korean.view.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,6 @@ import com.kstyles.korean.view.fragment.adapter.word.AllWordRecyclerAdapter;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.view.fragment.item.WordItem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AllWordFragment extends Fragment implements BottomViewManipulationListener {
@@ -61,33 +59,31 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
         recyclerView.setAdapter(adapter);
 
-        binding.wordBtnBeginner.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener wordBtnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // instanceOf 사용해서 텍스트 색상 or 백그라운드 수정 !!
-                wordManager.loadBeginnerWords(requireContext());
-                adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
-                recyclerView.setAdapter(adapter);
-            }
-        });
+                binding.wordBtnBeginner.setBackgroundResource(R.drawable.custom_btn_white);
+                binding.wordBtnIntermediate.setBackgroundResource(R.drawable.custom_btn_white);
+                binding.wordBtnAdvanced.setBackgroundResource(R.drawable.custom_btn_white);
+                if (v == binding.wordBtnBeginner) {
+                    wordManager.loadBeginnerWords(requireContext());
+                    binding.wordBtnBeginner.setBackgroundResource(R.drawable.custom_btn_word_click);
+                } else if (v == binding.wordBtnIntermediate) {
+                    wordManager.loadIntermediateWords(requireContext());
+                    binding.wordBtnIntermediate.setBackgroundResource(R.drawable.custom_btn_word_click);
+                } else if (v == binding.wordBtnAdvanced) {
+                    wordManager.loadAdvancedWords(requireContext());
+                    binding.wordBtnAdvanced.setBackgroundResource(R.drawable.custom_btn_word_click);
+                }
 
-        binding.wordBtnIntermediate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wordManager.loadIntermediateWords(requireContext());
                 adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
                 recyclerView.setAdapter(adapter);
             }
-        });
+        };
 
-        binding.wordBtnAdvanced.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                wordManager.loadAdvancedWords(requireContext());
-                adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
-                recyclerView.setAdapter(adapter);
-            }
-        });
+        binding.wordBtnBeginner.setOnClickListener(wordBtnClickListener);
+        binding.wordBtnIntermediate.setOnClickListener(wordBtnClickListener);
+        binding.wordBtnAdvanced.setOnClickListener(wordBtnClickListener);
 
         showBottomView();
 

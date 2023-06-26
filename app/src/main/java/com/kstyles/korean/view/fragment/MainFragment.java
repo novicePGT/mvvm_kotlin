@@ -58,7 +58,7 @@ public class MainFragment extends Fragment implements BottomViewManipulationList
         recyclerView.setLayoutManager(layoutManager);
         items = new ArrayList<>();
 
-        hideBottomView();
+        showBottomView();
 
         /**
          * Set User Profile

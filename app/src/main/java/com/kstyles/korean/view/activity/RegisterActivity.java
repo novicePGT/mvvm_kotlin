@@ -147,17 +147,6 @@ public class RegisterActivity extends AppCompatActivity {
                     UserAccount userAccount = new UserAccount(userEmail, userPassword, userName, firebaseAuth.getUid());
                     reference.child("UserAccount").child(currentUser.getUid()).setValue(userAccount);
 
-                    // 이메일 인증 메일 보내기
-                    currentUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "이메일 인증 메일을 보냈습니다. 이메일을 확인해주세요.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(RegisterActivity.this, "이메일 인증 메일 보내기 실패", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
                     Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
 
                     if (userProfile != null) {
@@ -174,6 +163,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     @Override

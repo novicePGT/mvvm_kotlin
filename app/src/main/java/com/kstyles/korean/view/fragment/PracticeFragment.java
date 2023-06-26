@@ -116,7 +116,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         LanguageManager languageManager = new LanguageManager(getContext());
         languageManager.setLanguage();
         buttons = new Button[]{binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3, binding.practiceBtn4};
-        int buttonIndex = new Random().nextInt(4);
+        int buttonIndex = new Random().nextInt(3);
 
         List<String> buttonTexts = setButtonText(buttonIndex);
 

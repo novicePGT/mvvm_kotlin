@@ -59,6 +59,8 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
         recyclerView.setAdapter(adapter);
 
+        binding.wordBtnBeginner.setBackgroundResource(R.drawable.custom_btn_word_click);
+
         View.OnClickListener wordBtnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {

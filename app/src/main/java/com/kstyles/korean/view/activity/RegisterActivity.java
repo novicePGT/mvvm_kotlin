@@ -71,6 +71,8 @@ public class RegisterActivity extends AppCompatActivity {
         binding.registerBtnJoin.setText(languageManager.getTranslatedString(R.string.btn_join));
         String pass_valid = languageManager.getTranslatedString(R.string.tv_pass_valid);
         String pass_invalid = languageManager.getTranslatedString(R.string.tv_pass_invalid);
+        String successMessage = languageManager.getTranslatedString(R.string.toast_success_regist);
+        String failedMessage = languageManager.getTranslatedString(R.string.toast_failed_regist);
 
         /**
          * firebase setting
@@ -125,7 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (PasswordValidator.validatePassword(password1, password2) && !binding.registerUserName.equals("") && !binding.registerUserEmail.equals("")) {
                     binding.registerTvPasswordVerification.setText(pass_valid);
                     binding.registerTvPasswordVerification.setTextColor(Color.BLUE);
-                    register();
+                    register(successMessage, failedMessage);
                 }
                 if (!PasswordValidator.validatePassword(password1, password2)) {
                     binding.registerTvPasswordVerification.setText(pass_invalid);
@@ -138,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register() {
+    private void register(String successMessage, String failedMessage) {
         firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task task) {
@@ -147,7 +149,7 @@ public class RegisterActivity extends AppCompatActivity {
                     UserAccount userAccount = new UserAccount(userEmail, userPassword, userName, firebaseAuth.getUid());
                     reference.child("UserAccount").child(currentUser.getUid()).setValue(userAccount);
 
-                    Toast.makeText(RegisterActivity.this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, successMessage, Toast.LENGTH_SHORT).show();
 
                     if (userProfile != null) {
                         FirebaseManager firebaseManager = new FirebaseManager();
@@ -159,7 +161,7 @@ public class RegisterActivity extends AppCompatActivity {
                     finish();
 
                 } else {
-                    Toast.makeText(RegisterActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, failedMessage, Toast.LENGTH_SHORT).show();
                 }
             }
         });

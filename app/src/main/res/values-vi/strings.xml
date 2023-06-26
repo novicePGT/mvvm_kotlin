@@ -51,6 +51,8 @@
     <string name="tv_nickname">Biệt danh</string>
     <string name="hint_nickname">Ghi lại nickname của bạn</string>
     <string name="btn_join">nhập</string>
+    <string name="toast_success_regist">Thành công đăng ký hội viên</string>
+    <string name="toast_failed_regist">Thất bại trong việc đăng ký hội viên</string>
 
     <!-- all word 페이지 -->
     <string name="tv_all_word">Tất cả lời nói</string>

@@ -51,6 +51,8 @@
     <string name="tv_nickname">Spitzname</string>
     <string name="hint_nickname">Geben Sie Ihren Spitznamen ein</string>
     <string name="btn_join">Beitreten</string>
+    <string name="toast_success_regist">Erfolgreiche Mitgliedschaft</string>
+    <string name="toast_failed_regist">Die Mitgliedschaft ist gescheitert</string>
 
     <!-- all word 페이지 -->
     <string name="tv_all_word">Alles Wort</string>

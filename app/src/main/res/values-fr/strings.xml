@@ -51,6 +51,8 @@
     <string name="tv_nickname">Surnom</string>
     <string name="hint_nickname">Écrivez votre surnom</string>
     <string name="btn_join">Joignez-vous à nous</string>
+    <string name="toast_success_regist">succès de l\'adhésion</string>
+    <string name="toast_failed_regist">échec de l\'adhésion</string>
 
     <!-- all word 페이지 -->
     <string name="tv_all_word">Tout est dit</string>

@@ -50,6 +50,8 @@
     <string name="tv_nickname">ニックネーム</string>
     <string name="hint_nickname">ニックネームを入力してください</string>
     <string name="btn_join">参加する</string>
+    <string name="toast_success_regist">会員登録成功</string>
+    <string name="toast_failed_regist">会員登録失敗</string>
 
     <!-- all word 페이지 -->
     <string name="tv_all_word">すべての単語</string>

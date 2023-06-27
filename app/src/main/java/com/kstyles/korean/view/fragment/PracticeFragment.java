@@ -1,5 +1,6 @@
 package com.kstyles.korean.view.fragment;
 
+import android.animation.Animator;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
@@ -90,6 +91,31 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         binding.practicePosition.setText(String.valueOf(currentPosition+1));
         binding.practiceSeekbar.setProgress(currentPosition);
 
+        binding.loadView.setVisibility(View.VISIBLE);
+        binding.loadView.playAnimation();
+        binding.loadView.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(@NonNull Animator animation) {
+                binding.frameLayout3.setBackgroundColor(Color.argb(32, 0, 0, 0));
+            }
+
+            @Override
+            public void onAnimationEnd(@NonNull Animator animation) {
+                binding.loadView.setVisibility(View.INVISIBLE);
+                binding.frameLayout3.setBackgroundColor(Color.TRANSPARENT);
+            }
+
+            @Override
+            public void onAnimationCancel(@NonNull Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(@NonNull Animator animation) {
+
+            }
+        });
+
         firebaseManager.getPracticeItems(new FirebaseCallback<List<PracticeItem>>() {
             @Override
             public void onSuccess(List<PracticeItem> result) {
@@ -116,7 +142,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         LanguageManager languageManager = new LanguageManager(getContext());
         languageManager.setLanguage();
         buttons = new Button[]{binding.practiceBtn1, binding.practiceBtn2, binding.practiceBtn3, binding.practiceBtn4};
-        int buttonIndex = new Random().nextInt(3);
+        int buttonIndex = new Random().nextInt(4);
 
         List<String> buttonTexts = setButtonText(buttonIndex);
 

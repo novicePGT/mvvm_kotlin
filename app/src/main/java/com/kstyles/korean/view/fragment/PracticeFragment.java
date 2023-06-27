@@ -185,6 +185,35 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         }
     }
 
+    private List<String> setButtonText(int buttonIndex) {
+        String[] buttonString = getResources().getStringArray(R.array.words);
+        List<String> buttonList = Arrays.asList(buttonString);
+        List<String> buttonTexts = new ArrayList<>(Collections.nCopies(buttons.length, ""));
+        buttonTexts.set(buttonIndex, answer);
+
+        List<Integer> usedIndices = new ArrayList<>();
+        usedIndices.add(buttonIndex);
+
+        Random random = new Random();
+
+        for (int i=0; i<buttons.length; i++) {
+            if (i != buttonIndex) {
+                int randomButtonIndex = random.nextInt(buttonList.size());
+
+                while (usedIndices.contains(randomButtonIndex)) {
+                    randomButtonIndex = random.nextInt(buttonList.size());
+                }
+
+                usedIndices.add(randomButtonIndex);
+                if(buttonList.get(randomButtonIndex) != answer) {
+                    buttonTexts.set(i, buttonList.get(randomButtonIndex));
+                }
+            }
+        }
+
+        return buttonTexts;
+    }
+
     private void showDialog(InputPracticeViewBinding inputPracticeViewBinding) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         inputPracticeViewBinding.correctView.playAnimation();
@@ -221,33 +250,6 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         } else {
             setExam(quizCount.getLevelPosition());
         }
-    }
-
-    private List<String> setButtonText(int buttonIndex) {
-        String[] buttonString = getResources().getStringArray(R.array.words);
-        List<String> buttonList = Arrays.asList(buttonString);
-        List<String> buttonTexts = new ArrayList<>(Collections.nCopies(buttons.length, ""));
-        buttonTexts.set(buttonIndex, answer);
-
-        List<Integer> usedIndices = new ArrayList<>();
-        usedIndices.add(buttonIndex);
-
-        Random random = new Random();
-
-        for (int i=0; i<buttons.length; i++) {
-            if (i != buttonIndex) {
-                int randomButtonIndex = random.nextInt(buttonList.size());
-
-                while (usedIndices.contains(randomButtonIndex)) {
-                    randomButtonIndex = random.nextInt(buttonList.size());
-                }
-
-                usedIndices.add(randomButtonIndex);
-                buttonTexts.set(i, buttonList.get(randomButtonIndex));
-            }
-        }
-
-        return buttonTexts;
     }
 
     @Override

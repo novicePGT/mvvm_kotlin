@@ -1,5 +1,6 @@
 package com.kstyles.korean.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -43,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
         binding.mainBtnProgress.setOnClickListener(v -> switchFragment(fragments[1]));
         binding.mainBtnWord.setOnClickListener(v -> switchFragment(fragments[2]));
         binding.mainBtnSetting.setOnClickListener(v -> switchFragment(fragments[3]));
+
+        binding.mainManagerSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ManagementActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void switchFragment(Fragment fragment) {

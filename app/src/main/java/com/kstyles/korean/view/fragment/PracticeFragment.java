@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -186,8 +187,13 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
     }
 
     private List<String> setButtonText(int buttonIndex) {
-        String[] buttonString = getResources().getStringArray(R.array.words);
-        List<String> buttonList = Arrays.asList(buttonString);
+        List<String> combinedList = new ArrayList<>();
+        String[] beginnerArray = getResources().getStringArray(R.array.beginner);
+        String[] intermediateArray = getResources().getStringArray(R.array.intermediate);
+        String[] advancedArray = getResources().getStringArray(R.array.advanced);
+        combinedList.addAll(Arrays.asList(beginnerArray));
+        combinedList.addAll(Arrays.asList(intermediateArray));
+        combinedList.addAll(Arrays.asList(advancedArray));
         List<String> buttonTexts = new ArrayList<>(Collections.nCopies(buttons.length, ""));
         buttonTexts.set(buttonIndex, answer);
 
@@ -198,15 +204,15 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
 
         for (int i=0; i<buttons.length; i++) {
             if (i != buttonIndex) {
-                int randomButtonIndex = random.nextInt(buttonList.size());
+                int randomButtonIndex = random.nextInt(combinedList.size());
 
                 while (usedIndices.contains(randomButtonIndex)) {
-                    randomButtonIndex = random.nextInt(buttonList.size());
+                    randomButtonIndex = random.nextInt(combinedList.size());
                 }
 
                 usedIndices.add(randomButtonIndex);
-                if(buttonList.get(randomButtonIndex) != answer) {
-                    buttonTexts.set(i, buttonList.get(randomButtonIndex));
+                if(!Objects.equals(combinedList.get(randomButtonIndex), answer)) {
+                    buttonTexts.set(i, combinedList.get(randomButtonIndex));
                 }
             }
         }

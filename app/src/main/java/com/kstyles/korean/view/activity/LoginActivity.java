@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
                 String userEmail = binding.userEmail.getText().toString();
                 String userPassword = binding.userPassword.getText().toString();
 
-                if (userEmail != null && userPassword != null) {
+                if (!userEmail.equals("") && !userPassword.equals("")) {
                     firebaseAuth.signInWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {

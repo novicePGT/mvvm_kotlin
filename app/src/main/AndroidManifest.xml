@@ -31,6 +31,7 @@
         <activity android:name=".view.activity.MainActivity"/>
         <activity android:name=".view.activity.LoginActivity"/>
         <activity android:name=".view.activity.ManagementActivity"/>
+        <activity android:name=".view.activity.UploadActivity"/>
     </application>
 
 </manifest>

@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityMainBinding;
+import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.repository.user.User;
 import com.kstyles.korean.view.fragment.AllWordFragment;
 import com.kstyles.korean.view.fragment.ProgressFragment;
 import com.kstyles.korean.view.fragment.SettingFragment;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private String TAG = "[MainActivity]";
     private ActivityMainBinding binding;
     private OperateUseTime operateUseTime;
+    private String uid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         binding.mainBtnWord.setOnClickListener(v -> switchFragment(fragments[2]));
         binding.mainBtnSetting.setOnClickListener(v -> switchFragment(fragments[3]));
 
+        setForManagement();
         binding.mainManagerSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +57,18 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void setForManagement() {
+        binding.mainManagerSetting.setVisibility(View.GONE);
+        FirebaseManager firebaseManager = new FirebaseManager();
+        User user = firebaseManager.getUser();
+        uid = user.getUid();
+        if (uid.equals("Q2CaQQYieDU17uVEa4YYuIoInbv1")) {
+            binding.mainManagerSetting.setVisibility(View.VISIBLE);
+        } else {
+            binding.mainManagerSetting.setVisibility(View.GONE);
+        }
     }
 
     private void switchFragment(Fragment fragment) {

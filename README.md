@@ -292,3 +292,14 @@
 - [docs]: 로딩 애니메이션 수행 -> 이미지가 늦게 로드될 시 지루함을 덜어주기 위함
 - [docs]: 로딩 애니메이션 프레임 가운데에 추가
 - [feat]: 로딩 애니메이션 추가
+
+### 2023-06-28 (수)
+- [chore]: Update Fragment 생성
+- [chore]: ManagementActivity 권한 추가
+- [docs]: ManagementActivity 디자인 추가
+- [feat]: MainActivity -> ManagementActivity 로 넘어가는 부분 추가
+- [docs]: 관리자 setting icon 메인 프레임에 추가
+- [docs]: 관리자 셋팅 페이지 아이콘 추가
+- [docs]: 하나로만 되어있는 레벨 단계를 3 구분 지음
+- [refactor]: 빈 문자열 조건문 추가
+- [feat]: 3개의 array 를 리스트로 병합하는 메서드 추가

@@ -27,6 +27,39 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/page_management">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Your Group"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginBottom="5dp"/>
+
+        <Spinner
+            android:id="@+id/manager_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_spinner_black"
+            android:popupBackground="@drawable/custom_spinner_black"
+            android:popupElevation="8dp"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            android:entries="@array/manager"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/management_upload"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -36,7 +69,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/page_management">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <TextView
             android:layout_width="0dp"
@@ -132,6 +165,28 @@
             android:layout_height="24dp"
             android:layout_gravity="end|center_vertical"
             android:background="@drawable/icon_setting_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/management_back"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/management_delete">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/custom_btn_white"
+            android:gravity="center"
+            android:text="Back To App"
+            android:textSize="16sp" />
     </LinearLayout>
 
 

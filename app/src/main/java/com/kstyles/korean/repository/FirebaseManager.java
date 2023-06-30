@@ -32,6 +32,7 @@ import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.repository.user.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FirebaseManager {
@@ -209,6 +210,31 @@ public class FirebaseManager {
            String defaultUid = "";
            return new User(defaultUid);
         }
+    }
+
+    public void uploadRecyclerItem(String levelName) {
+        String recyclerLevelName = "";
+        String[] splitLevelName = levelName.split(" ");
+
+        RecyclerItem recyclerItem = new RecyclerItem(splitLevelName[0], splitLevelName[1]+" "+splitLevelName[2]);
+        if (recyclerItem.getLevel().contains("Beginner")) {
+            recyclerLevelName = "A_" + splitLevelName[0] + splitLevelName[2];
+        }
+        if (recyclerItem.getLevel().contains("Intermediate")) {
+            recyclerLevelName = "B_" + splitLevelName[0] + splitLevelName[2];
+        }
+        if (recyclerItem.getLevel().contains("Advanced")) {
+            recyclerLevelName = "C_" + splitLevelName[0] + splitLevelName[2];
+        }
+
+        reference = FirebaseDatabase.getInstance().getReference().child("RecyclerItem");
+        reference.child(recyclerLevelName).setValue(recyclerItem)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.e(TAG, "업로드 완료 확인해라 이색기야");
+                    }
+                });
     }
 
     public void setPathString(String pathString) {

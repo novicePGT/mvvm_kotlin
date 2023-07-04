@@ -311,3 +311,10 @@
 - [docs]: 어떤 관리자인지 선택하는 스피너 추가
 - [docs]: Update Activity UI 추가
 - [chore]: Update Activity 추가
+
+### 2023-06-30 (금)
+- [docs]: 스피너에 등록될 아이템 추가
+- [feat]: fragment 레벨 설정 구현
+- [docs]: level 선택 디자인 수정
+- [feat]: recyclerItem 리포지토리에 올리기 위해 스피너 구현
+- [feat]: recyclerItem 리포지토리에 올리는 기능 추가

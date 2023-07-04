@@ -53,7 +53,6 @@ public class ManagementActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ManagementActivity.this, UploadActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 

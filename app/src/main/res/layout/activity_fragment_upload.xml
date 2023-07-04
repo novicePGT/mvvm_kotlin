@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/upload_tv_sequence"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"
@@ -50,6 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
         <EditText
+            android:id="@+id/upload_word_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
@@ -71,6 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <EditText
+            android:id="@+id/upload_translation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
@@ -93,13 +95,14 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_weight="1"
             app:cardCornerRadius="10dp">
 
             <ImageView
+                android:id="@+id/upload_image"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/icon_home" />
 
         </androidx.cardview.widget.CardView>
@@ -116,6 +119,7 @@
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/upload_btn_image"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"

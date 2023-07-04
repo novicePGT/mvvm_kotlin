@@ -6,6 +6,11 @@ public class PracticeItem {
     private String imageUrl;
 
     public PracticeItem() {
+
+    }
+    public PracticeItem(String answer, String imageUrl) {
+        this.answer = answer;
+        this.imageUrl = imageUrl;
     }
 
     public String getImageUrl() {

@@ -232,7 +232,19 @@ public class FirebaseManager {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Log.e(TAG, "업로드 완료 확인해라 이색기야");
+                        Log.d(TAG, "Recycler Item Update Successful");
+                    }
+                });
+    }
+
+    public void uploadPracticeItem(ArrayList<PracticeItem> practiceItems, String levelPathName) {
+        reference = FirebaseDatabase.getInstance().getReference().child("PracticeItem").child(levelPathName).child("items");
+
+        reference.setValue(practiceItems)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d(TAG, "Practice Items upload Successful");
                     }
                 });
     }

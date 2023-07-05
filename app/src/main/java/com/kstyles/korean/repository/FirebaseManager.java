@@ -32,7 +32,6 @@ import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.repository.user.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class FirebaseManager {
@@ -247,6 +246,23 @@ public class FirebaseManager {
                         Log.d(TAG, "Practice Items upload Successful");
                     }
                 });
+
+        for (int i=0; i <= practiceItems.size() -1; i++) {
+            StorageReference storageReference = storage.getReference().child(practiceItems.get(i).getAnswer());
+            Uri imageUri = Uri.parse(practiceItems.get(i).getImageUrl());
+            UploadTask uploadTask = storageReference.putFile(imageUri);
+
+            uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "Image Upload Successful");
+                    } else {
+                        Log.e(TAG, "Image Upload Failed");
+                    }
+                }
+            });
+        }
     }
 
     public void setPathString(String pathString) {

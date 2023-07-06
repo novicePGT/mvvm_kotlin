@@ -101,9 +101,10 @@ public class UploadActivity extends AppCompatActivity {
                 String sequence = binding.levelSequence.getText().toString();
                 String recyclerItemName = level + " Vocabulary " + sequence;
 
-                firebaseManager.uploadRecyclerItem(recyclerItemName);
-                firebaseManager.uploadPracticeItem(practiceItems, recyclerItemName);
-                // storage 에 올리는 것도 추가 해야함
+                if (practiceItems.size() == 10) {
+                    firebaseManager.uploadRecyclerItem(recyclerItemName);
+                    firebaseManager.uploadPracticeItem(practiceItems, recyclerItemName);
+                }
             }
         });
     }

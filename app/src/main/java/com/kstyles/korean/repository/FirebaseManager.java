@@ -239,15 +239,9 @@ public class FirebaseManager {
     public void uploadPracticeItem(ArrayList<PracticeItem> practiceItems, String levelPathName) {
         reference = FirebaseDatabase.getInstance().getReference().child("PracticeItem").child(levelPathName).child("items");
 
-        reference.setValue(practiceItems)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Log.d(TAG, "Practice Items upload Successful");
-                    }
-                });
+        for (int i = 0; i <= practiceItems.size() - 1; i++) {
+            final int index = i;
 
-        for (int i=0; i <= practiceItems.size() -1; i++) {
             StorageReference storageReference = storage.getReference().child(practiceItems.get(i).getAnswer());
             Uri imageUri = Uri.parse(practiceItems.get(i).getImageUrl());
             UploadTask uploadTask = storageReference.putFile(imageUri);
@@ -257,6 +251,28 @@ public class FirebaseManager {
                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "Image Upload Successful");
+                        storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String downloadUrl = uri.toString();
+                                PracticeItem practiceItem = new PracticeItem(practiceItems.get(index).getAnswer(), downloadUrl);
+                                practiceItems.set(index, practiceItem);
+
+                                if (index == practiceItems.size() - 1) {
+                                    reference.setValue(practiceItems)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.d(TAG, "Practice Items upload Successful");
+                                                    } else {
+                                                        Log.e(TAG, "Practice Items upload Failed");
+                                                    }
+                                                }
+                                            });
+                                }
+                            }
+                        });
                     } else {
                         Log.e(TAG, "Image Upload Failed");
                     }

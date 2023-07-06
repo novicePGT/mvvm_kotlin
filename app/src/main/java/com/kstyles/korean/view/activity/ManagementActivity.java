@@ -36,7 +36,27 @@ public class ManagementActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedLanguage = (String) parent.getItemAtPosition(position);
 
+                if (selectedLanguage.equals("Manager")) {
+                    editor.putInt("manager", 0);
+                }
+                if (selectedLanguage.equals("Translator - Deutschland")) {
+                    editor.putInt("manager", 1);
+                }
+                if (selectedLanguage.equals("Translator - France")) {
+                    editor.putInt("manager", 2);
+                }
+                if (selectedLanguage.equals("Translator - 日本")) {
+                    editor.putInt("manager", 3);
+                }
+                if (selectedLanguage.equals("Translator - ประเทศไทย")) {
+                    editor.putInt("manager", 4);
+                }
+                if (selectedLanguage.equals("Translator - Việt Nam")) {
+                    editor.putInt("manager", 5);
+                }
+                editor.apply();
             }
 
             @Override

@@ -318,3 +318,12 @@
 - [docs]: level 선택 디자인 수정
 - [feat]: recyclerItem 리포지토리에 올리기 위해 스피너 구현
 - [feat]: recyclerItem 리포지토리에 올리는 기능 추가
+
+### 2023-07-04 (화)
+- [feat]: word & translation & add image 에 필요한 메서드 구현
+- [feat]: Previous & Next 버튼 구현, addword 눌러서 리스트에 추가 구현 & creat 버튼 클릭하면 데이터베이스에 업데이트 구현
+- [feat]: PracticeItem 생성자 추가
+- [feat]: 뒤로 돌아갈 수 있게 하기 위해 메서드 삭제
+- [docs]: firebase에 Pratice items 추가하는 메서드 추가
+- [docs]: 사용할 UI 에 Id 값 추가
+- [docs]: 사용할 UI 에 Id 값 추가

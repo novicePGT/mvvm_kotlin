@@ -13,6 +13,7 @@ import com.kstyles.korean.databinding.ActivityManagementUploadBinding;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.view.fragment.UploadFragment;
 import com.kstyles.korean.view.fragment.item.PracticeItem;
+import com.kstyles.korean.view.fragment.item.TranslationItem;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class UploadActivity extends AppCompatActivity {
     private String level;
     private int position;
     private ArrayList<PracticeItem> practiceItems;
+    private ArrayList<TranslationItem> translationItems;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class UploadActivity extends AppCompatActivity {
 
         firebaseManager = new FirebaseManager();
         practiceItems = new ArrayList<>();
+        translationItems = new ArrayList<>();
 
         switchFragment(fragments[0]);
 
@@ -89,6 +92,9 @@ public class UploadActivity extends AppCompatActivity {
 
                 PracticeItem practiceItem = new PracticeItem(wordName, imageUri);
                 practiceItems.add(position, practiceItem);
+
+                TranslationItem translationItem = new TranslationItem(translation, UploadActivity.this);
+                translationItems.add(position, translationItem);
             }
         });
 
@@ -101,10 +107,9 @@ public class UploadActivity extends AppCompatActivity {
                 String sequence = binding.levelSequence.getText().toString();
                 String recyclerItemName = level + " Vocabulary " + sequence;
 
-                if (practiceItems.size() == 10) {
-                    firebaseManager.uploadRecyclerItem(recyclerItemName);
-                    firebaseManager.uploadPracticeItem(practiceItems, recyclerItemName);
-                }
+                firebaseManager.uploadRecyclerItem(recyclerItemName);
+                firebaseManager.uploadWordItem(practiceItems, translationItems);
+                firebaseManager.uploadPracticeItem(practiceItems, recyclerItemName, UploadActivity.this);
             }
         });
     }

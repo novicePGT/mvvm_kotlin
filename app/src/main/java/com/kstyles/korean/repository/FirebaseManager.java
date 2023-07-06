@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
@@ -25,13 +26,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.kstyles.korean.R;
 import com.kstyles.korean.view.activity.LoginActivity;
 import com.kstyles.korean.view.activity.MainActivity;
 import com.kstyles.korean.view.fragment.item.PracticeItem;
 import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.repository.user.User;
+import com.kstyles.korean.view.fragment.item.TranslationItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FirebaseManager {
@@ -236,11 +240,16 @@ public class FirebaseManager {
                 });
     }
 
-    public void uploadPracticeItem(ArrayList<PracticeItem> practiceItems, String levelPathName) {
+    public void uploadPracticeItem(ArrayList<PracticeItem> practiceItems, String levelPathName, Context context) {
         reference = FirebaseDatabase.getInstance().getReference().child("PracticeItem").child(levelPathName).child("items");
 
         for (int i = 0; i <= practiceItems.size() - 1; i++) {
             final int index = i;
+
+            Resources resources = context.getResources();
+            String[] wordArray = resources.getStringArray(R.array.level);
+            String[] addItemInArray = Arrays.copyOf(wordArray, wordArray.length + 1);
+            addItemInArray[addItemInArray.length - 1] = practiceItems.get(i).getAnswer();
 
             StorageReference storageReference = storage.getReference().child(practiceItems.get(i).getAnswer());
             Uri imageUri = Uri.parse(practiceItems.get(i).getImageUrl());
@@ -280,6 +289,34 @@ public class FirebaseManager {
             });
         }
     }
+
+    public void uploadWordItem(ArrayList<PracticeItem> practiceItems, ArrayList<TranslationItem> translationItems) {
+        DatabaseReference wordItemRef = FirebaseDatabase.getInstance().getReference().child("WordItem");
+
+        for (int i = 0; i < practiceItems.size(); i++) {
+            PracticeItem practiceItem = practiceItems.get(i);
+            TranslationItem translationItem = translationItems.get(i);
+
+            DatabaseReference childRef = wordItemRef.child(practiceItem.getAnswer());
+            childRef.child("en").setValue(practiceItem.getAnswer() + ": " +translationItem.getEn());
+            childRef.child("de").setValue(practiceItem.getAnswer() + ": " +translationItem.getDe());
+            childRef.child("fr").setValue(practiceItem.getAnswer() + ": " +translationItem.getFr());
+            childRef.child("ja").setValue(practiceItem.getAnswer() + ": " +translationItem.getJa());
+            childRef.child("th").setValue(practiceItem.getAnswer() + ": " +translationItem.getTh());
+            childRef.child("vi").setValue(practiceItem.getAnswer() + ": " +translationItem.getVi())
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d(TAG, "Translation Items Upload Successful");
+                            } else {
+                                Log.e(TAG,"Translation Items Upload Failed");
+                            }
+                        }
+                    });
+        }
+    }
+
 
     public void setPathString(String pathString) {
         this.pathString = pathString;

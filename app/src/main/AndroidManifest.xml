@@ -32,6 +32,7 @@
         <activity android:name=".view.activity.LoginActivity"/>
         <activity android:name=".view.activity.ManagementActivity"/>
         <activity android:name=".view.activity.UploadActivity"/>
+        <activity android:name=".view.activity.TranslationActivity"/>
     </application>
 
 </manifest>

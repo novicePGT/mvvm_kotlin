@@ -14,6 +14,11 @@ public class TranslationItem {
     String ja = "";
     String th = "";
     String vi = "";
+
+    public TranslationItem() {
+
+    }
+
     public TranslationItem(String translation, Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("manager", Context.MODE_PRIVATE);
         int manager = sharedPreferences.getInt("manager", 0);

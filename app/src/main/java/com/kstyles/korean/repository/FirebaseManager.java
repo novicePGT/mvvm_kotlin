@@ -36,6 +36,7 @@ import com.kstyles.korean.view.fragment.item.TranslationItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class FirebaseManager {
@@ -315,6 +316,30 @@ public class FirebaseManager {
                         }
                     });
         }
+    }
+
+    public HashMap<String, TranslationItem> getAllWordItem() {
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("WordItem");
+        HashMap<String, TranslationItem> wordTranslationItems = new HashMap<>();
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot wordSnapshot : snapshot.getChildren()) {
+                    String word = snapshot.getKey();
+                    TranslationItem translationItem = wordSnapshot.getValue(TranslationItem.class);
+                    wordTranslationItems.put(word, translationItem);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return wordTranslationItems;
     }
 
 

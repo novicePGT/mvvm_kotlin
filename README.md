@@ -327,3 +327,13 @@
 - [docs]: firebase에 Pratice items 추가하는 메서드 추가
 - [docs]: 사용할 UI 에 Id 값 추가
 - [docs]: 사용할 UI 에 Id 값 추가
+
+### 2023-07-05 (수)
+
+### 2023-07-06 (목)
+- [feat]: 번역을 데이터베이스에 올리는 기능 추가 
+- [feat]: 번역을 올리기 위한 클래스 추가
+- [feat]: Word Item Translation 업로드 기능 추가
+- [feat]: Manager Selector
+- [feat]: 문제 업로드 추가
+- [feat]: 이미지 업로드 구현

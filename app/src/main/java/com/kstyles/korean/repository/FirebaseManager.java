@@ -36,8 +36,8 @@ import com.kstyles.korean.view.fragment.item.TranslationItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 public class FirebaseManager {
 
@@ -318,28 +318,43 @@ public class FirebaseManager {
         }
     }
 
-    public HashMap<String, TranslationItem> getAllWordItem() {
+    public void updateTranslation(String wordPath, String translationLanguage, String translationValue) {
+        reference = FirebaseDatabase.getInstance().getReference().child("WordItem").child(wordPath).child(translationLanguage);
+
+        reference.setValue(translationValue)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Translation Items Update Successful");
+                        } else {
+                            Log.e(TAG,"Translation Items Update Failed");
+                        }
+                    }
+                });
+    }
+
+    public void getAllWordItem(final FirebaseCallback callback) {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("WordItem");
-        HashMap<String, TranslationItem> wordTranslationItems = new HashMap<>();
+        TreeMap<String, TranslationItem> wordTranslationItems = new TreeMap<>();
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot wordSnapshot : snapshot.getChildren()) {
-                    String word = snapshot.getKey();
+                    String word = wordSnapshot.getKey();
                     TranslationItem translationItem = wordSnapshot.getValue(TranslationItem.class);
                     wordTranslationItems.put(word, translationItem);
                 }
+                callback.onSuccess(wordTranslationItems);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                callback.onFailure(error);
             }
         });
-
-        return wordTranslationItems;
     }
 
 

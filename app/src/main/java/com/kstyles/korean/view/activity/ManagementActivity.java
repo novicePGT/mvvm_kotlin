@@ -77,6 +77,17 @@ public class ManagementActivity extends AppCompatActivity {
         });
 
         /**
+         * Go to Translation
+         */
+        binding.managementTranslation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ManagementActivity.this, TranslationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        /**
          * Back to app
          */
         binding.managementBack.setOnClickListener(new View.OnClickListener() {

@@ -36,6 +36,7 @@
             android:layout_weight="0.5"/>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/translation_find"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -56,6 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <EditText
+            android:id="@+id/translation_hint_en"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
@@ -77,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
 
         <EditText
+            android:id="@+id/translation_hint_de"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
@@ -98,6 +101,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <EditText
+            android:id="@+id/translation_hint_fr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
@@ -119,6 +123,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <EditText
+            android:id="@+id/translation_hint_ja"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
@@ -140,6 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <EditText
+            android:id="@+id/translation_hint_th"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
@@ -161,12 +167,33 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <EditText
+            android:id="@+id/translation_hint_vi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
             android:hint=" hint"
             android:inputType="text"
             android:padding="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/translation_btn_update"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_btn_black"
+            android:text="Update"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

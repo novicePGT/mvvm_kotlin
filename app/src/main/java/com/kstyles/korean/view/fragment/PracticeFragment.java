@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentPracticeBinding;
 import com.kstyles.korean.databinding.InputPracticeViewBinding;
+import com.kstyles.korean.language.TranslationManager;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.view.fragment.item.PracticeItem;
 import com.kstyles.korean.view.fragment.item.RecyclerItem;
@@ -49,6 +50,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
     private FirebaseManager firebaseManager;
     private ArrayList<RecyclerItem> recyclerItems;
     private ArrayList<PracticeItem> practiceItems;
+    private TranslationManager translationManager;
     private String selectLevel;
     private QuizCount quizCount;
     private Button buttons[];
@@ -80,6 +82,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         firebaseManager.setPathString(selectLevel);
         quizCount = new QuizCount(getContext(), selectLevel);
         practiceItems = new ArrayList<>();
+        translationManager = new TranslationManager(requireContext());
 
         hideBottomView();
 
@@ -165,16 +168,14 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
 
                         InputPracticeViewBinding inputPracticeViewBinding = InputPracticeViewBinding.inflate(LayoutInflater.from(binding.getRoot().getContext()), binding.getRoot(), false);
 
-                        int identifier = getResources().getIdentifier(answer, "string", getContext().getPackageName());
-                        String findByAnswer = getContext().getString(identifier);
+                        String findByAnswer = translationManager.getTranslatedLanguage(answer);
                         inputPracticeViewBinding.description.setText(findByAnswer);
 
                         showDialog(inputPracticeViewBinding);
                     } else {
                         String buttonText = button.getText().toString();
-                        int identifier = getResources().getIdentifier(buttonText, "string", getContext().getPackageName());
-                        String findByButtonText = getContext().getString(identifier);
-                        binding.practiceDescription.setText(findByButtonText);
+                        String findByAnswer = translationManager.getTranslatedLanguage(buttonText);
+                        binding.practiceDescription.setText(findByAnswer);
 
                         button.setBackground(getContext().getDrawable(R.drawable.custom_btn_incorrect));
                         button.setTextColor(Color.WHITE);

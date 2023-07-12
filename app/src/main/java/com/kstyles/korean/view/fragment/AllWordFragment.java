@@ -13,14 +13,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentWordBinding;
 import com.kstyles.korean.language.LanguageManager;
+import com.kstyles.korean.repository.FirebaseCallback;
+import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.repository.WordManager;
 import com.kstyles.korean.view.fragment.adapter.word.AllWordRecyclerAdapter;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.view.fragment.item.WordItem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AllWordFragment extends Fragment implements BottomViewManipulationListener {
@@ -48,6 +52,21 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
+        showBottomView();
+
+        FirebaseManager firebaseManager = new FirebaseManager();
+        firebaseManager.allWordSet("Beginner", new FirebaseCallback<ArrayList<String>>() {
+            @Override
+            public void onSuccess(ArrayList<String> separateKeys) {
+                int size = separateKeys.size();
+            }
+
+            @Override
+            public void onFailure(DatabaseError error) {
+
+            }
+        });
 
         LanguageManager languageManager = new LanguageManager(getContext());
         languageManager.setLanguage();
@@ -86,8 +105,6 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         binding.wordBtnBeginner.setOnClickListener(wordBtnClickListener);
         binding.wordBtnIntermediate.setOnClickListener(wordBtnClickListener);
         binding.wordBtnAdvanced.setOnClickListener(wordBtnClickListener);
-
-        showBottomView();
 
         return binding.getRoot();
     }

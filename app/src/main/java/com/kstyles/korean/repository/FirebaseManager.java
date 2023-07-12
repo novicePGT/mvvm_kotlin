@@ -22,7 +22,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.utilities.Tree;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -348,6 +350,29 @@ public class FirebaseManager {
                     wordTranslationItems.put(word, translationItem);
                 }
                 callback.onSuccess(wordTranslationItems);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                callback.onFailure(error);
+            }
+        });
+    }
+
+    public void allWordSet(String level, final FirebaseCallback callback) {
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("PracticeItem");
+        ArrayList<String> separateKeys = new ArrayList<>();
+
+        Query query = reference.startAt(level);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot wordItem : snapshot.getChildren()) {
+                    PracticeItem value = wordItem.getValue(PracticeItem.class);
+                    separateKeys.add(value.getAnswer());
+                }
+                callback.onSuccess(separateKeys);
             }
 
             @Override

@@ -350,3 +350,9 @@
 - [feat]: translationActivity 로 인텐트 추가
 - [feat]: 파이어베이스에 객체 별 번역 추가하는 기능 추가
 - [docs]: 버튼 & 에딧텍스트 에 id 값 설정
+
+### 2023-07-12 (수)
+- [feat]: All word Item 데이터 구조 변경 초안 적용본
+- [feat]: All word fragment 데이터 전송 방식 변경 초안
+- [feat]: 번역 후 데이터 반환해주는 클래스 추가로 인한 해설 불러오는 방식 변경
+- [feat]: 번역 후 데이터 반환해주는 클래스 추가

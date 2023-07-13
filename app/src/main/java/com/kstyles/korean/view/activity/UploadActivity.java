@@ -1,8 +1,10 @@
 package com.kstyles.korean.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -95,6 +97,8 @@ public class UploadActivity extends AppCompatActivity {
 
                 TranslationItem translationItem = new TranslationItem(translation, UploadActivity.this);
                 translationItems.add(position, translationItem);
+
+                Toast.makeText(UploadActivity.this, "Success to add word, Go next", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -110,6 +114,10 @@ public class UploadActivity extends AppCompatActivity {
                 firebaseManager.uploadRecyclerItem(recyclerItemName);
                 firebaseManager.uploadWordItem(practiceItems, translationItems);
                 firebaseManager.uploadPracticeItem(practiceItems, recyclerItemName, UploadActivity.this);
+
+                Intent intent = new Intent(UploadActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

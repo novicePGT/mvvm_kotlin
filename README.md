@@ -356,3 +356,7 @@
 - [feat]: All word fragment 데이터 전송 방식 변경 초안
 - [feat]: 번역 후 데이터 반환해주는 클래스 추가로 인한 해설 불러오는 방식 변경
 - [feat]: 번역 후 데이터 반환해주는 클래스 추가
+
+### 2023-07-13 (목)
+- [feat]: TranslationActivity 기능 수정 완료
+- [feat]: UploadActivity 기능 수정 완료

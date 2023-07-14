@@ -87,7 +87,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/management_read"
+        android:id="@+id/management_translation"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="30dp"
@@ -103,34 +103,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="start|center_vertical"
-            android:text="Read Exam"
-            android:textSize="16sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="end|center_vertical"
-            android:background="@drawable/icon_setting_arrow" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/management_update"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/management_read">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="start|center_vertical"
-            android:text="Update Exam"
+            android:text="Update translation"
             android:textSize="16sp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -150,7 +123,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/management_update">
+        app:layout_constraintTop_toBottomOf="@+id/management_translation">
 
         <TextView
             android:layout_width="0dp"

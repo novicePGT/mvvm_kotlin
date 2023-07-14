@@ -360,3 +360,12 @@
 ### 2023-07-13 (목)
 - [feat]: TranslationActivity 기능 수정 완료
 - [feat]: UploadActivity 기능 수정 완료
+
+### 2023-07-14 (금)
+- [docs]: 문제 해설을 이제 firebase에서 받아오는 이유로 문제 해설 삭제
+- [chore]: build.gradle dependency
+- [feat]: delete exam in firebase
+- [feat]: 관리자 페이지 구현 완료
+- [feat]: 오류 발생 유발 코드 삭제
+- [feat]: exam 삭제 코드 추가
+- [docs]: delete exam 을 위한 다이얼로그 뷰 추가

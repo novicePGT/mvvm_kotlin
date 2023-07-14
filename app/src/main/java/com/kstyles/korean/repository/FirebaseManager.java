@@ -22,9 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.utilities.Tree;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -95,7 +93,7 @@ public class FirebaseManager {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e(TAG, "onCancelled() 메서드가 호출됨. {}", error.toException());
+                Log.e(TAG, String.valueOf(error));
             }
         });
     }
@@ -359,29 +357,52 @@ public class FirebaseManager {
         });
     }
 
-    public void allWordSet(String level, final FirebaseCallback callback) {
+    public void findExistExam(final FirebaseCallback firebaseCallback) {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("PracticeItem");
-        ArrayList<String> separateKeys = new ArrayList<>();
+        ArrayList<String> existExam = new ArrayList<>();
 
-        Query query = reference.startAt(level);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot wordItem : snapshot.getChildren()) {
-                    PracticeItem value = wordItem.getValue(PracticeItem.class);
-                    separateKeys.add(value.getAnswer());
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    existExam.add(String.valueOf(dataSnapshot.getKey()));
                 }
-                callback.onSuccess(separateKeys);
+                firebaseCallback.onSuccess(existExam);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                callback.onFailure(error);
+                firebaseCallback.onFailure(error);
             }
         });
     }
 
+    public void deleteExam(String deleteLevelName) {
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("PracticeItem");
+
+        String[] levelName = deleteLevelName.split(" ");
+        String recyclerLevelName = "";
+
+        reference.child(deleteLevelName).removeValue()
+                .addOnCompleteListener(v -> Log.d(TAG, "Delete Exam Successful in PracticeItem"));
+
+        RecyclerItem recyclerItem = new RecyclerItem(levelName[0], levelName[1]+" "+levelName[2]);
+        if (recyclerItem.getLevel().contains("Beginner")) {
+            recyclerLevelName = "A_" + levelName[0] + levelName[2];
+        }
+        if (recyclerItem.getLevel().contains("Intermediate")) {
+            recyclerLevelName = "B_" + levelName[0] + levelName[2];
+        }
+        if (recyclerItem.getLevel().contains("Advanced")) {
+            recyclerLevelName = "C_" + levelName[0] + levelName[2];
+        }
+
+        reference = database.getReference("RecyclerItem");
+        reference.child(recyclerLevelName).removeValue()
+                .addOnCompleteListener(v -> Log.d(TAG,"Delete Exam Successful in RecyclerItem"));
+    }
 
     public void setPathString(String pathString) {
         this.pathString = pathString;

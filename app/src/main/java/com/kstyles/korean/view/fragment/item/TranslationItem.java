@@ -3,12 +3,9 @@ package com.kstyles.korean.view.fragment.item;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.ArrayList;
-
 public class TranslationItem {
 
     String en = "";
-
     String de = "";
     String fr = "";
     String ja = "";

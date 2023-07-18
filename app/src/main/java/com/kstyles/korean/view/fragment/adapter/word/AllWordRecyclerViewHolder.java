@@ -1,32 +1,28 @@
 package com.kstyles.korean.view.fragment.adapter.word;
 
-import android.content.Context;
-
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kstyles.korean.databinding.RecyclerItemWordBinding;
-import com.kstyles.korean.view.fragment.item.WordItem;
+import com.kstyles.korean.view.fragment.item.TranslationItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class AllWordRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     private RecyclerItemWordBinding binding;
-    private Context context;
 
-    public AllWordRecyclerViewHolder(RecyclerItemWordBinding binding, Context context) {
+    public AllWordRecyclerViewHolder(RecyclerItemWordBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
-        this.context = context;
     }
 
-    public void bind(HashMap<String, WordItem> wordsMap, int position) {
-        ArrayList<WordItem> items = new ArrayList<>(wordsMap.values());
-        WordItem wordItem = items.get(position);
-        String[] subDescription = wordItem.getDescription(context).split(":");
+    public void bind(TreeMap<String, TranslationItem> wordsMap, int position) {
+        ArrayList<String> keys = new ArrayList<>(wordsMap.keySet());
+        String key = keys.get(position);
+        TranslationItem translationItem = wordsMap.get(key);
 
-        binding.tvWord.setText(wordItem.getWordName());
-        binding.tvDescription.setText(subDescription[1]);
+        binding.tvWord.setText(key);
+        binding.tvDescription.setText(translationItem.getEn()); // 왜 null?
     }
 }

@@ -9,18 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kstyles.korean.databinding.RecyclerItemWordBinding;
-import com.kstyles.korean.view.fragment.item.WordItem;
+import com.kstyles.korean.view.fragment.item.TranslationItem;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class AllWordRecyclerAdapter extends RecyclerView.Adapter<AllWordRecyclerViewHolder> {
 
-    private HashMap<String, WordItem> wordsMap;
-    private Context context;
+    private TreeMap<String, TranslationItem> wordsMap;
 
-    public AllWordRecyclerAdapter(HashMap<String, WordItem> wordsMap, Context context) {
+    public AllWordRecyclerAdapter(TreeMap<String, TranslationItem> wordsMap) {
         this.wordsMap = wordsMap;
-        this.context = context;
     }
 
     @NonNull
@@ -29,7 +27,7 @@ public class AllWordRecyclerAdapter extends RecyclerView.Adapter<AllWordRecycler
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         RecyclerItemWordBinding binding = RecyclerItemWordBinding.inflate(inflater, parent, false);
 
-        return new AllWordRecyclerViewHolder(binding, context);
+        return new AllWordRecyclerViewHolder(binding);
     }
 
     @Override

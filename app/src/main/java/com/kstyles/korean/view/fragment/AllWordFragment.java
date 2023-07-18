@@ -19,9 +19,9 @@ import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.WordManager;
 import com.kstyles.korean.view.fragment.adapter.word.AllWordRecyclerAdapter;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
-import com.kstyles.korean.view.fragment.item.WordItem;
+import com.kstyles.korean.view.fragment.item.TranslationItem;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class AllWordFragment extends Fragment implements BottomViewManipulationListener {
 
@@ -30,7 +30,8 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-    private HashMap<String, WordItem> wordsMap;
+    private TreeMap<String, TranslationItem> wordsMap;
+    private WordManager wordManager;
 
     public AllWordFragment() {
 
@@ -55,10 +56,10 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         languageManager.setLanguage();
         binding.tvWord.setText(languageManager.getTranslatedString(R.string.tv_all_word));
 
-        WordManager wordManager = new WordManager(getContext());
+        wordManager = new WordManager(requireContext());
         wordsMap = wordManager.getAllWords();
 
-        adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
+        adapter = new AllWordRecyclerAdapter(wordsMap);
         recyclerView.setAdapter(adapter);
 
         binding.wordBtnBeginner.setBackgroundResource(R.drawable.custom_btn_word_click);
@@ -80,7 +81,7 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
                     binding.wordBtnAdvanced.setBackgroundResource(R.drawable.custom_btn_word_click);
                 }
 
-                adapter = new AllWordRecyclerAdapter(wordsMap, requireContext());
+                adapter = new AllWordRecyclerAdapter(wordsMap);
                 recyclerView.setAdapter(adapter);
             }
         };

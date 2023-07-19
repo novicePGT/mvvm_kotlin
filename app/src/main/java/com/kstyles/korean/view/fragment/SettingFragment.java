@@ -238,8 +238,12 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedLanguage = (String) parent.getItemAtPosition(position);
 
-                if (selectedLanguage.equals("Việt Nam")) {
-                    editor.putString("language", "vi");
+                if (selectedLanguage.equals("English")) {
+                    editor.putString("language", "en");
+                    editor.putInt("language_num", 0);
+                }
+                if (selectedLanguage.equals("Deutschland")) {
+                    editor.putString("language", "de");
                     editor.putInt("language_num", 1);
                 }
                 if (selectedLanguage.equals("France")) {
@@ -250,17 +254,13 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
                     editor.putString("language", "ja");
                     editor.putInt("language_num", 3);
                 }
-                if (selectedLanguage.equals("Deutschland")) {
-                    editor.putString("language", "de");
+                if (selectedLanguage.equals("Việt Nam")) {
+                    editor.putString("language", "vi");
                     editor.putInt("language_num", 4);
                 }
                 if (selectedLanguage.equals("ประเทศไทย")) {
                     editor.putString("language", "th");
                     editor.putInt("language_num", 5);
-                }
-                if (selectedLanguage.equals("English")) {
-                    editor.putString("language", "");
-                    editor.putInt("language_num", 0);
                 }
                 editor.apply();
 

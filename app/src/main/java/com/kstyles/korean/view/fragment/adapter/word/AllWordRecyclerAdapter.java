@@ -27,7 +27,7 @@ public class AllWordRecyclerAdapter extends RecyclerView.Adapter<AllWordRecycler
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         RecyclerItemWordBinding binding = RecyclerItemWordBinding.inflate(inflater, parent, false);
 
-        return new AllWordRecyclerViewHolder(binding);
+        return new AllWordRecyclerViewHolder(binding, inflater.getContext());
     }
 
     @Override

@@ -15,14 +15,14 @@ public class TranslationManager {
 
     private FirebaseManager firebaseManager;
     private TreeMap<String, TranslationItem> allWordItem;
-    private String language;
+    private int language;
 
     public TranslationManager(Context context) {
         firebaseManager = new FirebaseManager();
         User user = firebaseManager.getUser();
         String uid = user.getUid();
         SharedPreferences sharedPreferences = context.getSharedPreferences(uid,Context.MODE_PRIVATE);
-        language = sharedPreferences.getString("language", "en");
+        language = sharedPreferences.getInt("language_num", 0);
 
         firebaseManager.getAllWordItem(new FirebaseCallback<TreeMap<String, TranslationItem>>() {
             @Override
@@ -40,22 +40,22 @@ public class TranslationManager {
     public String getTranslatedLanguage(String key) {
         TranslationItem translationItem = allWordItem.get(key);
 
-        if (language.equals("en")) {
+        if (language == 0) {
             return translationItem.getEn();
         }
-        if (language.equals("de")) {
+        if (language == 1) {
             return translationItem.getDe();
         }
-        if (language.equals("fr")) {
+        if (language == 2) {
             return translationItem.getFr();
         }
-        if (language.equals("ja")) {
+        if (language == 3) {
             return translationItem.getJa();
         }
-        if (language.equals("th")) {
+        if (language == 4) {
             return translationItem.getTh();
         }
-        if (language.equals("vi")) {
+        if (language == 5) {
             return translationItem.getVi();
         }
         return null;

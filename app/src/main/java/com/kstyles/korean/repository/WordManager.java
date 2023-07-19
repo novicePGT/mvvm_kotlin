@@ -3,95 +3,81 @@ package com.kstyles.korean.repository;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.R;
-import com.kstyles.korean.view.fragment.item.WordItem;
+import com.kstyles.korean.view.fragment.item.TranslationItem;
 
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.TreeMap;
 
 public class WordManager {
 
     private String TAG = "[WordManager]";
-    private HashMap<String, WordItem> wordsMap;
+    private TreeMap<String, TranslationItem> wordsMap;
+    private TreeMap<String, TranslationItem> cloneWordsMap;
 
-    public WordManager(Context context) {
-        wordsMap = new HashMap<>();
-        loadWordsFromResources(context);
+    public interface onDataLoadedListener {
+        void onDataLoaded(TreeMap<String, TranslationItem> cloneWordsMap);
     }
 
-    private void loadWordsFromResources(Context context) {
-        Resources resources = context.getResources();
-        String packageName = context.getPackageName();
+    public WordManager(Context context, onDataLoadedListener loadedListener) {
+        FirebaseManager firebaseManager = new FirebaseManager();
+        wordsMap = new TreeMap<>();
+        cloneWordsMap = new TreeMap<>();
+        firebaseManager.getAllWordItem(new FirebaseCallback<TreeMap<String, TranslationItem>>() {
+            @Override
+            public void onSuccess(TreeMap<String, TranslationItem> result) {
+                wordsMap = result;
+                loadWordsFromResources(context, loadedListener);
+            }
 
+            @Override
+            public void onFailure(DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void loadWordsFromResources(Context context, onDataLoadedListener loadedListener) {
+        Resources resources = context.getResources();
         String[] wordNames = resources.getStringArray(R.array.beginner);
 
         for (String wordName : wordNames) {
-            int resourceIdString = resources.getIdentifier(wordName, "string", packageName);
-            if (resourceIdString != 0) {
-                String description = resources.getString(resourceIdString);
-                WordItem wordItem = new WordItem(wordName, description);
-                wordsMap.put(wordName, wordItem);
-            }
+            cloneWordsMap.put(wordName, wordsMap.get(wordName));
         }
+        loadedListener.onDataLoaded(cloneWordsMap);
     }
 
     public void loadBeginnerWords(Context context) {
-        wordsMap.clear();
+        cloneWordsMap.clear();
         Resources resources = context.getResources();
-        String packageName = context.getPackageName();
-
         String[] wordNames = resources.getStringArray(R.array.beginner);
 
         for (String wordName : wordNames) {
-            int resourceIdString = resources.getIdentifier(wordName, "string", packageName);
-            if (resourceIdString != 0) {
-                String description = resources.getString(resourceIdString);
-                WordItem wordItem = new WordItem(wordName, description);
-                wordsMap.put(wordName, wordItem);
-            }
+            cloneWordsMap.put(wordName, wordsMap.get(wordName));
         }
     }
 
     public void loadIntermediateWords(Context context) {
-        wordsMap.clear();
+        cloneWordsMap.clear();
         Resources resources = context.getResources();
-        String packageName = context.getPackageName();
-
         String[] wordNames = resources.getStringArray(R.array.intermediate);
 
         for (String wordName : wordNames) {
-            int resourceIdString = resources.getIdentifier(wordName, "string", packageName);
-            if (resourceIdString != 0) {
-                String description = resources.getString(resourceIdString);
-                WordItem wordItem = new WordItem(wordName, description);
-                wordsMap.put(wordName, wordItem);
-            }
+            cloneWordsMap.put(wordName, wordsMap.get(wordName));
         }
     }
 
     public void loadAdvancedWords(Context context) {
-        wordsMap.clear();
+        cloneWordsMap.clear();
         Resources resources = context.getResources();
-        String packageName = context.getPackageName();
-
         String[] wordNames = resources.getStringArray(R.array.advanced);
 
         for (String wordName : wordNames) {
-            int resourceIdString = resources.getIdentifier(wordName, "string", packageName);
-            if (resourceIdString != 0) {
-                String description = resources.getString(resourceIdString);
-                WordItem wordItem = new WordItem(wordName, description);
-                wordsMap.put(wordName, wordItem);
-            }
+            cloneWordsMap.put(wordName, wordsMap.get(wordName));
         }
     }
 
-    public WordItem getWord(String name) {
-        return wordsMap.get(name);
-    }
-
-    public HashMap<String, WordItem> getAllWords() {
-        return wordsMap;
+    public TreeMap<String, TranslationItem> getAllWords() {
+        return cloneWordsMap;
     }
 }

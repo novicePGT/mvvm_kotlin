@@ -23,7 +23,7 @@ import com.kstyles.korean.view.fragment.item.TranslationItem;
 
 import java.util.TreeMap;
 
-public class AllWordFragment extends Fragment implements BottomViewManipulationListener {
+public class AllWordFragment extends Fragment implements BottomViewManipulationListener, WordManager.onDataLoadedListener {
 
     private final String TAG = "[AllWordFragment]";
     private ActivityFragmentWordBinding binding;
@@ -56,7 +56,7 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         languageManager.setLanguage();
         binding.tvWord.setText(languageManager.getTranslatedString(R.string.tv_all_word));
 
-        wordManager = new WordManager(requireContext());
+        wordManager = new WordManager(requireContext(), this);
         wordsMap = wordManager.getAllWords();
 
         adapter = new AllWordRecyclerAdapter(wordsMap);
@@ -104,5 +104,11 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         textView.setVisibility(View.VISIBLE);
         LinearLayout layout = (LinearLayout) getActivity().findViewById(R.id.bottom_navigate_view);
         layout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDataLoaded(TreeMap<String, TranslationItem> cloneWordsMap) {
+        adapter = new AllWordRecyclerAdapter(wordsMap);
+        recyclerView.setAdapter(adapter);
     }
 }

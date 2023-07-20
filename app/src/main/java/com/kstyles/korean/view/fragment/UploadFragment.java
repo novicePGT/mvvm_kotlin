@@ -25,12 +25,26 @@ public class UploadFragment extends Fragment {
     private Uri image;
     private final int REQUEST_CODE = 1002;
     private int position;
+    private boolean isImageSelected = false;
 
     public UploadFragment() {
 
     }
     public UploadFragment(int position) {
         this.position = position;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if (isImageSelected && image != null) {
+            Glide.with(this)
+                    .load(image)
+                    .override(500, 500)
+                    .format(DecodeFormat.PREFER_ARGB_8888)
+                    .into(binding.uploadImage);
+        }
     }
 
     @Nullable
@@ -75,6 +89,7 @@ public class UploadFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             image = data.getData();
+            isImageSelected = true;
             Glide.with(this)
                     .load(image)
                     .override(500, 500)

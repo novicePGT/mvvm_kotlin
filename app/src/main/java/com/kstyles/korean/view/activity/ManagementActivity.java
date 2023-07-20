@@ -123,6 +123,7 @@ public class ManagementActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String value = inputDeleteExamBinding.inputDeleteSelect.getText().toString();
+                                firebaseManager.deleteWordItem(value);
                                 firebaseManager.deleteExam(value);
                             }
                         })

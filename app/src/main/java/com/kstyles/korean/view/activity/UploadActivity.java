@@ -125,7 +125,6 @@ public class UploadActivity extends AppCompatActivity {
     private void switchFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(binding.managementFrameLayout.getId(), fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 }

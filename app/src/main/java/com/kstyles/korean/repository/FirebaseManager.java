@@ -404,6 +404,26 @@ public class FirebaseManager {
                 .addOnCompleteListener(v -> Log.d(TAG,"Delete Exam Successful in RecyclerItem"));
     }
 
+    public void deleteWordItem(String deleteLevelName) {
+        reference = database.getReference("PracticeItem").child(deleteLevelName).child("items");
+        ArrayList<String> removeValues = new ArrayList<>();
+
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String answer = snapshot.child("0").child("answer").getValue(String.class);
+                if (answer != null) {
+                    removeValues.add(answer);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     public void setPathString(String pathString) {
         this.pathString = pathString;
     }

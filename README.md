@@ -383,3 +383,10 @@
 - [feat]: 필요없는 매개변수 삭제, TreeMap으로 변경
 - [feat]: HashMap -> TreeMap 으로 변경
 - [feat]: 전체 단어 뷰 데이터 구조 변경
+
+### 2023-07-20 (목)
+- [feat]: word item 삭제를 위한 메서드 사용 초안
+- [docs]: word item 삭제하기 위한 메서드 구현
+- [docs]: 번역 빠진 부분 추가
+- [feat]: onViewCreated 로 뷰가 생성되었을 때 이미지의 정보를 유지할 수 있게 변경
+- [feat]: back stack 제거로 프레그먼트 데이터 유지할 수 있도록 변경

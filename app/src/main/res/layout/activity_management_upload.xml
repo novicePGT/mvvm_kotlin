@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.3"
             android:background="@drawable/custom_edt"
-            android:hint="ex) 04"
+            android:hint="ex) 4"
             android:textAlignment="center"
             android:textSize="14sp" />
 

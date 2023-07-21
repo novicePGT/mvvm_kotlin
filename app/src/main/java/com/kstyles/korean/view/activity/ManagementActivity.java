@@ -19,8 +19,10 @@ import com.kstyles.korean.databinding.ActivityManagementBinding;
 import com.kstyles.korean.databinding.InputDeleteExamBinding;
 import com.kstyles.korean.repository.FirebaseCallback;
 import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.view.fragment.item.PracticeItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ManagementActivity extends AppCompatActivity {
 
@@ -123,8 +125,7 @@ public class ManagementActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String value = inputDeleteExamBinding.inputDeleteSelect.getText().toString();
-                                firebaseManager.deleteWordItem(value);
-                                firebaseManager.deleteExam(value);
+                                deleteExam(value);
                             }
                         })
                         .setNegativeButton("Refuse", null)
@@ -153,6 +154,21 @@ public class ManagementActivity extends AppCompatActivity {
                 dialogSpinnerAdapter.setDropDownViewResource(com.airbnb.lottie.R.layout.support_simple_spinner_dropdown_item);
 
                 inputSpinner.setAdapter(dialogSpinnerAdapter);
+            }
+
+            @Override
+            public void onFailure(DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void deleteExam(String value) {
+        firebaseManager.setPathString(value);
+        firebaseManager.getPracticeItems(new FirebaseCallback<List<PracticeItem>>() {
+            @Override
+            public void onSuccess(List<PracticeItem> result) {
+                firebaseManager.deleteExam(value, result);
             }
 
             @Override

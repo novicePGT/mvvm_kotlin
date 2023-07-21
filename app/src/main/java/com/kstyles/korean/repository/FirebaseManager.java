@@ -378,7 +378,7 @@ public class FirebaseManager {
         });
     }
 
-    public void deleteExam(String deleteLevelName) {
+    public void deleteExam(String deleteLevelName, List<PracticeItem> wordItems) {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("PracticeItem");
 
@@ -402,26 +402,13 @@ public class FirebaseManager {
         reference = database.getReference("RecyclerItem");
         reference.child(recyclerLevelName).removeValue()
                 .addOnCompleteListener(v -> Log.d(TAG,"Delete Exam Successful in RecyclerItem"));
-    }
 
-    public void deleteWordItem(String deleteLevelName) {
-        reference = database.getReference("PracticeItem").child(deleteLevelName).child("items");
-        ArrayList<String> removeValues = new ArrayList<>();
-
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String answer = snapshot.child("0").child("answer").getValue(String.class);
-                if (answer != null) {
-                    removeValues.add(answer);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        reference = database.getReference("WordItem");
+        for (PracticeItem item : wordItems) {
+            String key = item.getAnswer();
+            reference.child(key).removeValue()
+                    .addOnCompleteListener(v -> Log.d(TAG,"Delete Exam Successful in WordItem"));
+        }
     }
 
     public void setPathString(String pathString) {

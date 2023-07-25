@@ -79,6 +79,56 @@
         <item>고양이</item>
         <item>휴대폰</item>
         <item>컴퓨터</item>
+        <item>여자</item>
+        <item>남자</item>
+        <item>선생님</item>
+        <item>학생</item>
+        <item>하늘</item>
+        <item>과학</item>
+        <item>수학</item>
+        <item>바람</item>
+        <item>음악</item>
+        <item>비</item>
+        <item>할아버지</item>
+        <item>할머니</item>
+        <item>버스</item>
+        <item>고기</item>
+        <item>봄</item>
+        <item>여름</item>
+        <item>가을</item>
+        <item>겨울</item>
+        <item>1월</item>
+        <item>2월</item>
+        <item>3월</item>
+        <item>4월</item>
+        <item>5월</item>
+        <item>6월</item>
+        <item>7월</item>
+        <item>8월</item>
+        <item>9월</item>
+        <item>10월</item>
+        <item>11월</item>
+        <item>12월</item>
+        <item>가방</item>
+        <item>그릇</item>
+        <item>시계</item>
+        <item>교회</item>
+        <item>마늘</item>
+        <item>선물</item>
+        <item>택시</item>
+        <item>화장실</item>
+        <item>생일</item>
+        <item>창문</item>
+        <item>초</item>
+        <item>치즈</item>
+        <item>우유</item>
+        <item>거울</item>
+        <item>양파</item>
+        <item>경찰서</item>
+        <item>신발</item>
+        <item>계단</item>
+        <item>김치</item>
+        <item>칼</item>
     </string-array>
 
     <string-array name="intermediate">

@@ -395,3 +395,6 @@
 - [docs]: 예시 표현 이해하기 쉽게 교체
 - [feat]: WordItem 삭제 메서드 외부로 분리
 - [feat]: WordItem 삭제 방식 최종 수정
+
+### 2023-07-25 (화)
+- [docs]: 문제 추가 <beginner> 50문제

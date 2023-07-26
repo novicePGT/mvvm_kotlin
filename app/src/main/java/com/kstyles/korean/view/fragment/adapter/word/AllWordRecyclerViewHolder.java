@@ -39,27 +39,51 @@ public class AllWordRecyclerViewHolder extends RecyclerView.ViewHolder {
         binding.tvWord.setText(key);
         if (language.equals("en")) {
             String[] split = translationItem.getEn().split(":");
-            binding.tvDescription.setText(split[1]);
+            if (split.length <= 1) {
+                binding.tvDescription.setText("");
+            } else {
+                binding.tvDescription.setText(split[1]);
+            }
         }
         if (language.equals("de")) {
             String[] split = translationItem.getDe().split(":");
-            binding.tvDescription.setText(split[1]);
+            if (split.length <= 1) {
+                binding.tvDescription.setText("");
+            } else {
+                binding.tvDescription.setText(split[1]);
+            }
         }
         if (language.equals("fr")) {
             String[] split = translationItem.getFr().split(":");
-            binding.tvDescription.setText(split[1]);
+            if (split.length <= 1) {
+                binding.tvDescription.setText("");
+            } else {
+                binding.tvDescription.setText(split[1]);
+            }
         }
         if (language.equals("ja")) {
             String[] split = translationItem.getJa().split(":");
-            binding.tvDescription.setText(split[1]);
+            if (split.length <= 1) {
+                binding.tvDescription.setText("");
+            } else {
+                binding.tvDescription.setText(split[1]);
+            }
         }
         if (language.equals("th")) {
             String[] split = translationItem.getTh().split(":");
-            binding.tvDescription.setText(split[1]);
+            if (split.length <= 1) {
+                binding.tvDescription.setText("");
+            } else {
+                binding.tvDescription.setText(split[1]);
+            }
         }
         if (language.equals("vi")) {
             String[] split = translationItem.getVi().split(":");
-            binding.tvDescription.setText(split[1]);
+            if (split.length <= 1) {
+                binding.tvDescription.setText("");
+            } else {
+                binding.tvDescription.setText(split[1]);
+            }
         }
     }
 }

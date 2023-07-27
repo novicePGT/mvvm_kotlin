@@ -85,7 +85,7 @@
         <item>학생</item>
         <item>하늘</item>
         <item>과학</item>
-        <item>수학</item>ㅍ
+        <item>수학</item>
         <item>바람</item>
         <item>음악</item>
         <item>비</item>
@@ -284,6 +284,86 @@
         <item>목걸이</item>
         <item>금고</item>
         <item>두건</item>
+        <item>대통령</item>
+        <item>정치</item>
+        <item>교수</item>
+        <item>산업</item>
+        <item>대표</item>
+        <item>단체</item>
+        <item>방송</item>
+        <item>연극</item>
+        <item>노동</item>
+        <item>불교</item>
+        <item>우주</item>
+        <item>담배</item>
+        <item>환자</item>
+        <item>속도</item>
+        <item>교장</item>
+        <item>방사능</item>
+        <item>입시</item>
+        <item>국회</item>
+        <item>뿌리</item>
+        <item>피부</item>
+        <item>오염</item>
+        <item>범죄</item>
+        <item>기사</item>
+        <item>체험</item>
+        <item>불법</item>
+        <item>공사</item>
+        <item>문화재</item>
+        <item>평균</item>
+        <item>이익</item>
+        <item>논문</item>
+        <item>임신</item>
+        <item>태양</item>
+        <item>도로</item>
+        <item>전기</item>
+        <item>모델</item>
+        <item>법원</item>
+        <item>화장품</item>
+        <item>사회주의</item>
+        <item>민주주의</item>
+        <item>공산주의</item>
+        <item>날개</item>
+        <item>간부</item>
+        <item>뼈</item>
+        <item>혀</item>
+        <item>관계</item>
+        <item>자격증</item>
+        <item>요금</item>
+        <item>음료</item>
+        <item>하천</item>
+        <item>화학</item>
+        <item>현금</item>
+        <item>껍질</item>
+        <item>극장</item>
+        <item>외교</item>
+        <item>연기</item>
+        <item>호흡</item>
+        <item>풍경</item>
+        <item>근육</item>
+        <item>산소</item>
+        <item>유교</item>
+        <item>뇌</item>
+        <item>승리</item>
+        <item>동화</item>
+        <item>졸업</item>
+        <item>교과서</item>
+        <item>농산물</item>
+        <item>바닷가</item>
+        <item>서류</item>
+        <item>검사</item>
+        <item>비닐</item>
+        <item>소음</item>
+        <item>조각</item>
+        <item>테이프</item>
+        <item>부자</item>
+        <item>무늬</item>
+        <item>통계</item>
+        <item>감옥</item>
+        <item>광장</item>
+        <item>주방</item>
+        <item>아르바이트</item>
     </string-array>
 
     <string-array name="nation">

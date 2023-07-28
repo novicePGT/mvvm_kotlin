@@ -61,6 +61,7 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
         binding = ActivityFragmentSettingBinding.inflate(inflater, container, false);
 
         showBottomView();
+        setUserProfile();
 
         /**
          * user & SharedPreferences

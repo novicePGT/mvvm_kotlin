@@ -13,9 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.request.RequestOptions;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentWordBinding;
 import com.kstyles.korean.language.LanguageManager;
+import com.kstyles.korean.preferences.user.UserProfile;
 import com.kstyles.korean.repository.WordManager;
 import com.kstyles.korean.view.fragment.adapter.word.AllWordRecyclerAdapter;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
@@ -51,6 +55,8 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         recyclerView.setLayoutManager(layoutManager);
 
         showBottomView();
+
+        setUserProfile();
 
         LanguageManager languageManager = new LanguageManager(getContext());
         languageManager.setLanguage();
@@ -91,6 +97,22 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         binding.wordBtnAdvanced.setOnClickListener(wordBtnClickListener);
 
         return binding.getRoot();
+    }
+
+    private void setUserProfile() {
+        UserProfile userProfile = new UserProfile();
+        String userProfileImageUrl = userProfile.getUserProfileImageUrl(getContext());
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.icon_user)
+                .error(R.drawable.icon_user);
+
+        Glide.with(binding.getRoot())
+                .load(userProfileImageUrl)
+                .override(500, 500)
+                .circleCrop()
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .apply(requestOptions)
+                .into(binding.mainUserProfile);
     }
 
     @Override

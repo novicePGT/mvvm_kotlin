@@ -22,11 +22,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentPracticeBinding;
 import com.kstyles.korean.databinding.InputPracticeViewBinding;
 import com.kstyles.korean.language.TranslationManager;
+import com.kstyles.korean.preferences.user.UserProfile;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.view.fragment.item.PracticeItem;
 import com.kstyles.korean.view.fragment.item.RecyclerItem;
@@ -87,6 +90,8 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         hideBottomView();
 
         setPracticeView();
+
+        setUserProfile();
 
         return binding.getRoot();
     }
@@ -257,6 +262,22 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         } else {
             setExam(quizCount.getLevelPosition());
         }
+    }
+
+    private void setUserProfile() {
+        UserProfile userProfile = new UserProfile();
+        String userProfileImageUrl = userProfile.getUserProfileImageUrl(getContext());
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.icon_user)
+                .error(R.drawable.icon_user);
+
+        Glide.with(binding.getRoot())
+                .load(userProfileImageUrl)
+                .override(500, 500)
+                .circleCrop()
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .apply(requestOptions)
+                .into(binding.mainUserProfile);
     }
 
     @Override

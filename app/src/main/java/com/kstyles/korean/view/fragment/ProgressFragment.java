@@ -15,6 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.request.RequestOptions;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.MarkerView;
@@ -30,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kstyles.korean.R;
+import com.kstyles.korean.preferences.user.UserProfile;
 import com.kstyles.korean.view.fragment.adapter.progress.ProgressRecyclerAdapter;
 import com.kstyles.korean.custom.CustomMarkerView;
 import com.kstyles.korean.databinding.ActivityFragmentProgressBinding;
@@ -73,6 +77,8 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
         setTranslation();
 
         showBottomView();
+
+        setUserProfile();
 
         /**
          * user
@@ -234,6 +240,22 @@ public class ProgressFragment extends Fragment implements BottomViewManipulation
             timer.cancel();
             timer = null;
         }
+    }
+
+    private void setUserProfile() {
+        UserProfile userProfile = new UserProfile();
+        String userProfileImageUrl = userProfile.getUserProfileImageUrl(getContext());
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.icon_user)
+                .error(R.drawable.icon_user);
+
+        Glide.with(binding.getRoot())
+                .load(userProfileImageUrl)
+                .override(500, 500)
+                .circleCrop()
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .apply(requestOptions)
+                .into(binding.mainUserProfile);
     }
 
     @Override

@@ -30,11 +30,13 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.request.RequestOptions;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentSettingBinding;
 import com.kstyles.korean.databinding.InputEditProfileBinding;
 import com.kstyles.korean.databinding.InputFindPassBinding;
 import com.kstyles.korean.databinding.InputLogoutBinding;
+import com.kstyles.korean.preferences.user.UserProfile;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
@@ -323,6 +325,22 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
         binding.tvSound.setText(languageManager.getTranslatedString(R.string.tv_sound));
         binding.tvPushNotifications.setText(languageManager.getTranslatedString(R.string.tv_push_notifications));
         binding.tvLogout.setText(languageManager.getTranslatedString(R.string.tv_logout));
+    }
+
+    private void setUserProfile() {
+        UserProfile userProfile = new UserProfile();
+        String userProfileImageUrl = userProfile.getUserProfileImageUrl(getContext());
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.icon_user)
+                .error(R.drawable.icon_user);
+
+        Glide.with(binding.getRoot())
+                .load(userProfileImageUrl)
+                .override(500, 500)
+                .circleCrop()
+                .format(DecodeFormat.PREFER_ARGB_8888)
+                .apply(requestOptions)
+                .into(binding.mainUserProfile);
     }
 
     @Override

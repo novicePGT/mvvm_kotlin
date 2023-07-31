@@ -417,3 +417,6 @@
 - [docs]: 관리자 Ui 아이콘 위치 변경
 - [feat]: user profile & 상단 Ui 변경
 - [docs]: main page nestedScrollView 로 변경
+
+### 2023-07-31 (월)
+- ui 디자인 변경

@@ -22,7 +22,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="60dp"
                 android:background="@drawable/rectangle_shape"
                 android:backgroundTintMode="add"
                 android:backgroundTint="@color/black">
@@ -57,7 +57,8 @@
         <FrameLayout
             android:id="@+id/main_small_frame"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/item_view_shape">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/main_recycler"

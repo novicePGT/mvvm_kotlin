@@ -405,3 +405,18 @@
 ### 2023-07-27 (목)
 - [docs]: 문제 추가 <Advanced> 80문제
 - [docs]: 추가된 단어 전체 번역 추가 
+
+### 2023-07-28 (금)
+- [docs]: 상태바 삭제 -> 풀스크린
+- [docs]: 상단 Ui 바 더 둥글둥글하게 변경
+- [docs]: recycler item 색상 변경
+- [docs]: icon 색상 변경
+- [docs]: ui 색상 변경
+- [docs]: rectangle shape 추가
+- [feat]: user profile 설정 추가
+- [docs]: 관리자 Ui 아이콘 위치 변경
+- [feat]: user profile & 상단 Ui 변경
+- [docs]: main page nestedScrollView 로 변경
+
+### 2023-07-31 (월)
+- ui 디자인 변경

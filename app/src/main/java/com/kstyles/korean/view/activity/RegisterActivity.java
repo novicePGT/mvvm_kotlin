@@ -23,17 +23,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityRegisterBinding;
+import com.kstyles.korean.view.ILocalization;
 import com.kstyles.korean.view.fragment.item.UserAccount;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.verification.EditTextWatcher;
 import com.kstyles.korean.verification.PasswordValidator;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements ILocalization {
 
     private FirebaseAuth firebaseAuth; // 파이어베이스 인증
     private DatabaseReference reference; // 실시간 데이터 베이스
     private ActivityRegisterBinding binding;
+    private LanguageManager languageManager;
     private String TAG = "[Register]";
     private String userEmail;
     private String userPassword;
@@ -55,20 +57,10 @@ public class RegisterActivity extends AppCompatActivity {
         /**
          * Set Language
          */
-        LanguageManager languageManager = new LanguageManager(this);
+
+        languageManager = new LanguageManager(this);
         languageManager.setLanguage();
-        binding.tvRegister.setText(languageManager.getTranslatedString(R.string.tv_register));
-        binding.registerTvUser.setText(languageManager.getTranslatedString(R.string.tv_user_profile));
-        binding.tvEmail.setText(languageManager.getTranslatedString(R.string.tv_email));
-        binding.registerUserEmail.setHint(languageManager.getTranslatedString(R.string.hint_register_email));
-        binding.tvPassword.setText(languageManager.getTranslatedString(R.string.tv_password));
-        binding.registerUserPassword.setHint(languageManager.getTranslatedString(R.string.hint_register_password));
-        binding.tvCheckPassword.setText(languageManager.getTranslatedString(R.string.tv_check_password));
-        binding.registerUserRePassword.setHint(languageManager.getTranslatedString(R.string.hint_check_password));
-        binding.registerTvPasswordVerification.setText(languageManager.getTranslatedString(R.string.tv_password_expression));
-        binding.tvNickname.setText(languageManager.getTranslatedString(R.string.tv_nickname));
-        binding.registerUserName.setHint(languageManager.getTranslatedString(R.string.hint_nickname));
-        binding.registerBtnJoin.setText(languageManager.getTranslatedString(R.string.btn_join));
+        translation();
         String pass_valid = languageManager.getTranslatedString(R.string.tv_pass_valid);
         String pass_invalid = languageManager.getTranslatedString(R.string.tv_pass_invalid);
         String successMessage = languageManager.getTranslatedString(R.string.toast_success_regist);
@@ -183,5 +175,21 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             Log.e(TAG, "image 로드 오류");
         }
+    }
+
+    @Override
+    public void translation() {
+        binding.tvRegister.setText(languageManager.getTranslatedString(R.string.tv_register));
+        binding.registerTvUser.setText(languageManager.getTranslatedString(R.string.tv_user_profile));
+        binding.tvEmail.setText(languageManager.getTranslatedString(R.string.tv_email));
+        binding.registerUserEmail.setHint(languageManager.getTranslatedString(R.string.hint_register_email));
+        binding.tvPassword.setText(languageManager.getTranslatedString(R.string.tv_password));
+        binding.registerUserPassword.setHint(languageManager.getTranslatedString(R.string.hint_register_password));
+        binding.tvCheckPassword.setText(languageManager.getTranslatedString(R.string.tv_check_password));
+        binding.registerUserRePassword.setHint(languageManager.getTranslatedString(R.string.hint_check_password));
+        binding.registerTvPasswordVerification.setText(languageManager.getTranslatedString(R.string.tv_password_expression));
+        binding.tvNickname.setText(languageManager.getTranslatedString(R.string.tv_nickname));
+        binding.registerUserName.setHint(languageManager.getTranslatedString(R.string.hint_nickname));
+        binding.registerBtnJoin.setText(languageManager.getTranslatedString(R.string.btn_join));
     }
 }

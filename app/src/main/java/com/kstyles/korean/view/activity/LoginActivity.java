@@ -29,8 +29,9 @@ import com.kstyles.korean.databinding.InputFindPassBinding;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.repository.user.User;
+import com.kstyles.korean.view.ILocalization;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ILocalization {
 
     private final String TAG = "LoginActivity";
     private String uid;
@@ -127,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 editor.apply();
 
-                setTranslation();
+                translation();
             }
 
             @Override
@@ -196,7 +197,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void setTranslation() {
+    @Override
+    public void translation() {
         LanguageManager languageManager = new LanguageManager(this);
         languageManager.setLanguage();
         binding.userEmail.setHint(languageManager.getTranslatedString(R.string.hint_id));

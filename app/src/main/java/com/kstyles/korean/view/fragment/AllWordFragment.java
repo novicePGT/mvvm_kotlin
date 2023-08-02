@@ -21,13 +21,14 @@ import com.kstyles.korean.databinding.ActivityFragmentWordBinding;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.user.UserProfile;
 import com.kstyles.korean.repository.WordManager;
+import com.kstyles.korean.view.ILocalization;
 import com.kstyles.korean.view.fragment.adapter.word.AllWordRecyclerAdapter;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.view.fragment.item.TranslationItem;
 
 import java.util.TreeMap;
 
-public class AllWordFragment extends Fragment implements BottomViewManipulationListener, WordManager.onDataLoadedListener {
+public class AllWordFragment extends Fragment implements BottomViewManipulationListener, WordManager.onDataLoadedListener, ILocalization {
 
     private final String TAG = "[AllWordFragment]";
     private ActivityFragmentWordBinding binding;
@@ -55,12 +56,8 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         recyclerView.setLayoutManager(layoutManager);
 
         showBottomView();
-
         setUserProfile();
-
-        LanguageManager languageManager = new LanguageManager(getContext());
-        languageManager.setLanguage();
-        binding.tvWord.setText(languageManager.getTranslatedString(R.string.tv_all_word));
+        translation();
 
         wordManager = new WordManager(requireContext(), this);
         wordsMap = wordManager.getAllWords();
@@ -132,5 +129,12 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
     public void onDataLoaded(TreeMap<String, TranslationItem> cloneWordsMap) {
         adapter = new AllWordRecyclerAdapter(wordsMap);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void translation() {
+        LanguageManager languageManager = new LanguageManager(getContext());
+        languageManager.setLanguage();
+        binding.tvWord.setText(languageManager.getTranslatedString(R.string.tv_all_word));
     }
 }

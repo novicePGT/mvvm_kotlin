@@ -88,9 +88,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         translationManager = new TranslationManager(requireContext());
 
         hideBottomView();
-
         setPracticeView();
-
         setUserProfile();
 
         return binding.getRoot();

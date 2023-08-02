@@ -11,8 +11,9 @@ import com.kstyles.korean.databinding.ActivitySplashBinding;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.repository.user.User;
+import com.kstyles.korean.view.ILocalization;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements ILocalization {
 
     private final String TAG = "[SplashActivity]";
     private String uid;
@@ -33,10 +34,7 @@ public class SplashActivity extends AppCompatActivity {
         /**
          * Set Translation
          */
-        LanguageManager languageManager = new LanguageManager(this);
-        languageManager.setLanguage();
-        binding.tvTop.setText(languageManager.getTranslatedString(R.string.tv_top));
-        binding.tvTop2.setText(languageManager.getTranslatedString(R.string.tv_top2));
+        translation();
 
         /**
          * user & SharedPreferences
@@ -55,5 +53,13 @@ public class SplashActivity extends AppCompatActivity {
                 firebaseManager.signInWithEmailAndPass(SplashActivity.this, userEmail, userPass);
             }
         }, SPLASH_DURATION);
+    }
+
+    @Override
+    public void translation() {
+        LanguageManager languageManager = new LanguageManager(this);
+        languageManager.setLanguage();
+        binding.tvTop.setText(languageManager.getTranslatedString(R.string.tv_top));
+        binding.tvTop2.setText(languageManager.getTranslatedString(R.string.tv_top2));
     }
 }

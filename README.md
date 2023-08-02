@@ -426,3 +426,13 @@
 - [docs]: 그림자 효과 solid 겹쳐서 직접 생성
 - [docs]: 각 뷰 백그라운드 디자인 변경 & 쉐도우 커스텀 설정
 - [docs]: 상단뷰 그라디언트 색상 변경
+
+### 2023-08-02 (수)
+- [feat]: User 를 관리하기 위한 UserAccount 리매뉴얼
+- [feat]: registerActivity 에 있던 firebase 의존 코드 이동하면서 폐기 코드 삭제
+- [feat]: registerActivity 에 있던 firebase 의존 코드 수정 & 이동
+- [feat]: NestedScrollView 에 View Port 옵션 추가
+- [feat]: ILocalization 구현
+- [feat]: 형식 유지 & 코드 가독성을 위해 국제화 현지화 의미를 가진 ILocalization 인터페이스 추가
+- [feat]: offset position 을 활용해 view 의 y 값을 구해서 scrollToPosition 구현
+- [feat]: offset 높이를 구하기 위한 포지션 값을 static 으로 메모리에 저장

@@ -23,6 +23,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
 
     private RecyclerItemBinding binding;
     private Context context;
+    public static int offsetPosition;
 
     public RecyclerViewHolder(@NonNull RecyclerItemBinding binding, Context context) {
         super(binding.getRoot());
@@ -71,6 +72,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.
         }
         if (position == nextPosition) {
             binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_unlock_black));
+            offsetPosition = nextPosition;
             if (value >= 10) {
                 binding.recyclerMainToggle.setBackgroundDrawable(context.getDrawable(R.drawable.custom_toggle_check_black));
             }

@@ -1,5 +1,7 @@
 package com.kstyles.korean.view.fragment;
 
+import static com.kstyles.korean.view.fragment.adapter.main.RecyclerViewHolder.offsetPosition;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +38,7 @@ public class MainFragment extends Fragment implements BottomViewManipulationList
     private final String TAG = "[MainFragment]";
     private ActivityFragmentMainBinding binding;
     private RecyclerView recyclerView;
+    private NestedScrollView nestedScrollView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
     private FirebaseManager firebaseManager;
@@ -53,6 +57,7 @@ public class MainFragment extends Fragment implements BottomViewManipulationList
          * global variable setting
          */
         recyclerView = binding.mainRecycler;
+        nestedScrollView = binding.mainNestedScrollview;
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -74,7 +79,18 @@ public class MainFragment extends Fragment implements BottomViewManipulationList
             @Override
             public void onSuccess(List<RecyclerItem> result) {
                 items.addAll(result);
-                adapter.notifyDataSetChanged();
+                adapter = new RecyclerAdapter(items, getContext());
+                recyclerView.setAdapter(adapter);
+
+                nestedScrollView.post(() -> {
+                    View targetView = recyclerView.getChildAt(offsetPosition - 2);
+                    if (offsetPosition -2 > 0) {
+                        int y = targetView.getTop();
+
+                        nestedScrollView.fling(0);
+                        nestedScrollView.smoothScrollTo(0, y);
+                    }
+                });
             }
 
             @Override
@@ -82,9 +98,6 @@ public class MainFragment extends Fragment implements BottomViewManipulationList
                 Log.e(TAG, "onFailure() 메서드가 호출됨. {}", error.toException());
             }
         });
-
-        adapter = new RecyclerAdapter(items, getContext());
-        recyclerView.setAdapter(adapter);
 
         return binding.getRoot();
     }

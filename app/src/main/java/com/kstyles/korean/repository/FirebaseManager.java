@@ -33,6 +33,7 @@ import com.kstyles.korean.view.fragment.item.PracticeItem;
 import com.kstyles.korean.view.fragment.item.RecyclerItem;
 import com.kstyles.korean.repository.user.User;
 import com.kstyles.korean.view.fragment.item.TranslationItem;
+import com.kstyles.korean.view.fragment.item.UserAccount;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,6 +95,24 @@ public class FirebaseManager {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e(TAG, String.valueOf(error));
+            }
+        });
+    }
+
+    public void register(UserAccount userAccount, Context context) {
+        auth.createUserWithEmailAndPassword(userAccount.getEmail(), userAccount.getPassword()).addOnCompleteListener( new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(context, userAccount.getSuccessMessage(), Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences sharedPreferences = context.getSharedPreferences(auth.getUid(), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("user_profile", String.valueOf(userAccount.getProfile()));
+                    editor.apply();
+                } else {
+                    Toast.makeText(context, userAccount.getFailedMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

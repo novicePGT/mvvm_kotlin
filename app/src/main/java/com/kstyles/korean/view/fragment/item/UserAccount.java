@@ -1,68 +1,40 @@
 package com.kstyles.korean.view.fragment.item;
 
+import android.net.Uri;
+
 public class UserAccount {
 
-    private int seq;
-    private String userEmail;
-    private String userPassword;
-    private String userName;
-    private String date;
-    private String idToken;
+    private String email;
+    private String password;
+    private Uri profile;
+    private String successMessage;
+    private String failedMessage;
 
-    public UserAccount(String userEmail, String userPassword, String userName, String idToken) {
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userName = userName;
-        this.idToken = idToken;
+    public UserAccount(String email, String password, Uri profile, String successMessage, String failedMessage) {
+        this.email = email;
+        this.password = password;
+        this.profile = profile;
+        this.successMessage = successMessage;
+        this.failedMessage = failedMessage;
     }
 
-    public UserAccount() {}
-
-    /**
-     * GETTER & SETTER
-     * @return
-     */
-    public int getSeq() {
-        return seq;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSeq(int seq) {
-        this.seq = seq;
+    public String getPassword() {
+        return password;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public Uri getProfile() {
+        return profile;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public String getSuccessMessage() {
+        return successMessage;
     }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getIdToken() {
-        return idToken;
+    public String getFailedMessage() {
+        return failedMessage;
     }
 }

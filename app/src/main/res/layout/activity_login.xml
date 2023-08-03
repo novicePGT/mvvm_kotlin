@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edt"
-            android:padding="10dp"
+            android:padding="12dp"
             android:textSize="16sp"
             android:textColor="@android:color/black"
             android:hint="Username or Email Address"
@@ -49,26 +49,31 @@
             android:maxLength="30"
             android:imeOptions="actionNext"/>
 
-        <EditText
-            android:id="@+id/user_password"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_edt"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:gravity="center_vertical"
-            android:layout_margin="10dp"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/icon_lock"
-            android:drawableRight="@drawable/icon_eye_hide"
-            android:drawableTint="@android:color/darker_gray"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:maxLength="30"
-            android:imeOptions="actionNext"/>
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/icon_lock"
+            app:startIconTint="#AAAAAA">
+
+            <EditText
+                android:id="@+id/user_password"
+                android:layout_width="match_parent"
+                android:layout_weight="6"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_edt"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:inputType="textPassword"
+                android:gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:maxLength="30"
+                android:imeOptions="actionNext"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

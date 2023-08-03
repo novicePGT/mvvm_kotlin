@@ -436,3 +436,13 @@
 - [feat]: 형식 유지 & 코드 가독성을 위해 국제화 현지화 의미를 가진 ILocalization 인터페이스 추가
 - [feat]: offset position 을 활용해 view 의 y 값을 구해서 scrollToPosition 구현
 - [feat]: offset 높이를 구하기 위한 포지션 값을 static 으로 메모리에 저장
+
+### 2023-08-03 (목)
+- [chore]: Messaging meta-data 추가
+- [feat]: 알림서비스 기본 구현
+- [chore]: 알림서비스 service - MESSAGING_EVENT 종속성 추가
+- [chore]: 알림서비스 의존성 추가
+- [docs]: login 할 때도 눈 클릭하면 비밀번호 보이게 수정
+- [docs]: setting page 변경
+- [docs]: UI 업데이트
+- [docs]: 눈 모양 클릭하면 비밀번호 보이게 변경

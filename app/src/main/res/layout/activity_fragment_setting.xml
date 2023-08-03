@@ -62,9 +62,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="40dp">
 
                 <TextView
                     android:id="@+id/tv_account_settings"
@@ -80,8 +80,9 @@
                 android:id="@+id/setting_btn_edit_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp">
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/tv_edit_profile"
@@ -107,8 +108,9 @@
                 android:id="@+id/setting_change_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp">
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/tv_change_password"
@@ -134,15 +136,15 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="25dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="35dp"
                 android:background="@android:color/black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -158,8 +160,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp">
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/tv_language"
@@ -192,8 +195,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp">
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/tv_sound"
@@ -219,8 +223,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp">
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/tv_push_notifications"
@@ -246,8 +251,9 @@
                 android:id="@+id/setting_btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp">
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/tv_logout"

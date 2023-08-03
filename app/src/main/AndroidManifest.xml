@@ -33,6 +33,13 @@
         <activity android:name=".view.activity.ManagementActivity"/>
         <activity android:name=".view.activity.UploadActivity"/>
         <activity android:name=".view.activity.TranslationActivity"/>
+
+        <service android:name=".repository.fcm.FirebaseMessagingFCM"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

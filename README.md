@@ -446,3 +446,8 @@
 - [docs]: setting page 변경
 - [docs]: UI 업데이트
 - [docs]: 눈 모양 클릭하면 비밀번호 보이게 변경
+
+### 2023-08-04 (금)
+- [docs]: Notification View 추가
+- [feat]: FCM & Notification 추가
+- [chore]: com.android.application plugin 추가

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -59,6 +61,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
     private Button buttons[];
     private int position;
     private String answer;
+    private TextToSpeech tts;
 
     public PracticeFragment() {
         recyclerItems = MainFragment.items;
@@ -90,6 +93,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         hideBottomView();
         setPracticeView();
         setUserProfile();
+        initTts();
 
         return binding.getRoot();
     }
@@ -182,6 +186,15 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
 
                         button.setBackground(getContext().getDrawable(R.drawable.custom_btn_incorrect));
                         button.setTextColor(Color.WHITE);
+                        binding.listenWord.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                tts.setPitch(1.0f);
+                                tts.setSpeechRate(1.0f);
+                                tts.speak(buttonText, TextToSpeech.QUEUE_FLUSH, null);
+                                Log.d(TAG, "SPEAK");
+                            }
+                        });
                     }
                 }
             });
@@ -245,6 +258,17 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
                 }).show();
     }
 
+    private void initTts() {
+        tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    tts.setLanguage(Locale.KOREAN);
+                }
+            }
+        });
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void setPracticeView() {
         Button button = getActivity().findViewById(R.id.recycler_item_progress_btn);
@@ -289,5 +313,15 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
     @Override
     public void showBottomView() {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+            tts = null;
+        }
+        super.onDestroy();
     }
 }

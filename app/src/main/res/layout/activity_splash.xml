@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@drawable/splash_background_main">
 
     <TextView
         android:id="@+id/tv_top"
@@ -23,10 +24,10 @@
         android:textStyle="bold"/>
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="225dp"
-        android:background="@drawable/icon_logo"
-        android:layout_marginTop="100dp"/>
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:background="@drawable/splash_background"
+        android:layout_marginTop="50dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,7 +35,7 @@
         android:text="Provide from"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="50dp" />
 
     <TextView
         android:layout_width="wrap_content"

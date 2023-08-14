@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1057675861730",
+    "firebase_url": "https://word-app-2-default-rtdb.firebaseio.com",
+    "project_id": "word-app-2",
+    "storage_bucket": "word-app-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057675861730:android:be79b9fa22ef7bdfe448bb",
+        "android_client_info": {
+          "package_name": "com.kstyles.korean"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057675861730-6no9533afb0hcgcf17t3pugqtr357mhi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIGEbBfLYNugnSmmxOFqv52yl5J5sTPoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057675861730-6no9533afb0hcgcf17t3pugqtr357mhi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

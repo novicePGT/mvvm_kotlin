@@ -192,7 +192,6 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
                                 tts.setPitch(1.0f);
                                 tts.setSpeechRate(1.0f);
                                 tts.speak(buttonText, TextToSpeech.QUEUE_FLUSH, null);
-                                Log.d(TAG, "SPEAK");
                             }
                         });
                     }

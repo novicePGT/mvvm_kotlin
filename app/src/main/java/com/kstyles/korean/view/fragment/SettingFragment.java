@@ -200,25 +200,17 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
          */
         boolean sound_key = sharedPreferences.getBoolean("sound_key", false);
         binding.settingSoundToggle.setChecked(sound_key);
-        binding.settingSoundToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.MODIFY_AUDIO_SETTINGS) == PackageManager.PERMISSION_GRANTED) {
-                    AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
-                    if (isChecked) {
-                        audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                        editor.putBoolean("sound_key", true);
-                        editor.apply();
-                    } else {
-                        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                        editor.putBoolean("sound_key", false);
-                        editor.apply();
-                    }
-                } else {
-                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.MODIFY_AUDIO_SETTINGS}, PERMISSION_AUDIO_REQUEST_CODE);
-                }
+        binding.settingSoundToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.MODIFY_AUDIO_SETTINGS) == PackageManager.PERMISSION_GRANTED) {
+                AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
+                int ringerMode = isChecked ? AudioManager.RINGER_MODE_SILENT : AudioManager.RINGER_MODE_NORMAL;
+                audioManager.setRingerMode(ringerMode);
+                editor.putBoolean("sound_key", isChecked).apply();
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.MODIFY_AUDIO_SETTINGS}, PERMISSION_AUDIO_REQUEST_CODE);
             }
         });
+
 
         /**
          * Toggle button set Notification control

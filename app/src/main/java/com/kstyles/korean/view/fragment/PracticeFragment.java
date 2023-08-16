@@ -1,7 +1,9 @@
 package com.kstyles.korean.view.fragment;
 
 import android.animation.Animator;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +33,7 @@ import com.kstyles.korean.databinding.ActivityFragmentPracticeBinding;
 import com.kstyles.korean.databinding.InputPracticeViewBinding;
 import com.kstyles.korean.language.TranslationManager;
 import com.kstyles.korean.preferences.user.UserProfile;
+import com.kstyles.korean.repository.user.User;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.view.fragment.item.PracticeItem;
 import com.kstyles.korean.view.fragment.item.RecyclerItem;
@@ -62,6 +65,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
     private int position;
     private String answer;
     private TextToSpeech tts;
+    private Boolean sound_key;
 
     public PracticeFragment() {
         recyclerItems = MainFragment.items;
@@ -75,6 +79,10 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         if (bundle != null) {
             position = bundle.getInt("position");
         }
+        User user = firebaseManager.getUser();
+        String uid = user.getUid();
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(uid, Context.MODE_PRIVATE);
+        sound_key = sharedPreferences.getBoolean("sound_key", false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -189,9 +197,11 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
                         binding.listenWord.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                tts.setPitch(1.0f);
-                                tts.setSpeechRate(1.0f);
-                                tts.speak(buttonText, TextToSpeech.QUEUE_FLUSH, null);
+                                if (!sound_key) {
+                                    tts.setPitch(1.0f);
+                                    tts.setSpeechRate(0.8f);
+                                    tts.speak(buttonText, TextToSpeech.QUEUE_FLUSH, null);
+                                }
                             }
                         });
                     }

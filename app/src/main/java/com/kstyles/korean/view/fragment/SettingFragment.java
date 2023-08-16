@@ -3,6 +3,7 @@ package com.kstyles.korean.view.fragment;
 
 import static com.kstyles.korean.verification.noti.NotificationPolicy.isNotificationPolicyAccessGranted;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -47,7 +50,8 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
     private ActivityFragmentSettingBinding binding;
     private String uid;
     private Spinner spinner;
-    private int REQUEST_CODE = 1002;
+    private final int REQUEST_CODE = 1002;
+    private final int PERMISSION_AUDIO_REQUEST_CODE = 1003;
     private String TAG = "[SettingFragment}";
     private Uri userProfile;
     private Uri previousUserProfile;
@@ -71,6 +75,7 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
         uid = user.getUid();
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(uid, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         /**
          * 비밀번호 변경 로직을 포함한 AlertDialog
@@ -193,18 +198,24 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
         /**
          * Toggle button Sound Control
          */
+        boolean sound_key = sharedPreferences.getBoolean("sound_key", false);
+        binding.settingSoundToggle.setChecked(sound_key);
         binding.settingSoundToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isNotificationPolicyAccessGranted(getContext())) {
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.MODIFY_AUDIO_SETTINGS) == PackageManager.PERMISSION_GRANTED) {
                     AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
                     if (isChecked) {
                         audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                        editor.putBoolean("sound_key", true);
+                        editor.apply();
                     } else {
                         audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                        editor.putBoolean("sound_key", false);
+                        editor.apply();
                     }
                 } else {
-                    showNotificationPolicyAccessDialog();
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.MODIFY_AUDIO_SETTINGS}, PERMISSION_AUDIO_REQUEST_CODE);
                 }
             }
         });
@@ -224,7 +235,6 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
                         notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
                     }
                 } else {
-                    showNotificationPolicyAccessDialog();
                 }
             }
         });
@@ -233,7 +243,6 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
          * Spinner setting
          */
         spinner = binding.settingSpinner;
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         int language_num = sharedPreferences.getInt("language_num", 0);
         spinner.setSelection(language_num);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -292,26 +301,6 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
         } else {
             Log.e(TAG, "image 로드 오류");
         }
-    }
-
-    private void showNotificationPolicyAccessDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Notification Policy Access")
-                .setMessage("Please grant notification policy access to enable this feature.")
-                .setPositiveButton("Grant Access", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(android.provider.Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .show();
     }
 
     private void setTranslation() {

@@ -8,7 +8,7 @@
     <string name="tv_change_password">Đổi mật khẩu</string>
     <string name="tv_settings">Thiết lập</string>
     <string name="tv_language">Ngôn ngữ</string>
-    <string name="tv_sound">Âm thanh</string>
+    <string name="tv_sound">Chế độ im lặng</string>
     <string name="tv_push_notifications">Thông báo đẩy</string>
     <string name="tv_logout">Đăng xuất</string>
 

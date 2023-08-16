@@ -8,7 +8,7 @@
     <string name="tv_change_password">Modifier le mot de passe</string>
     <string name="tv_settings">Réglages</string>
     <string name="tv_language">Langue</string>
-    <string name="tv_sound">Le son</string>
+    <string name="tv_sound">Mode silencieux</string>
     <string name="tv_push_notifications">Notifications de poussée</string>
     <string name="tv_logout">Ouverture de session</string>
 

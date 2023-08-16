@@ -8,7 +8,7 @@
     <string name="tv_change_password">เปลี่ยนรหัสผ่าน</string>
     <string name="tv_settings">การตั้งค่า</string>
     <string name="tv_language">ภาษา</string>
-    <string name="tv_sound">เสียง</string>
+    <string name="tv_sound">โหมดเงียบ</string>
     <string name="tv_push_notifications">การแจ้งเตือนแบบพุช</string>
     <string name="tv_logout">ออกจากระบบ</string>
 

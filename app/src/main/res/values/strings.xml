@@ -1,7 +1,8 @@
 <resources>
 
     <string name="app_name" translatable="false">KoreanApp</string>
-    
+    <string name="notification_channel" translatable="false">notification_channel</string>
+
     <!-- Setting 페이지 -->
     <string name="tv_setting">Setting</string>
     <string name="tv_account_settings">Account Settings</string>

@@ -240,10 +240,13 @@
                     android:id="@+id/setting_notification_push_toggle"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="false" />
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:checked="true" />
 
             </RelativeLayout>
 

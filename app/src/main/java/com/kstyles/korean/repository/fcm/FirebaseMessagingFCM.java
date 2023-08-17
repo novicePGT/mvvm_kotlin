@@ -7,35 +7,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.kstyles.korean.R;
 import com.kstyles.korean.repository.FirebaseManager;
-import com.kstyles.korean.repository.user.User;
 import com.kstyles.korean.view.activity.MainActivity;
 
 public class FirebaseMessagingFCM extends FirebaseMessagingService  {
 
     private final String TAG = "FirebaseMessageFCM";
-    private FirebaseMessaging firebaseMessaging;
-    private String token = "";
     private final FirebaseManager firebaseManager = new FirebaseManager();
     private SharedPreferences sharedPreferences;
-    private String uid;
-
-    public FirebaseMessagingFCM() {
-        firebaseMessaging = FirebaseMessaging.getInstance();
-        getToken();
-        User user = firebaseManager.getUser();
-        uid = user.getUid();
-    }
 
     @Override
     public void onNewToken(@NonNull String token) {
@@ -45,28 +32,12 @@ public class FirebaseMessagingFCM extends FirebaseMessagingService  {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remotemessage) {
 
-        sharedPreferences = getSharedPreferences(uid, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(firebaseManager.getUser().getUid(), MODE_PRIVATE);
         boolean notify_key = sharedPreferences.getBoolean("notify_key", true);
 
         if (remotemessage.getNotification() != null && notify_key) {
             generateNotification(remotemessage.getNotification().getTitle(), remotemessage.getNotification().getBody());
         }
-    }
-
-    private void getToken() {
-        firebaseMessaging.getToken()
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Log.w(TAG,"Fetching FCM registration token failed", task.getException());
-                    }
-
-                    token = task.getResult();
-                    sendRegistrationToServer(token);
-                    Log.d(TAG, "getToken(): " + token);
-                });
-    }
-
-    private void sendRegistrationToServer(String token) {
     }
 
     private void generateNotification(String title, String message) {

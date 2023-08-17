@@ -215,21 +215,10 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
         /**
          * Toggle button set Notification control
          */
-        binding.settingNotificationPushToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isNotificationPolicyAccessGranted(getContext())) {
-                    NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-                    if (isChecked) {
-                        notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
-                    }
-                    if (!isChecked) {
-                        notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
-                    }
-                } else {
-                }
-            }
-        });
+        boolean notify_key = sharedPreferences.getBoolean("notify_key", true);
+        binding.settingNotificationPushToggle.setChecked(notify_key);
+        binding.settingNotificationPushToggle.setOnCheckedChangeListener((buttonView, isChecked)
+                -> editor.putBoolean("notify_key", isChecked).apply());
 
         /**
          * Spinner setting

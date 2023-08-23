@@ -9,6 +9,8 @@ import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.repository.user.User;
 import com.kstyles.korean.view.fragment.item.TranslationItem;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.TreeMap;
 
 public class TranslationManager {
@@ -19,22 +21,14 @@ public class TranslationManager {
 
     public TranslationManager(Context context) {
         firebaseManager = new FirebaseManager();
+        allWordItem = new TreeMap<>();
         User user = firebaseManager.getUser();
         String uid = user.getUid();
         SharedPreferences sharedPreferences = context.getSharedPreferences(uid,Context.MODE_PRIVATE);
         language = sharedPreferences.getInt("language_num", 0);
 
-        firebaseManager.getAllWordItem(new FirebaseCallback<TreeMap<String, TranslationItem>>() {
-            @Override
-            public void onSuccess(TreeMap<String, TranslationItem> wordItems) {
-                allWordItem = wordItems;
-            }
-
-            @Override
-            public void onFailure(DatabaseError error) {
-
-            }
-        });
+        List<String> levels = Arrays.asList("Beginner", "Intermediate", "Advanced");
+        fetchWordsForLevels(levels);
     }
 
     public String getTranslatedLanguage(String key) {
@@ -59,5 +53,21 @@ public class TranslationManager {
             return translationItem.getVi();
         }
         return null;
+    }
+
+    private void fetchWordsForLevels(List<String> levels) {
+        for (String level : levels) {
+            firebaseManager.getWordByLevel(level, new FirebaseCallback<TreeMap<String, TranslationItem>>() {
+                @Override
+                public void onSuccess(TreeMap<String, TranslationItem> result) {
+                    allWordItem.putAll(result);
+                }
+
+                @Override
+                public void onFailure(DatabaseError error) {
+                    // 실패 시 처리
+                }
+            });
+        }
     }
 }

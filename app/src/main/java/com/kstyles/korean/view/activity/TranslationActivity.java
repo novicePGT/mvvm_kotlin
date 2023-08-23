@@ -1,6 +1,5 @@
 package com.kstyles.korean.view.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +18,8 @@ import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.view.fragment.item.TranslationItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.TreeMap;
 
 public class TranslationActivity extends AppCompatActivity {
@@ -28,6 +29,13 @@ public class TranslationActivity extends AppCompatActivity {
     private Spinner spinner;
     private TreeMap<String, TranslationItem> allWordItem;
     private String item;
+
+    public TranslationActivity() {
+        firebaseManager = new FirebaseManager();
+        allWordItem = new TreeMap<>();
+        List<String> levels = Arrays.asList("Beginner", "Intermediate", "Advanced");
+        fetchWordsForLevels(levels);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,26 +47,6 @@ public class TranslationActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("manager", MODE_PRIVATE);
         int manager = sharedPreferences.getInt("manager", 0);
-
-        firebaseManager = new FirebaseManager();
-
-        firebaseManager.getAllWordItem(new FirebaseCallback<TreeMap<String, TranslationItem>>() {
-            @Override
-            public void onSuccess(TreeMap<String, TranslationItem> wordTranslationItems) {
-                allWordItem = wordTranslationItems;
-                ArrayList<String> wordSet = new ArrayList<>(wordTranslationItems.keySet());
-                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(TranslationActivity.this, com.airbnb.lottie.R.layout.support_simple_spinner_dropdown_item, wordSet);
-                spinnerAdapter.setDropDownViewResource(com.airbnb.lottie.R.layout.support_simple_spinner_dropdown_item);
-
-                spinner = binding.translationSpinner;
-                spinner.setAdapter(spinnerAdapter);
-            }
-
-            @Override
-            public void onFailure(DatabaseError error) {
-                // Handle onFailure event if needed
-            }
-        });
 
         binding.translationFind.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,5 +133,27 @@ public class TranslationActivity extends AppCompatActivity {
         binding.translationHintVi.setEnabled(false);
 
         editText.setEnabled(true);
+    }
+
+    private void fetchWordsForLevels(List<String> levels) {
+        for (String level : levels) {
+            firebaseManager.getWordByLevel(level, new FirebaseCallback<TreeMap<String, TranslationItem>>() {
+                @Override
+                public void onSuccess(TreeMap<String, TranslationItem> result) {
+                    allWordItem.putAll(result);
+                    ArrayList<String> wordSet = new ArrayList<>(allWordItem.keySet());
+                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(TranslationActivity.this, com.airbnb.lottie.R.layout.support_simple_spinner_dropdown_item, wordSet);
+                    spinnerAdapter.setDropDownViewResource(com.airbnb.lottie.R.layout.support_simple_spinner_dropdown_item);
+
+                    spinner = binding.translationSpinner;
+                    spinner.setAdapter(spinnerAdapter);
+                }
+
+                @Override
+                public void onFailure(DatabaseError error) {
+                    // 실패 시 처리
+                }
+            });
+        }
     }
 }

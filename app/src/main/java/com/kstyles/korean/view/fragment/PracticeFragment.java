@@ -41,6 +41,7 @@ import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.count.QuizCount;
 import com.kstyles.korean.repository.FirebaseCallback;
 import com.kstyles.korean.repository.FirebaseManager;
+import com.kstyles.korean.view.fragment.item.TranslationItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +50,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.stream.IntStream;
 
 public class PracticeFragment extends Fragment implements BottomViewManipulationListener {
@@ -66,10 +68,15 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
     private String answer;
     private TextToSpeech tts;
     private Boolean sound_key;
+    private List<String> combinedList;
 
     public PracticeFragment() {
         recyclerItems = MainFragment.items;
         firebaseManager = new FirebaseManager();
+        combinedList = new ArrayList<>();
+
+        List<String> levels = Arrays.asList("Beginner", "Intermediate", "Advanced");
+        fetchWordsForLevels(levels);
     }
 
     @Override
@@ -199,7 +206,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
                             public void onClick(View v) {
                                 if (!sound_key) {
                                     tts.setPitch(1.0f);
-                                    tts.setSpeechRate(0.8f);
+                                    tts.setSpeechRate(1.0f);
                                     tts.speak(buttonText, TextToSpeech.QUEUE_FLUSH, null);
                                 }
                             }
@@ -213,13 +220,6 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
     }
 
     private List<String> setButtonText(int buttonIndex) {
-        List<String> combinedList = new ArrayList<>();
-        String[] beginnerArray = getResources().getStringArray(R.array.beginner);
-        String[] intermediateArray = getResources().getStringArray(R.array.intermediate);
-        String[] advancedArray = getResources().getStringArray(R.array.advanced);
-        combinedList.addAll(Arrays.asList(beginnerArray));
-        combinedList.addAll(Arrays.asList(intermediateArray));
-        combinedList.addAll(Arrays.asList(advancedArray));
         List<String> buttonTexts = new ArrayList<>(Collections.nCopies(buttons.length, ""));
         buttonTexts.set(buttonIndex, answer);
 
@@ -309,6 +309,22 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
                 .format(DecodeFormat.PREFER_ARGB_8888)
                 .apply(requestOptions)
                 .into(binding.mainUserProfile);
+    }
+
+    private void fetchWordsForLevels(List<String> levels) {
+        for (String level : levels) {
+            firebaseManager.getWordByLevel(level, new FirebaseCallback<TreeMap<String, TranslationItem>>() {
+                @Override
+                public void onSuccess(TreeMap<String, TranslationItem> result) {
+                    combinedList.addAll(result.keySet());
+                }
+
+                @Override
+                public void onFailure(DatabaseError error) {
+                    // 실패 시 처리
+                }
+            });
+        }
     }
 
     @Override

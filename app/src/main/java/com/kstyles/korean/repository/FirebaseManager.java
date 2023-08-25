@@ -310,8 +310,8 @@ public class FirebaseManager {
         }
     }
 
-    public void uploadWordItem(ArrayList<PracticeItem> practiceItems, ArrayList<TranslationItem> translationItems) {
-        DatabaseReference wordItemRef = FirebaseDatabase.getInstance().getReference().child("WordItem");
+    public void uploadWordItem(String level, ArrayList<PracticeItem> practiceItems, ArrayList<TranslationItem> translationItems) {
+        DatabaseReference wordItemRef = FirebaseDatabase.getInstance().getReference().child("WordItem").child(level);
 
         for (int i = 0; i < practiceItems.size(); i++) {
             PracticeItem practiceItem = practiceItems.get(i);
@@ -337,8 +337,8 @@ public class FirebaseManager {
         }
     }
 
-    public void updateTranslation(String wordPath, String translationLanguage, String translationValue) {
-        reference = FirebaseDatabase.getInstance().getReference().child("WordItem").child(wordPath).child(translationLanguage);
+    public void updateTranslation(String level, String wordPath, String translationLanguage, String translationValue) {
+        reference = FirebaseDatabase.getInstance().getReference().child("WordItem").child(level).child(wordPath).child(translationLanguage);
 
         reference.setValue(translationValue)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -353,9 +353,9 @@ public class FirebaseManager {
                 });
     }
 
-    public void getAllWordItem(final FirebaseCallback callback) {
+    public void getWordByLevel(final String level, final FirebaseCallback callback) {
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("WordItem");
+        reference = database.getReference("WordItem").child(level);
         TreeMap<String, TranslationItem> wordTranslationItems = new TreeMap<>();
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -397,7 +397,7 @@ public class FirebaseManager {
         });
     }
 
-    public void deleteExam(String deleteLevelName, List<PracticeItem> wordItems) {
+    public void deleteExam(String deleteLevelName, List<String> itemSet) {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("PracticeItem");
 
@@ -422,10 +422,9 @@ public class FirebaseManager {
         reference.child(recyclerLevelName).removeValue()
                 .addOnCompleteListener(v -> Log.d(TAG,"Delete Exam Successful in RecyclerItem"));
 
-        reference = database.getReference("WordItem");
-        for (PracticeItem item : wordItems) {
-            String key = item.getAnswer();
-            reference.child(key).removeValue()
+        reference = database.getReference("WordItem").child(levelName[0]);
+        for (String item : itemSet) {
+            reference.child(item).removeValue()
                     .addOnCompleteListener(v -> Log.d(TAG,"Delete Exam Successful in WordItem"));
         }
     }

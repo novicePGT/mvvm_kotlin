@@ -112,7 +112,7 @@ public class UploadActivity extends AppCompatActivity {
                 String recyclerItemName = level + " Vocabulary " + sequence;
 
                 firebaseManager.uploadRecyclerItem(recyclerItemName);
-                firebaseManager.uploadWordItem(practiceItems, translationItems);
+                firebaseManager.uploadWordItem(level, practiceItems, translationItems);
                 firebaseManager.uploadPracticeItem(practiceItems, recyclerItemName, UploadActivity.this);
 
                 Intent intent = new Intent(UploadActivity.this, MainActivity.class);

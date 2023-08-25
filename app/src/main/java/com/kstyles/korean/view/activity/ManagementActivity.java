@@ -168,7 +168,12 @@ public class ManagementActivity extends AppCompatActivity {
         firebaseManager.getPracticeItems(new FirebaseCallback<List<PracticeItem>>() {
             @Override
             public void onSuccess(List<PracticeItem> result) {
-                firebaseManager.deleteExam(value, result);
+                List<String> itemSet = new ArrayList<>();
+                for (PracticeItem itemName : result) {
+                    itemSet.add(itemName.getAnswer());
+                }
+
+                firebaseManager.deleteExam(value, itemSet);
             }
 
             @Override

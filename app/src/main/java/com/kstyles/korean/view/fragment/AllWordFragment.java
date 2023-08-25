@@ -59,7 +59,7 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         setUserProfile();
         translation();
 
-        wordManager = new WordManager(requireContext(), this);
+        wordManager = new WordManager(this);
         wordsMap = wordManager.getAllWords();
 
         adapter = new AllWordRecyclerAdapter(wordsMap);
@@ -74,13 +74,13 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
                 binding.wordBtnIntermediate.setBackgroundResource(R.drawable.custom_btn_white);
                 binding.wordBtnAdvanced.setBackgroundResource(R.drawable.custom_btn_white);
                 if (v == binding.wordBtnBeginner) {
-                    wordManager.loadBeginnerWords(requireContext());
+                    wordManager.loadWords("Beginner");
                     binding.wordBtnBeginner.setBackgroundResource(R.drawable.custom_btn_word_click);
                 } else if (v == binding.wordBtnIntermediate) {
-                    wordManager.loadIntermediateWords(requireContext());
+                    wordManager.loadWords("Intermediate");
                     binding.wordBtnIntermediate.setBackgroundResource(R.drawable.custom_btn_word_click);
                 } else if (v == binding.wordBtnAdvanced) {
-                    wordManager.loadAdvancedWords(requireContext());
+                    wordManager.loadWords("Advanced");
                     binding.wordBtnAdvanced.setBackgroundResource(R.drawable.custom_btn_word_click);
                 }
 

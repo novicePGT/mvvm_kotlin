@@ -33,7 +33,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="65dp"
-            android:background="@drawable/icon_clip" />
+            android:background="@drawable/icon_chart" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/main_btn_word"

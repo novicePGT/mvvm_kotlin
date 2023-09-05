@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
 
         binding.mainBtnHome.setBackgroundResource(fragment instanceof MainFragment ? R.drawable.icon_home_black : R.drawable.icon_home);
-        binding.mainBtnProgress.setBackgroundResource(fragment instanceof ProgressFragment ? R.drawable.icon_clip_black : R.drawable.icon_clip);
+        binding.mainBtnProgress.setBackgroundResource(fragment instanceof ProgressFragment ? R.drawable.icon_chart_black : R.drawable.icon_chart);
         binding.mainBtnWord.setBackgroundResource(fragment instanceof AllWordFragment ? R.drawable.icon_book_black : R.drawable.icon_book);
         binding.mainBtnSetting.setBackgroundResource(fragment instanceof SettingFragment ? R.drawable.icon_setup_black : R.drawable.icon_setup);
 

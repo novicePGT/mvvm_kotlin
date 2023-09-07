@@ -198,7 +198,7 @@ public class SettingFragment extends Fragment implements BottomViewManipulationL
         binding.settingSoundToggle.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.MODIFY_AUDIO_SETTINGS) == PackageManager.PERMISSION_GRANTED) {
                 AudioManager audioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
-                int ringerMode = isChecked ? AudioManager.RINGER_MODE_SILENT : AudioManager.RINGER_MODE_NORMAL;
+                int ringerMode = isChecked ? AudioManager.RINGER_MODE_VIBRATE : AudioManager.RINGER_MODE_NORMAL;
                 audioManager.setRingerMode(ringerMode);
                 editor.putBoolean("sound_key", isChecked).apply();
             } else {

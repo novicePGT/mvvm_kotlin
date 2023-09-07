@@ -250,6 +250,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         inputPracticeViewBinding.correctView.playAnimation();
         builder.setView(inputPracticeViewBinding.getRoot())
+                .setCancelable(false)
                 .setPositiveButton("Next", new DialogInterface.OnClickListener() {
                     @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override

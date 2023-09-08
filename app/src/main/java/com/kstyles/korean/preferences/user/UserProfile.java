@@ -20,4 +20,10 @@ public class UserProfile {
         SharedPreferences sharedPreferences = context.getSharedPreferences(uid, Context.MODE_PRIVATE);
         return sharedPreferences.getString("user_profile", "");
     }
+
+    public void saveUserProfileImageUrl(Context context, String url) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(uid, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user_profile", url).apply();
+    }
 }

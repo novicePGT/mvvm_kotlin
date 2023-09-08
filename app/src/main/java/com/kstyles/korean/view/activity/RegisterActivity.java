@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityRegisterBinding;
+import com.kstyles.korean.preferences.user.UserProfile;
 import com.kstyles.korean.view.ILocalization;
 import com.kstyles.korean.view.fragment.item.UserAccount;
 import com.kstyles.korean.language.LanguageManager;
@@ -33,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity implements ILocalization
     private String userPassword;
     private String userName;
     private Uri userProfile;
+    private UserProfile userProfileManager;
     private int REQUEST_CODE = 1001;
 
     @Override
@@ -45,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity implements ILocalization
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        userProfileManager = new UserProfile();
 
         /**
          * Set Language
@@ -109,6 +112,7 @@ public class RegisterActivity extends AppCompatActivity implements ILocalization
 
                     if (userAccount.getProfile() != null) {
                         firebaseManager.uploadUserProfile(RegisterActivity.this, userAccount.getProfile());
+                        userProfileManager.saveUserProfileImageUrl(getApplicationContext(), userAccount.getProfile().toString());
                     }
 
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);

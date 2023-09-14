@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -46,10 +47,12 @@ import com.kstyles.korean.view.fragment.item.TranslationItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.IntStream;
 
@@ -69,6 +72,10 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
     private TextToSpeech tts;
     private Boolean sound_key;
     private List<String> combinedList;
+    private SharedPreferences sharedPreferences;
+    private Set<String> personalWord = new HashSet<>();
+    private boolean isStarState = false;
+    private String uid;
 
     public PracticeFragment() {
         recyclerItems = MainFragment.items;
@@ -87,9 +94,10 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
             position = bundle.getInt("position");
         }
         User user = firebaseManager.getUser();
-        String uid = user.getUid();
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences(uid, Context.MODE_PRIVATE);
+        uid = user.getUid();
+        sharedPreferences = getContext().getSharedPreferences(uid, Context.MODE_PRIVATE);
         sound_key = sharedPreferences.getBoolean("sound_key", false);
+        personalWord = sharedPreferences.getStringSet(uid, new HashSet<>());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -193,7 +201,7 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
                         String findByAnswer = translationManager.getTranslatedLanguage(answer);
                         inputPracticeViewBinding.description.setText(findByAnswer);
 
-                        showDialog(inputPracticeViewBinding);
+                        showDialog(inputPracticeViewBinding, answer);
                     } else {
                         String buttonText = button.getText().toString();
                         String findByAnswer = translationManager.getTranslatedLanguage(buttonText);
@@ -246,9 +254,21 @@ public class PracticeFragment extends Fragment implements BottomViewManipulation
         return buttonTexts;
     }
 
-    private void showDialog(InputPracticeViewBinding inputPracticeViewBinding) {
+    private void showDialog(InputPracticeViewBinding inputPracticeViewBinding, String answer) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         inputPracticeViewBinding.correctView.playAnimation();
+        inputPracticeViewBinding.starBtn.setOnClickListener(v -> {
+
+            if (!isStarState) {
+                inputPracticeViewBinding.starBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.icon_star_fill));
+                personalWord.add(answer);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putStringSet(uid, personalWord).apply();
+            } else {
+                inputPracticeViewBinding.starBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.icon_star_empty));
+            }
+            isStarState = !isStarState;
+        });
         builder.setView(inputPracticeViewBinding.getRoot())
                 .setCancelable(false)
                 .setPositiveButton("Next", new DialogInterface.OnClickListener() {

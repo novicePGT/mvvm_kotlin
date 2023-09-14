@@ -1,5 +1,7 @@
 package com.kstyles.korean.view.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,12 +22,15 @@ import com.kstyles.korean.R;
 import com.kstyles.korean.databinding.ActivityFragmentWordBinding;
 import com.kstyles.korean.language.LanguageManager;
 import com.kstyles.korean.preferences.user.UserProfile;
+import com.kstyles.korean.repository.FirebaseManager;
 import com.kstyles.korean.repository.WordManager;
+import com.kstyles.korean.repository.user.User;
 import com.kstyles.korean.view.ILocalization;
 import com.kstyles.korean.view.fragment.adapter.word.AllWordRecyclerAdapter;
 import com.kstyles.korean.view.fragment.bottomView.BottomViewManipulationListener;
 import com.kstyles.korean.view.fragment.item.TranslationItem;
 
+import java.util.Set;
 import java.util.TreeMap;
 
 public class AllWordFragment extends Fragment implements BottomViewManipulationListener, WordManager.onDataLoadedListener, ILocalization {
@@ -37,9 +42,21 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
     private RecyclerView.Adapter adapter;
     private TreeMap<String, TranslationItem> wordsMap;
     private WordManager wordManager;
+    private SharedPreferences sharedPreferences;
+    private String uid;
 
     public AllWordFragment() {
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        FirebaseManager firebaseManager = new FirebaseManager();
+        User user = firebaseManager.getUser();
+        uid = user.getUid();
+        sharedPreferences = getContext().getSharedPreferences(uid, Context.MODE_PRIVATE);
     }
 
     @Nullable
@@ -73,6 +90,7 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
                 binding.wordBtnBeginner.setBackgroundResource(R.drawable.custom_btn_white);
                 binding.wordBtnIntermediate.setBackgroundResource(R.drawable.custom_btn_white);
                 binding.wordBtnAdvanced.setBackgroundResource(R.drawable.custom_btn_white);
+                binding.wordBtnMyWord.setBackgroundResource(R.drawable.custom_btn_white);
                 if (v == binding.wordBtnBeginner) {
                     wordManager.loadWords("Beginner");
                     binding.wordBtnBeginner.setBackgroundResource(R.drawable.custom_btn_word_click);
@@ -82,6 +100,10 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
                 } else if (v == binding.wordBtnAdvanced) {
                     wordManager.loadWords("Advanced");
                     binding.wordBtnAdvanced.setBackgroundResource(R.drawable.custom_btn_word_click);
+                } else if (v == binding.wordBtnMyWord) {
+                    Set<String> personal_word = sharedPreferences.getStringSet(uid, null);
+                    wordManager.loadPersonalWord(personal_word);
+                    binding.wordBtnMyWord.setBackgroundResource(R.drawable.custom_btn_word_click);
                 }
 
                 adapter = new AllWordRecyclerAdapter(wordsMap);
@@ -92,6 +114,7 @@ public class AllWordFragment extends Fragment implements BottomViewManipulationL
         binding.wordBtnBeginner.setOnClickListener(wordBtnClickListener);
         binding.wordBtnIntermediate.setOnClickListener(wordBtnClickListener);
         binding.wordBtnAdvanced.setOnClickListener(wordBtnClickListener);
+        binding.wordBtnMyWord.setOnClickListener(wordBtnClickListener);
 
         return binding.getRoot();
     }

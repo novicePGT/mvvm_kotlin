@@ -3,6 +3,7 @@ package com.kstyles.korean.repository;
 import com.google.firebase.database.DatabaseError;
 import com.kstyles.korean.view.fragment.item.TranslationItem;
 
+import java.util.Set;
 import java.util.TreeMap;
 
 public class WordManager {
@@ -40,6 +41,32 @@ public class WordManager {
                 // 실패 처리 로직 추가
             }
         });
+    }
+
+    public void loadPersonalWord(Set<String> personalWordSet) {
+        cloneWordsMap.clear();
+        wordsMap.clear();
+
+        String[] allLevel = {"Beginner", "Intermediate", "Advanced"};
+        for (String level : allLevel) {
+            getWordByLevel(level, new FirebaseCallback() {
+                @Override
+                public void onSuccess(Object result) {
+                    wordsMap = (TreeMap<String, TranslationItem>) result;
+                    for (String key : personalWordSet) {
+                        if (wordsMap.containsKey(key)) {
+                            cloneWordsMap.put(key, wordsMap.get(key));
+                        }
+                    }
+                    onDataLoaded.onDataLoaded(cloneWordsMap);
+                }
+
+                @Override
+                public void onFailure(DatabaseError error) {
+                    // 실패 처리 로직 추가
+                }
+            });
+        }
     }
 
     public TreeMap<String, TranslationItem> getAllWords() {
